@@ -22,7 +22,7 @@ export class UtilisateurService {
   }
 
   public addUtilisateur(utilisateur: Utilisateur): Observable<Utilisateur>{
-    return this.http.post<Utilisateur>(this.url, utilisateur, httpOptions);
+    return this.http.post<Utilisateur>((this.url), utilisateur, httpOptions);
   }
 
   public getEmploye(id: number): Observable<Employe> {

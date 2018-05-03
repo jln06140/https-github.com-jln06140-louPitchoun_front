@@ -12,7 +12,6 @@ import { GestionComponent } from './gestion/gestion.component';
 import { EmployeListComponent } from './employe-list/employe-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModifEmployeComponent } from './modif-employe/modif-employe.component';
-<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth/auth.service';
 import { HeaderComponent } from './header/header.component';
@@ -27,24 +26,11 @@ import { InformationService } from './services/information.service';
 const appRoutes: Routes = [
   // { path: '', component: HomeEmployeComponent}, //canActivate: [AuthGuard] },
   // { path: 'login', component: LoginComponent },
-=======
-import { CreationEmployeComponent } from './creation-employe/creation-employe.component';
-import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
-import { SectionDashComponent } from './section-dash/section-dash.component';
-
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '/dashboard', component: DashboardViewComponent},
->>>>>>> 9a4b6d5d13fade2bfb160e769769151e5e1d17b3
   {
     path: 'gestion',
     component: GestionComponent,
     children : [
-<<<<<<< HEAD
       { path : 'utilisateur', component: AjoutUtilisateurComponent},
-=======
-      { path : 'employe', component: EmployeListComponent},
->>>>>>> 9a4b6d5d13fade2bfb160e769769151e5e1d17b3
       { path : 'employe/{id}', component: ModifEmployeComponent}
     ]
   }
@@ -56,16 +42,10 @@ const appRoutes: Routes = [
     GestionComponent,
     EmployeListComponent,
     ModifEmployeComponent,
-<<<<<<< HEAD
     LoginComponent,
     HeaderComponent,
     HomeEmployeComponent,
     AjoutUtilisateurComponent
-=======
-    CreationEmployeComponent,
-    DashboardViewComponent,
-    SectionDashComponent
->>>>>>> 9a4b6d5d13fade2bfb160e769769151e5e1d17b3
   ],
   imports: [
     BrowserModule,

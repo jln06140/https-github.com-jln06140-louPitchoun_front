@@ -121,7 +121,7 @@ export class AjoutUtilisateurComponent implements OnInit {
   onSubmitForm3() {
     const form3value = this.thirdFormGroup.value;
     this.utilisateurCreated = new Utilisateur(
-      'cocfrfro@aio.com',
+      'cgggocfrfro@aio.com',
       form3value['motDePasse'],
       new Date(),
       this.informationSelected,
