@@ -27,6 +27,7 @@ export class AjoutUtilisateurComponent implements OnInit {
   profiSelected: Profil;
   informationSelected;
   utilisateurCreated: Utilisateur;
+  email;
 
   constructor(private formBuilder: FormBuilder,
               private profilService: ProfilService,
@@ -89,6 +90,7 @@ export class AjoutUtilisateurComponent implements OnInit {
   onSubmitForm2() {
     const form2value = this.secondFormGroup.value;
     console.log(form2value);
+    this.email = form2value['email'];
     if (parent) {
       this.informationSelected = new InformationParent(
         form2value['nom'],
@@ -101,7 +103,7 @@ export class AjoutUtilisateurComponent implements OnInit {
         form2value['telPro']
       );
     }
-    else {
+     else {
       this.informationSelected = new InformationEmploye(
         form2value['nom'],
         form2value['prenom'],
@@ -121,7 +123,7 @@ export class AjoutUtilisateurComponent implements OnInit {
   onSubmitForm3() {
     const form3value = this.thirdFormGroup.value;
     this.utilisateurCreated = new Utilisateur(
-      'cgggocfrfro@aio.com',
+      this.email,
       form3value['motDePasse'],
       new Date(),
       this.informationSelected,

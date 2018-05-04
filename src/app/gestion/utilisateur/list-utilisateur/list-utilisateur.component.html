@@ -1,0 +1,59 @@
+<div class="example-container">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+    </mat-form-field>
+  </div>
+  <mat-table #table [(dataSource)]="dataSource">
+
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.info.nom}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="prenom">
+      <mat-header-cell *matHeaderCellDef> Prenom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.info.prenom }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.info.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.profil.libelle}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="associer">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button *ngIf="isParent(element.profil.libelle)"class="btn" routerLink="{{element.id}}">Associer Enfant</button>
+        <button *ngIf="!isParent(element.profil.libelle)"class="btn" routerLink="{{element.id}}">Associer Section</button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button class="btn" routerLink="{{element.id}}">Modifier</button>
+      </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button class="btn" (click)="onDelete(element.id)">Supprimer</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+  </mat-table>
+  <mat-paginator [length]="5" [pageSize]="10" [pageSizeOptions]="[10, 20, 30]">
+  </mat-paginator>
+  <div>
+    {{ utilisateurs | json}}
+  </div>

@@ -21,6 +21,8 @@ import { HomeEmployeComponent } from './home-employe/home-employe.component';
 import { AjoutUtilisateurComponent } from './gestion/utilisateur/ajout-utilisateur/ajout-utilisateur.component';
 import { ProfilService } from './services/profil.service';
 import { InformationService } from './services/information.service';
+import { ListUtilisateurComponent } from './gestion/utilisateur/list-utilisateur/list-utilisateur.component';
+
 
 
 const appRoutes: Routes = [
@@ -31,6 +33,7 @@ const appRoutes: Routes = [
     component: GestionComponent,
     children : [
       { path : 'utilisateur', component: AjoutUtilisateurComponent},
+      { path : 'listeUtilisateur', component: ListUtilisateurComponent},
       { path : 'employe/{id}', component: ModifEmployeComponent}
     ]
   }
@@ -45,7 +48,8 @@ const appRoutes: Routes = [
     LoginComponent,
     HeaderComponent,
     HomeEmployeComponent,
-    AjoutUtilisateurComponent
+    AjoutUtilisateurComponent,
+    ListUtilisateurComponent
   ],
   imports: [
     BrowserModule,

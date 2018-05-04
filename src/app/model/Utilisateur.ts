@@ -6,8 +6,8 @@ export class Utilisateur {
     constructor(
         public login: string,
         public motDePasse: String,
-        public dateDeCreation: Date,
-        public commonInfo: any,
+        public createdDate: Date,
+        public info: any,
         public profil: Profil,
         public enfants?: Enfant[],
         public id?: number
