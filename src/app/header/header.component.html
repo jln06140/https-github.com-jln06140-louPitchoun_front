@@ -1,15 +1,25 @@
-<mat-toolbar color="primary" >
-  <span>
-    <img src="./assets/logo.png" class="angular-logo"> Creche LouPitchoun
-  </span>
-  <span class="fill-remaining-space"></span>
-  <span class="align-center"></span>
-  <span class="example-spacer"></span>
-  <button mat-button>Menu Option 01</button>
-  <button mat-button>Menu Option 02</button>
-  <button mat-button routerLink="login">Login</button>
-  <button mat-button (click)="onLogout()" >Logout</button>
-</mat-toolbar>
+<header class="row">
+  <div class="col-2 text-center logo">
+    <img src="./assets/logo.png"> 
+  </div>
+  <h1 class="col-6 col-sm-8 text-center">LouPitchoun</h1>
+  <menu class="col-4 col-sm-2">
+      <span routerLink="login" class="fa fa-user"></span>
+      <span class="menu-mob">
+        <span></span>
+      </span>
+    </menu>
+
+  <nav class="d-none d-md-block col-12 text-center">
+    <ul>
+      <li>Menu Option 01</li>
+      <li>Menu Option 02</li>
+      <!--<li><a href="#" routerLink="login">Login</a></li>
+      <li><a href="#" (click)="onLogout()" >Logout</a></li>-->
+    </ul>
+
+  </nav>
+</header>
 
 <!-- *ngIf="isLoggedIn$ | async as isLoggedIn" -->
 <!-- *ngIf="isLoggedIn" -->

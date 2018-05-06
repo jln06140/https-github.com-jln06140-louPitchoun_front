@@ -24,10 +24,11 @@ export class AjoutUtilisateurComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
 
-  profiSelected: Profil;
+  profiSelected;
   informationSelected;
   utilisateurCreated: Utilisateur;
-  email;
+  email: string;
+  matricule: string;
 
   constructor(private formBuilder: FormBuilder,
               private profilService: ProfilService,
@@ -49,6 +50,7 @@ export class AjoutUtilisateurComponent implements OnInit {
 
   inifForm2() {
     this.secondFormGroup = this.formBuilder.group({
+      matricule: '',
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       adresse: ['', Validators.required],
@@ -70,41 +72,25 @@ export class AjoutUtilisateurComponent implements OnInit {
   }
 
   chargeFormulaire(profil: string) {
-    if (profil === 'parent') {
+    if (profil === 'PARENT') {
       this.parent = true;
-      //getprofil parent
     } else {
       this.parent = false;
-      //get profil employe
     }
   }
 
 
   onSubmitForm1() {
-     const form1value = this.firstFormGroup.value;
-     this.profilService.getprofilByLibelle(form1value['profil']).subscribe(
-       profil => this.profiSelected = profil
-     );
+     this.profiSelected = this.firstFormGroup.value['profil'];
   }
 
   onSubmitForm2() {
     const form2value = this.secondFormGroup.value;
     console.log(form2value);
     this.email = form2value['email'];
-    if (parent) {
+    this.matricule = form2value['matricule'];
       this.informationSelected = new InformationParent(
-        form2value['nom'],
-        form2value['prenom'],
-        form2value['email'],
-        form2value['adresse'],
-        form2value['ville'],
-        form2value['telMobile'],
-        form2value['telFixe'],
-        form2value['telPro']
-      );
-    }
-     else {
-      this.informationSelected = new InformationEmploye(
+        form2value['matricule'],
         form2value['nom'],
         form2value['prenom'],
         form2value['email'],
@@ -115,17 +101,16 @@ export class AjoutUtilisateurComponent implements OnInit {
         form2value['telPro'],
         form2value['fonction']
       );
-    }
 
     console.log(this.informationSelected);
   }
 
   onSubmitForm3() {
     const form3value = this.thirdFormGroup.value;
+    const login = (parent) ? this.email : this.matricule;
     this.utilisateurCreated = new Utilisateur(
-      this.email,
+      login,
       form3value['motDePasse'],
-      new Date(),
       this.informationSelected,
       this.profiSelected
 

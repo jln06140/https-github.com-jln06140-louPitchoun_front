@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // tslint:disable-next-line:max-line-length
 import {MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatTableModule, MatMenuModule, MatIconModule, MatToolbarModule, MatCardModule, MatSelectModule} from '@angular/material';
 import {MatStepperModule} from '@angular/material/stepper';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppComponent } from './app.component';
 import { GestionComponent } from './gestion/gestion.component';
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFontAwesomeModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatTableModule,

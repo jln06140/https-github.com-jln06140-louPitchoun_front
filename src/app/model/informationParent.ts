@@ -1,6 +1,7 @@
 export class InformationParent {
 
     constructor(
+        public matricule: string,
         public nom: string,
         public prenom: string,
         public email: string,
@@ -9,6 +10,7 @@ export class InformationParent {
         public telMobile: string,
         public telPro: string,
         public telFixe: string,
+        public fonction: string,
         public id?: number
     ) {}
 

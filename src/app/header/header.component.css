@@ -1,8 +1,94 @@
-.angular-logo {
-    margin: 0 4px 3px 0;
-    height: 35px;
-    vertical-align: middle;
+header {
+  background-color:#af99ff;
+  padding:10px 0;
+  align-items: center;
 }
-.fill-remaining-space {
-  flex: 1 1 auto;
+.logo img {
+  max-width:80px
+}
+menu .fa {
+  font-size:25px
+}
+nav ul {
+  padding-left:0
+}
+nav li {
+  display:inline-block;
+  margin: 0 10px;
+}
+nav li:first-child{
+  margin-left:0
+}
+nav li:last-child{
+  margin-right:0
+}
+.menu-mob {display:none}
+
+@media (max-width:767px) {
+  .logo {
+    padding:0;
+  }
+  .logo img {
+    max-width:80%;
+    margin-left:20px}
+  h1 {font-size:25px}
+  nav ul {display:none}
+  menu {
+    text-align:right
+  }
+  .menu-mob {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    overflow: hidden;
+    text-indent: 101%;
+    white-space: nowrap;
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+  }    
+  .menu-mob:before, .menu-mob:after, .menu-mob span {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      right: 0px;
+      margin-top: -2px;
+      background: #fff;
+      height: 15%;
+      -webkit-transition: all .2s linear;
+      transition: all .2s linear;
+  }
+  .menu-mob:before, .menu-mob:after {
+    content: "";
+  } 
+  .menu-mob:after {
+    top: 90%;
+  }
+  .menu-mob:before {
+    top: 10%;
+  }.nav-active .menu span {
+		opacity: 0;
+	}
+	.nav-active .menu-mob:after, .nav-active .menu-mob:before {
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+		top: 50%;
+		left: 0;
+		right: 0;
+	}
+	.nav-active .menu:after {
+		-webkit-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+	}
+  header nav {
+    position: absolute;
+    left: 100%;
+    right: 0;
+    margin: 20px 0px 0;
+    z-index: 20;
+    height: 100%;
+    padding: 0;
+  }
 }

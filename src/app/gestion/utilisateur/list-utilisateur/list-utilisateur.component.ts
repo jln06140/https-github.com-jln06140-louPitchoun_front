@@ -35,7 +35,7 @@ export class ListUtilisateurComponent implements OnInit {
   }
 
   isParent(profil: string){
-    return profil === "PARENT";
+    return profil === 'PARENT';
   }
 
   loadAgents(){
