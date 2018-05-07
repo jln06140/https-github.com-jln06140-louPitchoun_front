@@ -8,6 +8,8 @@ import { UtilisateurService } from '../../../services/utilisateur.service';
 import { InformationService } from '../../../services/information.service';
 import { InformationParent } from '../../../model/informationParent';
 import { InformationEmploye } from '../../../model/InformationEmploye';
+import { VALID, INVALID } from '@angular/forms/src/model';
+import { CustomValidators, ConfirmValidParentMatcher, errorMessages } from '../../../tools/custom-validators';
 
 
 @Component({
@@ -28,7 +30,9 @@ export class AjoutUtilisateurComponent implements OnInit {
   informationSelected;
   utilisateurCreated: Utilisateur;
   email: string;
-  matricule: string;
+  matriculeSel: string;
+  confirmValidParentMatcher = new ConfirmValidParentMatcher();
+  errors = errorMessages;
 
   constructor(private formBuilder: FormBuilder,
               private profilService: ProfilService,
@@ -50,25 +54,30 @@ export class AjoutUtilisateurComponent implements OnInit {
 
   inifForm2() {
     this.secondFormGroup = this.formBuilder.group({
-      matricule: '',
+      matricule: '',//['', Validators.required],
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
-      adresse: ['', Validators.required],
-      ville: ['', Validators.required],
+      adresse: '',
+      ville: '',
       email: ['', Validators.email],
-      telMobile: ['', Validators.required],
+      telMobile: ['', [Validators.required,Validators.pattern("0[1-68]([-. ]?[0-9]{2}){4}")]],
       telFixe: '',
       telPro: '',
       fonction: '',
 
+    
     });
   }
+ 
+
+  //"\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"
 
   initForm3() {
     this.thirdFormGroup = this.formBuilder.group({
       motDePasse: ['', Validators.required],
       confMdp: ['', Validators.required]
-    });
+    }, { validator: CustomValidators.childrenEqual})
+  
   }
 
   chargeFormulaire(profil: string) {
@@ -88,7 +97,7 @@ export class AjoutUtilisateurComponent implements OnInit {
     const form2value = this.secondFormGroup.value;
     console.log(form2value);
     this.email = form2value['email'];
-    this.matricule = form2value['matricule'];
+    //this.matricule = form2value['matricule'];
       this.informationSelected = new InformationParent(
         form2value['matricule'],
         form2value['nom'],
@@ -107,7 +116,9 @@ export class AjoutUtilisateurComponent implements OnInit {
 
   onSubmitForm3() {
     const form3value = this.thirdFormGroup.value;
-    const login = (parent) ? this.email : this.matricule;
+    //this.thirdFormGroup.status = INVALID; = this.motDePasseEqMdpConf(form3value['motDePasse'],form3value['confMdp']);
+    console.log('form3value.')
+    const login = (parent) ? this.email : this.matriculeSel;
     this.utilisateurCreated = new Utilisateur(
       login,
       form3value['motDePasse'],
@@ -117,6 +128,20 @@ export class AjoutUtilisateurComponent implements OnInit {
   //   formValue["motDePasse"],
   //   formValue["profil"]
   );
+  }
+
+  get matricule(){
+    return this.secondFormGroup.get('matricule');
+  }
+
+  get telMobile(){
+    return this.secondFormGroup.get('telMobile');
+  }
+
+  motDePasseEqMdpConf(motDePasse,mdpConf){
+    if(motDePasse != mdpConf) return false
+    else return true;
+
   }
 
   onSubmitForm() {

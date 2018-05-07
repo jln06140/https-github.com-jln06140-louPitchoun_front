@@ -8,29 +8,29 @@
 
     <ng-container matColumnDef="nom">
       <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.info.nom}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{ element.infoUserDto.nom}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="prenom">
       <mat-header-cell *matHeaderCellDef> Prenom </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.info.prenom }} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{ element.infoUserDto.prenom }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.info.email}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{ element.infoUserDto.email}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.profil.libelle}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{ element.profil}} </mat-cell>
     </ng-container>
     
     <ng-container matColumnDef="associer">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button *ngIf="isParent(element.profil.libelle)"class="btn" routerLink="{{element.id}}">Associer Enfant</button>
-        <button *ngIf="!isParent(element.profil.libelle)"class="btn" routerLink="{{element.id}}">Associer Section</button>
+        <button *ngIf="isParent(element.profil)"class="btn" routerLink="{{element.id}}">Associer Enfant</button>
+        <button *ngIf="!isParent(element.profil)"class="btn" routerLink="{{element.id}}">Associer Section</button>
       </mat-cell>
     </ng-container>
 

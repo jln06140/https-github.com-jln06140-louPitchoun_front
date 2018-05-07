@@ -4,7 +4,7 @@ import { Enfant } from './enfant';
 export class Utilisateur {
 
     constructor(
-        public login: string,
+        public username: string,
         public motDePasse: String,
         public infoUserDto: any,
         public profil: Profil,

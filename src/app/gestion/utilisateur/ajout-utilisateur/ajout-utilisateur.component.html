@@ -84,9 +84,12 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmitForm2()">
       <ng-template matStepLabel>Informations Personnelles</ng-template>
+
       <div class="info-container">
         <mat-form-field *ngIf="!parent">
-          <input class="element" matInput placeholder="matricule" formControlName="matricule" >
+          <input matInput placeholder="matricule" formControlName="matricule" >
+          <!-- <mat-error *ngIf="matricule?.dirty && matricule.untouched">{{ errors.matricule }}</mat-error>
+          <mat-error *ngIf="matricule?.errors?.required">{{ errors.matricule }}</mat-error> -->
         </mat-form-field>
         <mat-form-field>
           <input class="element" matInput placeholder="Nom" formControlName="nom" required>
@@ -101,20 +104,22 @@
           <input matInput placeholder="Adresse" formControlName="adresse" required>
         </mat-form-field>
         <mat-form-field *ngIf="parent">
-          <input matInput placeholder="Ville" formControlName="ville" required>
+          <input matInput placeholder="Ville" formControlName="ville" >
         </mat-form-field>
 
         <mat-form-field>
           <input matInput placeholder="Tel Mobile" formControlName="telMobile" required>
+          <mat-error *ngIf="telMobile.touched && telMobile?.errors?.pattern">{{errors.telephone}}</mat-error>
         </mat-form-field>
+        
         <mat-form-field *ngIf="parent">
-          <input matInput placeholder="Tel Fixe" formControlName="telFixe">
+          <input matInput placeholder="Tel Fixe" formControlName="telFixe" >
         </mat-form-field>
         <mat-form-field *ngIf="parent">
           <input matInput placeholder="Tel Pro" formControlName="telPro">
         </mat-form-field>
         <mat-form-field *ngIf="!parent">
-          <input matInput placeholder="Fonction" formControlName="fonction">
+          <input matInput placeholder="Fonction" formControlName="fonction" >
         </mat-form-field>
         <div class="bouton">
           <button mat-button matStepperPrevious>Precedent</button>
@@ -132,7 +137,10 @@
           <input matInput type="password" placeholder="Mot de Passe" formControlName="motDePasse" required>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Confirmation mot de passe" formControlName="confMdp" required>
+          <input matInput placeholder="Confirmation mot de passe" formControlName="confMdp" [errorStateMatcher]="confirmValidParentMatcher">
+          <mat-error>
+              {{errors.confMdp}}
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="bouton">
@@ -152,5 +160,5 @@
 </mat-horizontal-stepper>
 
 <div>
-  {{ profiSelected | json}} {{ informationSelected | json }} {{ utilisateurCreated | json}}
+  <pre>Dirty? {{ matricule.dirty }}</pre> {{ profiSelected | json}} {{ informationSelected | json }} {{ utilisateurCreated | json}}
 </div>
