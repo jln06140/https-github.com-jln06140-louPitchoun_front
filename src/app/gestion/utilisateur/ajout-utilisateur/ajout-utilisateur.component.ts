@@ -60,7 +60,7 @@ export class AjoutUtilisateurComponent implements OnInit {
       adresse: '',
       ville: '',
       email: ['', Validators.email],
-      telMobile: ['', [Validators.required,Validators.pattern("0[1-68]([-. ]?[0-9]{2}){4}")]],
+      telMobile: ['', [Validators.required, Validators.pattern("0[1-68]([-. ]?[0-9]{2}){4}")]],
       telFixe: '',
       telPro: '',
       fonction: '',
@@ -76,7 +76,7 @@ export class AjoutUtilisateurComponent implements OnInit {
     this.thirdFormGroup = this.formBuilder.group({
       motDePasse: ['', Validators.required],
       confMdp: ['', Validators.required]
-    }, { validator: CustomValidators.childrenEqual})
+    }, { validator: CustomValidators.childrenEqual});
   
   }
 

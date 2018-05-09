@@ -25,19 +25,20 @@ export class UtilisateurService {
     return this.http.post<Utilisateur>((this.url), utilisateur, httpOptions);
   }
 
-  public getEmploye(id: number): Observable<Employe> {
+  public getUtilisateur(id: number): Observable<Utilisateur> {
     const url = `${this.url}/${id}`;
-    return this.http.get<Employe>(this.url);
+    console.log(url);
+    return this.http.get<Utilisateur>(url);
   }
 
-  public updateEmploe(id: number, employe: Employe): Observable<any> {
+  public updateUtilisateur(id: number, utilisateur: Utilisateur): Observable<any> {
     const url = `${this.url}/${id}`;
-    return this.http.put(url, employe, httpOptions);
+    return this.http.put(url, utilisateur, httpOptions);
   }
 
-  public deleteEmploye(id: number): Observable<Employe> {
+  public deleteUtilisateur(id: number): Observable<Utilisateur> {
     const url = `${this.url}/${id}`;
-    return this.http.delete<Employe>(url, httpOptions);
+    return this.http.delete<Utilisateur>(url, httpOptions);
   }
 }
 

@@ -10,9 +10,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppComponent } from './app.component';
 import { GestionComponent } from './gestion/gestion.component';
-import { EmployeListComponent } from './employe-list/employe-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ModifEmployeComponent } from './modif-employe/modif-employe.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth/auth.service';
 import { HeaderComponent } from './header/header.component';
@@ -23,6 +21,10 @@ import { AjoutUtilisateurComponent } from './gestion/utilisateur/ajout-utilisate
 import { ProfilService } from './services/profil.service';
 import { InformationService } from './services/information.service';
 import { ListUtilisateurComponent } from './gestion/utilisateur/list-utilisateur/list-utilisateur.component';
+import { AjoutEnfantComponent } from './gestion/enfants/ajout-enfant/ajout-enfant.component';
+import { ModifierUtilisateurComponent } from './gestion/utilisateur/modifier-utilisateur/modifier-utilisateur.component';
+import { FormModEmpComponent } from './gestion/utilisateur/modifier-utilisateur/form-mod-emp/form-mod-emp.component';
+import { FormModParentComponent } from './gestion/utilisateur/modifier-utilisateur/form-mod-parent/form-mod-parent.component';
 
 
 
@@ -35,7 +37,7 @@ const appRoutes: Routes = [
     children : [
       { path : 'utilisateur', component: AjoutUtilisateurComponent},
       { path : 'listeUtilisateur', component: ListUtilisateurComponent},
-      { path : 'employe/{id}', component: ModifEmployeComponent}
+      { path : 'listeUtilisateur/:id', component: ModifierUtilisateurComponent}
     ]
   }
 ];
@@ -44,13 +46,15 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     GestionComponent,
-    EmployeListComponent,
-    ModifEmployeComponent,
     LoginComponent,
     HeaderComponent,
     HomeEmployeComponent,
     AjoutUtilisateurComponent,
-    ListUtilisateurComponent
+    ListUtilisateurComponent,
+    AjoutEnfantComponent,
+    ModifierUtilisateurComponent,
+    FormModEmpComponent,
+    FormModParentComponent
   ],
   imports: [
     BrowserModule,
