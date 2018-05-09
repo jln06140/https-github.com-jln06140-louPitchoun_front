@@ -3,7 +3,7 @@ import { Enfant } from "./enfant";
 
 export class Parent {
 
-    public username: string;
+        public username: string;
         public motDePasse: string;
         public infoUserDto: any;
         public profil?: Profil;

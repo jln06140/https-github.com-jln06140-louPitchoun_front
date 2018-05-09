@@ -44,11 +44,11 @@ export class ListUtilisateurComponent implements OnInit {
     );
   }
 
-  // onDelete(id: number) {
-  //   console.log(id);
-  //   this.agentService.deleteAgent(id).subscribe(
-  //     data => this.loadAgents()
-  //      // () => this.router.navigate(['../'], {relativeTo : this.router})
-  //   );
-  // }
+  onDelete(id: number) {
+    console.log(id);
+    this.agentService.deleteAgent(id).subscribe(
+      data => this.loadAgents()
+       // () => this.router.navigate(['../'], {relativeTo : this.router})
+    );
+  }
 }

@@ -4,6 +4,8 @@ import { CustomValidators } from '../../../../tools/custom-validators';
 import { Utilisateur } from '../../../../model/Utilisateur';
 import { UtilisateurService } from '../../../../services/utilisateur.service';
 import { Parent } from '../../../../model/parent';
+import { ParentService } from '../../../../services/parent.service';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-mod-parent',
@@ -15,67 +17,27 @@ export class FormModParentComponent implements OnInit {
   @Input()
   parent: Utilisateur;
   lecture: boolean;
-  ParentUpdated: Parent;
+ 
+  parentToUpdate: Parent;
+  id: number;
+  motDePasse: any   ;
+  confirmation: string;
+
 
   parentModForm: NgForm;
 
   constructor(private formBuilder: FormBuilder,
-              private utilisateurService: UtilisateurService
+              private parentService: ParentService,
+              private route: ActivatedRoute,
+              private router: Router
   ) { }
 
   ngOnInit() {
     this.lecture = true;
-    this.cloneParent();
-    //this.initFormParent();
-    //this.getInfo();
-   // this.setForm();
+    this.UtilisateurToParent();
+    
   }
 
-  cloneParent() {
-    this.ParentUpdated = new Parent();
-    this.ParentUpdated.infoUserDto = this.parentModForm.value['infoUserDto'];
-
-  }
-
-  // initFormParent() {
-  //   this.parentModForm = this.formBuilder.group({
-  //     motDePasse: ['', Validators.required],
-  //     confMdp: ['', Validators.required],
-  //     infoUserDto : this.formBuilder.group({
-  //       email: '',
-  //       nom: '',
-  //       prenom: '',
-  //       adresse: '',
-  //       ville: '',
-  //       telMobile: ['', [Validators.required, Validators.pattern('0[1-68]([-. ]?[0-9]{2}){4}')]],
-  //       telFixe: '',
-  //       telPro: '',
-  //     },
-  //     { validator: CustomValidators.childrenEqual}),
-  //   });
-  // }
-
-  // initFormParent() {
-  //   this.parentModForm = new FormGroup({
-  //     motDePasse: new FormControl(),
-  //     confMdp: new FormControl(),
-  //     infoUserDto : new FormGroup({
-  //       email: new FormControl(),
-  //       nom: new FormControl(),
-  //       prenom: new FormControl(),
-  //       adresse: new FormControl(),
-  //       ville: new FormControl(),
-  //       telMobile: new FormControl(),
-  //       telFixe: new FormControl(),
-  //       telPro: new FormControl(),
-  //     }),
-  //   });
-  // }
-
-  setForm() {
-    this.parentModForm.controls['nom'].setValue(this.parenst.motDePasse);
-
-  }
 
   onModification() {
     this.lecture = this.lecture === true ? false : true;
@@ -85,15 +47,25 @@ export class FormModParentComponent implements OnInit {
     return this.parent.infoUserDto;
   }
 
-  get parenst() {
-    return this.parent;
+  UtilisateurToParent() {
+    this.id = +this.route.snapshot.paramMap.get('id');
+    return this.parentService.getParent(this.id).subscribe(
+      data => this.parentToUpdate = data
+    );
   }
 
   onSubmitForm(form: NgForm) {
-    Parent ParentToUpdate = new Parent(
-
-    )
-       console.log(JSON.stringify(form.value));
+    if(form.valid){
+      if(this.motDePasse != null){
+        this.parentToUpdate.motDePasse = this.motDePasse;
+      }
+      console.log(JSON.stringify(form.value));
+      this.parentService.updateParent(this.parentToUpdate.id,this.parentToUpdate).subscribe(
+        data => this.router.navigate(['../'])
+      );
+    }
+  
+       
   }
 
 }
