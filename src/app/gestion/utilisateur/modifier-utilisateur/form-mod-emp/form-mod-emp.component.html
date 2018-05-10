@@ -1,85 +1,85 @@
-<div *ngIf="employe; let employe; else loading">
-    <form class="" [formGroup]="myform" (ngSubmit)="onSubmitForm(parentModForm)" >
-      <div class="row justify-content-around">
-  
-        <div class="col-4" formGroupName="infoUserDto">
-          <div class="form-group">
-            <label for="nom">Nom</label>
-            <input type="text" id="nom" class="form-control" [ngModel]="ParentUpdated?.infoUserDto?.nom" name="nom" #nom="ngModel" required>
-            <div [hidden]="nom.valid || nom.pristine" class="form-control-feedback text-danger">
-              Le nom est requis
-            </div>
-  
-          </div>
-          <div class="form-group">
-            <label for="prenom">Prenom</label>
-            <input type="text" id="prenom" class="form-control" [ngModel]="parent.infoUserDto.prenom" name="prenom" required #prenom="ngModel">
-            <div [hidden]="prenom.valid || prenom.pristine" class="form-control-feedback text-danger">
-              Le prenom est requis
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="email">Adresse e-mail</label>
-            <input type="text" id="email" class="form-control" [ngModel]="parent.infoUserDto.email" name="email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-              required>
-            <div [hidden]="email.valid || email.pristine || email.errors?.pattern" class="form-control-feedback text-danger">
-              Adresse email requise
-            </div>
-            <div *ngIf="email.errors?.pattern && email.touched" class="form-control-feedback text-danger">
-              Format non valide
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="adresse">Adresse</label>
-            <input type="text" id="adresse" class="form-control" [ngModel]="parent.infoUserDto.adresse" name="adresse" #adresse="ngModel"
-              required>
-            <div [hidden]="adresse.valid || adresse.pristine" class="form-control-feedback text-danger">
-              Adresse requise
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="ville">Ville</label>
-            <input type="text" id="ville" class="form-control" [ngModel]="parent.infoUserDto.ville" name="ville" required>
-          </div>
-          <div class="form-group">
-            <label for="telMobile">Telephone mobile</label>
-            <input type="text" id="telMobile" class="form-control" [ngModel]="parent.infoUserDto.telMobile" name="telMobile">
-          </div>
-          <div class="form-group">
-            <label for="telFixe">Telephone fixe</label>
-            <input type="text" id="telFixe" class="form-control" [ngModel]="parent.infoUserDto.telFixe" name="telFixe">
-          </div>
-          <div class="form-group">
-            <label for="telPro">Telephone travail</label>
-            <input type="text" id="telPro" class="form-control" [ngModel]="parent.infoUserDto.telPro" name="telPro">
-          </div>
+<!-- <div *ngIf="EmployeToUpdate; let EmployeToUpdate; else loading"> -->
+<form class="" #employetModForm="ngForm" (ngSubmit)="onSubmitForm(employetModForm)" *ngIf="employeToUpdate">
+  <div class="row justify-content-around">
+
+    <div class="col-4" ngModelGroup="infoEmploye">
+      <div class="form-group">
+        <label for="matricule">Matricule</label>
+        <input type="text" id="matricule" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.matricule" name="matricule"
+          #matricule="ngModel" required>
+        <!-- <div [hidden]="nom.valid || nom.pristine" class="form-control-feedback text-danger">
+                Le nom est requis
+              </div> -->
+      </div>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.nom" name="nom" #nom="ngModel"
+          required>
+        <div [hidden]="nom.valid || nom.pristine" class="form-control-feedback text-danger">
+          Le nom est requis
         </div>
-        <div class="col-4 ">
-          <div class="form-group">
-            <label for="motDePasse">Mot de passe</label>
-            <input type="text" id="motDePasse" class="form-control" [ngModel]="parent.motDePasse" name="motDePasse" required #mdp="ngModel">
-            <div [hidden]="(mdp.valid || mdp.pristine)" class="form-control-feedback text-danger">
-              Saisir un mot de passe
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="confMdp">Confirmation mot de passe</label>
-            <input type="text" id="confMdp" class="form-control" [ngModel]="parent.confMdp" name="confMdp" #confMdp="ngModel" required>
-            <div [hidden]="(confMdp.valid || confMdp.pristine)" class="form-control-feedback text-danger">
-              Une confirmation doit etre saisie
-            </div>
-            <div [hidden]="mdp.value == confMdp.value || !confMdp.valid" class="form-control-feedback text-danger">
-              les mots de passe dvent correspondre
-            </div>
-          </div>
+
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prenom</label>
+        <input type="text" id="prenom" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.prenom" name="prenom" required
+          #prenom="ngModel">
+        <div [hidden]="prenom.valid || prenom.pristine" class="form-control-feedback text-danger">
+          Le prenom est requis
         </div>
       </div>
-      <div class="row justify-content-around">
-        <div class="col-4">
-          <a class="btn btn-outline-primary" routerLink="../">Retour</a>
-          <button type="submit" class="btn btn-outline-primary">Valider</button>
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="text" id="email" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.email" name="email" #email="ngModel"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+        <div [hidden]="email.valid || email.pristine || email.errors?.pattern" class="form-control-feedback text-danger">
+          Adresse email requise
+        </div>
+        <div [hidden]="email.pristine || email.untouched" class="form-control-feedback text-danger">
+          Le changement de l'adresse mail changera l'identifiant
+        </div>
+        <div *ngIf="email.errors?.pattern && email.touched" class="form-control-feedback text-danger">
+          Format non valide
         </div>
       </div>
-    </form>
-  
-    <ng-template #loading>Loading User Data...</ng-template>
+
+      <div class="form-group">
+        <label for="telMobile">Telephone mobile</label>
+        <input type="text" id="telMobile" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.telMobile" name="telMobile">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="profil">Profil</label>
+      <select class="form-control" id="profil" required [(ngModel)]="employeToUpdate.profil" name="profil">
+        <option value="ADMIN">Admin</option>
+        <option value="EMPLOYE">Employe</option>
+      </select>
+    </div>
+    <div class="col-4 ">
+      <div class="form-group">
+        <label for="motDePasse">Mot de passe</label>
+        <input type="password" id="motDePasse" class="form-control" [(ngModel)]="motDePasse" name="motDePasse" #mdp="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="confMdp">Confirmation mot de passe</label>
+        <input type="password" id="confMdp" class="form-control" [(ngModel)]="confirmation" name="confMdp" #confMdp="ngModel">
+        <div [hidden]="(confMdp.valid || confMdp.pristine)" class="form-control-feedback text-danger">
+          Une confirmation doit etre saisie
+        </div>
+        <div [hidden]="mdp.value == confMdp.value || !confMdp.valid" class="form-control-feedback text-danger">
+          les mots de passe doivent correspondre
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-4">
+      <a class="btn btn-outline-primary" routerLink="../">Retour</a>
+      <button type="submit" class="btn btn-outline-primary">Valider</button>
+    </div>
+  </div>
+</form>
+
+<p *ngIf="employeToUpdate">{{ employeToUpdate | json }}</p>
+
+<!-- <ng-template #loading>Loading User Data...</ng-template> -->

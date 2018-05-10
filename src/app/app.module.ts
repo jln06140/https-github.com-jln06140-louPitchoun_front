@@ -26,6 +26,7 @@ import { ModifierUtilisateurComponent } from './gestion/utilisateur/modifier-uti
 import { FormModEmpComponent } from './gestion/utilisateur/modifier-utilisateur/form-mod-emp/form-mod-emp.component';
 import { FormModParentComponent } from './gestion/utilisateur/modifier-utilisateur/form-mod-parent/form-mod-parent.component';
 import { ParentService } from './services/parent.service';
+import { EmployeService } from './services/employe.service';
 
 
 
@@ -86,6 +87,7 @@ const appRoutes: Routes = [
   providers: [AuthService,
               UtilisateurService,
               ParentService,
+              EmployeService,
               ProfilService,
               InformationService,
               AuthGuard

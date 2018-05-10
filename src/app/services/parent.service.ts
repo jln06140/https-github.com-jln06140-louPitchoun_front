@@ -25,7 +25,6 @@ export class ParentService {
 
   public getParent(id: number): Observable<Utilisateur> {
     const url = `${this.url}/${id}`;
-    console.log(url);
     return this.http.get<Utilisateur>(url);
   }
 

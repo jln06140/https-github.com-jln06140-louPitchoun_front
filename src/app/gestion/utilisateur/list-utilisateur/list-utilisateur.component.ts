@@ -46,7 +46,7 @@ export class ListUtilisateurComponent implements OnInit {
 
   onDelete(id: number) {
     console.log(id);
-    this.agentService.deleteAgent(id).subscribe(
+    this.utilisateurService.deleteUtilisateur(id).subscribe(
       data => this.loadAgents()
        // () => this.router.navigate(['../'], {relativeTo : this.router})
     );

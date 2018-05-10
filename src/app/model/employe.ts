@@ -1,16 +1,14 @@
 import { Login } from './login';
+import { InformationEmploye } from './InformationEmploye';
 
 export class Employe {
 
     constructor(
-        public id: number,
-        public nom: string,
-        public prenom: string,
-        public dateDeNaissance: Date,
-        public fonction: string,
-        public grade: string,
-        public dateDebutContrat: Date,
-        public typeContrat: string,
-        public login: Login
+
+        public username: string,
+        public motDePasse: string,
+        public infoEmploye: InformationEmploye,
+        public profil: string,
+        public id?: number,
     ) {}
 }

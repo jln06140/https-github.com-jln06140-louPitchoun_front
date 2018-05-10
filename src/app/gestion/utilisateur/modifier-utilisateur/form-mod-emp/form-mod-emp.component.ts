@@ -4,6 +4,9 @@ import { CustomValidators } from '../../../../tools/custom-validators';
 import { Utilisateur } from '../../../../model/Utilisateur';
 import { Employe } from '../../../../model/employe';
 import { UtilisateurService } from '../../../../services/utilisateur.service';
+import { EmployeService } from '../../../../services/employe.service';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ProfilEnum } from '../../../../enum/profil-enum.enum';
 
 @Component({
   selector: 'app-form-mod-emp',
@@ -11,84 +14,62 @@ import { UtilisateurService } from '../../../../services/utilisateur.service';
   styleUrls: ['./form-mod-emp.component.css']
 })
 export class FormModEmpComponent implements OnInit {
-
-  @Input()
-  employe: Utilisateur;
-  myForm: FormGroup;
+  @Input() employe: Utilisateur;
   lecture: boolean;
-  ParentUpdated: Employe;
+  profilEnum = ProfilEnum;
+  prof: string;
 
-  parentModForm: NgForm;
 
-  constructor(private formBuilder: FormBuilder,
-              private utilisateurService: UtilisateurService
-  ) { }
+  employeToUpdate: Employe;
+  motDePasse: any;
+  confirmation: string;
+
+ employetModForm: NgForm;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private employeService: EmployeService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.lecture = true;
-    this.cloneParent();
-    //this.initFormParent();
-    //this.getInfo();
-   // this.setForm();
+    this.UtilisateurToParent();
   }
 
-  cloneParent() {
-    this.ParentUpdated = new Employe();
-    //this.ParentUpdated.infoUserDto = this.parentModForm.value['infoUserDto'];
-
-  }
-
-  // initFormParent() {
-  //   this.parentModForm = this.formBuilder.group({
-  //     motDePasse: ['', Validators.required],
-  //     confMdp: ['', Validators.required],
-  //     infoUserDto : this.formBuilder.group({
-  //       email: '',
-  //       nom: '',
-  //       prenom: '',
-  //       adresse: '',
-  //       ville: '',
-  //       telMobile: ['', [Validators.required, Validators.pattern('0[1-68]([-. ]?[0-9]{2}){4}')]],
-  //       telFixe: '',
-  //       telPro: '',
-  //     },
-  //     { validator: CustomValidators.childrenEqual}),
-  //   });
-  // }
-
-  // initFormParent() {
-  //   this.parentModForm = new FormGroup({
-  //     motDePasse: new FormControl(),
-  //     confMdp: new FormControl(),
-  //     infoUserDto : new FormGroup({
-  //       email: new FormControl(),
-  //       nom: new FormControl(),
-  //       prenom: new FormControl(),
-  //       adresse: new FormControl(),
-  //       ville: new FormControl(),
-  //       telMobile: new FormControl(),
-  //       telFixe: new FormControl(),
-  //       telPro: new FormControl(),
-  //     }),
-  //   });
-  // }
-
-  setForm() {
-    this.parentModForm.controls['nom'].setValue(this.parenst.motDePasse);
-
-  }
+  keys() : Array<string> {
+    const keys = Object.keys(this.profilEnum);
+    return keys.slice(keys.length / 2);
+}
 
   onModification() {
     this.lecture = this.lecture === true ? false : true;
   }
 
- 
+  getInfo() {
+    return this.employeToUpdate.infoEmploye;
+  }
+
+  UtilisateurToParent() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const id = +params.get('id');
+      this.employeService
+        .getEmploye(id)
+        .subscribe(data => (this.employeToUpdate = data));
+    });
+  }
 
   onSubmitForm(form: NgForm) {
-    // Parent ParentToUpdate = new Parent(
-
-    // )
-       console.log(JSON.stringify(form.value));
+    if (form.valid) {
+      if (this.motDePasse != null) {
+        this.employeToUpdate.motDePasse = this.motDePasse;
+      }
+      console.log(JSON.stringify(form.value));
+      this.employeService
+        .updateEmploye(this.employeToUpdate.id, this.employeToUpdate)
+        .subscribe(data => this.router.navigate(['../']));
+    }
   }
 
 }

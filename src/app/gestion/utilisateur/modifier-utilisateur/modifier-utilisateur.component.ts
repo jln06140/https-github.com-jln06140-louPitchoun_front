@@ -25,8 +25,7 @@ export class ModifierUtilisateurComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id');
     this.utilisateurService.getUtilisateur(this.id).subscribe(data => {
       this.utilisateurSelected = data;
-      console.log(this.utilisateurSelected);
-      this.isEmploye = this.utilisateurSelected.isEmploye();
+      this.isEmploye = this.utilisateurSelected.profil==='EMPLOYE';
     });
   }
 
@@ -38,7 +37,7 @@ export class ModifierUtilisateurComponent implements OnInit {
     return this.getInfo().nom + ' ' + this.getInfo().prenom;
   }
 
-  getProfilLebelle(){
+  getProfilLebelle() {
     return this.utilisateurSelected.profil;
   }
 
