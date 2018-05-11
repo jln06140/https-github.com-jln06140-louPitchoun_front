@@ -1,4 +1,3 @@
 <h2 *ngIf='utilisateurSelected'>{{getProfilLebelle() | lowercase }} : {{getNomPrenom() }}</h2>
 <app-form-mod-emp *ngIf="isEmploye" [employe] = "utilisateurSelected" ></app-form-mod-emp>
 <app-form-mod-parent *ngIf="!isEmploye" [parent] = "utilisateurSelected"></app-form-mod-parent>
-<p>{{isEmploye}}</p>

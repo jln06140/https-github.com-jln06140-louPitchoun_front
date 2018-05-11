@@ -25,7 +25,8 @@ export class ModifierUtilisateurComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id');
     this.utilisateurService.getUtilisateur(this.id).subscribe(data => {
       this.utilisateurSelected = data;
-      this.isEmploye = this.utilisateurSelected.profil==='EMPLOYE';
+      console.log(this.utilisateurSelected.profil === ('ADMIN' || 'EMPLOYE'));
+      this.isEmploye = this.utilisateurSelected.profil=== ('ADMIN') || this.utilisateurSelected.profil === ('EMPLOYE');
     });
   }
 

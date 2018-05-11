@@ -27,6 +27,7 @@ import { FormModEmpComponent } from './gestion/utilisateur/modifier-utilisateur/
 import { FormModParentComponent } from './gestion/utilisateur/modifier-utilisateur/form-mod-parent/form-mod-parent.component';
 import { ParentService } from './services/parent.service';
 import { EmployeService } from './services/employe.service';
+import { ListeChoixParentComponent } from './gestion/enfants/liste-choix-parent/liste-choix-parent.component';
 
 
 
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     children : [
       { path : 'utilisateur', component: AjoutUtilisateurComponent},
       { path : 'listeUtilisateur', component: ListUtilisateurComponent},
-      { path : 'listeUtilisateur/:id', component: ModifierUtilisateurComponent}
+      { path : 'listeUtilisateur/:id', component: ModifierUtilisateurComponent},
+      { path : 'enfant', component: AjoutEnfantComponent}
     ]
   }
 ];
@@ -56,7 +58,8 @@ const appRoutes: Routes = [
     AjoutEnfantComponent,
     ModifierUtilisateurComponent,
     FormModEmpComponent,
-    FormModParentComponent
+    FormModParentComponent,
+    ListeChoixParentComponent
   ],
   imports: [
     BrowserModule,

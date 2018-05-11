@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-ajout-enfant',
@@ -16,8 +16,20 @@ export class AjoutEnfantComponent implements OnInit {
 
   initForm(){
     this.EnfantForm = this.formBuilder.group({
-
+    enfantInfo:this.formBuilder.group({
+      nom: '',
+      prenom: '',
+      dateDeNaissance: '',
+      allergie: '',
+      maladie: '',
+      biberon: ''
+    }),
+    parents: this.formBuilder.array([new FormControl])
     })
+  }
+
+  onSubmit(){
+
   }
 
 }

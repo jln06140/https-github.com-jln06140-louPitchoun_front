@@ -1,11 +1,12 @@
 import { Utilisateur } from "./Utilisateur";
 import { InfoEnfant } from "./info-enfant";
+import { Parent } from "./parent";
 
 export class Enfant {
 
     constructor(
-        informations: InfoEnfant,
-        parents: Utilisateur[],
+        enfantInfo: InfoEnfant,
+        parents: Parent[],
         id?: number
     ){}
 }

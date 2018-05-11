@@ -116,7 +116,6 @@ export class AjoutUtilisateurComponent implements OnInit {
 
   onSubmitForm3() {
     const form3value = this.thirdFormGroup.value;
-    //this.thirdFormGroup.status = INVALID; = this.motDePasseEqMdpConf(form3value['motDePasse'],form3value['confMdp']);
     console.log('form3value.')
     const login = (parent) ? this.email : this.matriculeSel;
     this.utilisateurCreated = new Utilisateur(
@@ -124,9 +123,6 @@ export class AjoutUtilisateurComponent implements OnInit {
       form3value['motDePasse'],
       this.informationSelected,
       this.profiSelected
-
-  //   formValue["motDePasse"],
-  //   formValue["profil"]
   );
   }
 
