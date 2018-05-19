@@ -7,6 +7,9 @@ import { UtilisateurService } from '../../../../services/utilisateur.service';
 import { EmployeService } from '../../../../services/employe.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ProfilEnum } from '../../../../enum/profil-enum.enum';
+import { MatSnackBar } from '@angular/material';
+import { tap } from 'rxjs/operators';
+import { ProfilService } from '../../../../services/profil.service';
 
 @Component({
   selector: 'app-form-mod-emp',
@@ -15,14 +18,12 @@ import { ProfilEnum } from '../../../../enum/profil-enum.enum';
 })
 export class FormModEmpComponent implements OnInit {
   @Input() employe: Utilisateur;
-  lecture: boolean;
-  profilEnum = ProfilEnum;
-  prof: string;
-
 
   employeToUpdate: Employe;
   motDePasse: any;
   confirmation: string;
+  ListeProfil: string[];
+  sectionList: string[];
 
  employetModForm: NgForm;
 
@@ -30,21 +31,16 @@ export class FormModEmpComponent implements OnInit {
     private formBuilder: FormBuilder,
     private employeService: EmployeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private profilService: ProfilService
   ) {}
 
   ngOnInit() {
-    this.lecture = true;
+    // this.ListeProfil = this.profilService.listeProfils;
+    // console.log(this.profilService.listeProfils);
+    this.sectionList = ['Petit', 'Moyen', 'Grand'];
     this.UtilisateurToParent();
-  }
-
-  keys() : Array<string> {
-    const keys = Object.keys(this.profilEnum);
-    return keys.slice(keys.length / 2);
-}
-
-  onModification() {
-    this.lecture = this.lecture === true ? false : true;
   }
 
   getInfo() {
@@ -68,8 +64,16 @@ export class FormModEmpComponent implements OnInit {
       console.log(JSON.stringify(form.value));
       this.employeService
         .updateEmploye(this.employeToUpdate.id, this.employeToUpdate)
-        .subscribe(data => this.router.navigate(['../']));
-    }
+        .subscribe(
+          () => {this.router.navigate(['gestion/listeUtilisateur']); this.openSnackBar('Employe modifié avec succes', 'Succes');}
+        );
+      }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }

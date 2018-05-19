@@ -32,7 +32,6 @@ export class EmployeService {
   public updateEmploye(id: number, employe: Employe): Observable<any> {
     const url = `${this.url}/${id}`;
     console.log(url);
-    console.log(JSON.stringify(Employe));
     return this.http.put(url, employe, httpOptions);
   }
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListeChoixParentComponent } from './liste-choix-parent.component';
+import { DialogBodyComponent } from './dialog-body.component';
 
-describe('ListeChoixParentComponent', () => {
-  let component: ListeChoixParentComponent;
-  let fixture: ComponentFixture<ListeChoixParentComponent>;
+describe('DialogBodyComponent', () => {
+  let component: DialogBodyComponent;
+  let fixture: ComponentFixture<DialogBodyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListeChoixParentComponent ]
+      declarations: [ DialogBodyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListeChoixParentComponent);
+    fixture = TestBed.createComponent(DialogBodyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

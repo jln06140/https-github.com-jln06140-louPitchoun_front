@@ -18,13 +18,22 @@ export class AuthService {
               private utilisateurService: UtilisateurService
   ) { }
 
-  login(utilisateur: Utilisateur) {
+  login(utilisateur: any) {
+    this.utilisateurService.getUtilisateurByUsernameAndPassword(utilisateur.userName,utilisateur.password).subscribe(
+      (data) =>{
+        localStorage.setItem('utilisateur', JSON.stringify(data));
+        this.router.navigate(['/dashboard']);
+      },
+      (error) =>{
+        console.log(error.message);
+      }
+    );
     // recuperer et verifier utilisateur
     // comparer que email existe sinon erreur
     // sinon comparer email et mot de passe correspondent
     // if (utilisateur.login !== '' && utilisateur.motDePasse !== '') {
       this.loggedIn.next(true);
-      this.router.navigate(['/']);
+      
     // }
   }
 

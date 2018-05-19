@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { EnfantService } from '../../../services/enfant.service';
+import { Enfant } from '../../../model/enfant';
+import { ProfilService } from '../../../services/profil.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-ajout-enfant',
@@ -9,27 +13,58 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 export class AjoutEnfantComponent implements OnInit {
 
   EnfantForm: FormGroup;
-  constructor(private formBuilder : FormBuilder) { }
+  enfant: Enfant;
+  sectionSelected = 'PETIT';
+  sectionList: string[];
+
+  constructor(private formBuilder: FormBuilder,
+              private enfantService: EnfantService,
+              private profilService: ProfilService,
+              private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
+    this.sectionList = ['Petit', 'Moyen', 'Grand'];
+    this.initForm();
+    console.log(this.sectionList);
   }
 
-  initForm(){
+  initForm() {
     this.EnfantForm = this.formBuilder.group({
-    enfantInfo:this.formBuilder.group({
-      nom: '',
-      prenom: '',
+    enfantInfo: this.formBuilder.group({
+      nom: ['', Validators.required],
+      prenom: ['', Validators.required],
       dateDeNaissance: '',
-      allergie: '',
-      maladie: '',
-      biberon: ''
+      allergie: false,
+      maladie: false,
+      biberon: false
     }),
-    parents: this.formBuilder.array([new FormControl])
-    })
-  }
+    section: ['', Validators.required],
+    });
 
-  onSubmit(){
 
   }
+
+
+  onSubmitForm() {
+    if(this.EnfantForm.valid){
+    this.enfant = this.EnfantForm.value;
+    console.log(this.enfant);
+    this.enfantService.addEnfant(this.enfant).subscribe(
+      () => {
+        this.openSnackBar('Enfant ajouté','Succes');
+      }
+    );
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  get nom(){ return this.EnfantForm.get('enfantInfo').get('nom'); }
+  get enfantInfo() { return this.enfantInfo.get('enfantInfo'); }
 
 }

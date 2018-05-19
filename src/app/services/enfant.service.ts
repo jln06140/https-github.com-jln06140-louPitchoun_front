@@ -18,7 +18,7 @@ export class EnfantService {
     return this.http.get(this.url) as Observable<Enfant[]>;
   }
 
-  public addEnfant(enfant: Enfant): Observable<Enfant>{
+  public addEnfant(enfant: Enfant): Observable<Enfant> {
     return this.http.post<Enfant>((this.url), enfant, httpOptions);
   }
 
@@ -38,4 +38,6 @@ export class EnfantService {
     const url = `${this.url}/${id}`;
     return this.http.delete<Enfant>(url, httpOptions);
   }
+
+  //public getEnfantsBySection(String nomSection)
 }

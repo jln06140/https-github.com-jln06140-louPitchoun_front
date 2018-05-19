@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { ProfilService } from './services/profil.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,13 @@ import * as $ from 'jquery';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+ 
   title = 'app';
+
+  constructor(private profilService: ProfilService){}
+
+  
+
+
 }

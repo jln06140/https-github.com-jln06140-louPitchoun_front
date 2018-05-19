@@ -40,10 +40,7 @@ export class AjoutUtilisateurComponent implements OnInit {
               private informationService: InformationService) {}
 
   ngOnInit() {
-    this.inifForm1();
-    this.inifForm2();
-    this.initForm3();
-    // this.initForm();
+        // this.initForm();
   }
 
   inifForm1() {
@@ -64,10 +61,9 @@ export class AjoutUtilisateurComponent implements OnInit {
       telFixe: '',
       telPro: '',
       fonction: '',
-
-    
     });
   }
+  
  
 
   //"\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"
@@ -81,7 +77,7 @@ export class AjoutUtilisateurComponent implements OnInit {
   }
 
   chargeFormulaire(profil: string) {
-    if (profil === 'PARENT') {
+    if (profil === 'parent') {
       this.parent = true;
     } else {
       this.parent = false;
@@ -134,12 +130,7 @@ export class AjoutUtilisateurComponent implements OnInit {
     return this.secondFormGroup.get('telMobile');
   }
 
-  motDePasseEqMdpConf(motDePasse,mdpConf){
-    if(motDePasse != mdpConf) return false
-    else return true;
-
-  }
-
+ 
   onSubmitForm() {
    this.utilisateurService.addUtilisateur(this.utilisateurCreated).subscribe(
      ()=>console.log('utilisateur ajouté')

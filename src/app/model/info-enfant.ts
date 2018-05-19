@@ -1,14 +1,11 @@
 export class InfoEnfant {
-
-    constructor(
-        nom: string,
-        prenom: string,
-        dateDeNaissance: Date,
-        allergie: string,
-        maladie: string,
-        biberon: boolean,
-        id?: number
-    ){
-
-    }
+  constructor(
+    public nom: string,
+    public prenom: string,
+    public dateDeNaissance: Date,
+    public allergie: boolean,
+    public maladie: boolean,
+    public biberon: boolean,
+    public id?: number
+  ) {}
 }

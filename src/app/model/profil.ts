@@ -1,7 +1,7 @@
 export class Profil {
 
     constructor(
-        libelle: string,
-        id: number
+        public libelle: string,
+        public id: number
     ){}
 }

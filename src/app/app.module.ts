@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // tslint:disable-next-line:max-line-length
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatTableModule, MatMenuModule, MatIconModule, MatToolbarModule, MatCardModule, MatSelectModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatTableModule, MatMenuModule, MatIconModule, MatToolbarModule, MatCardModule, MatSelectModule, MatSnackBarModule, MatDialogModule} from '@angular/material';
 import {MatStepperModule} from '@angular/material/stepper';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 
 import { AppComponent } from './app.component';
 import { GestionComponent } from './gestion/gestion.component';
@@ -27,7 +28,18 @@ import { FormModEmpComponent } from './gestion/utilisateur/modifier-utilisateur/
 import { FormModParentComponent } from './gestion/utilisateur/modifier-utilisateur/form-mod-parent/form-mod-parent.component';
 import { ParentService } from './services/parent.service';
 import { EmployeService } from './services/employe.service';
-import { ListeChoixParentComponent } from './gestion/enfants/liste-choix-parent/liste-choix-parent.component';
+import { EnfantService } from './services/enfant.service';
+import { ListeEnfantsComponent } from './gestion/enfants/liste-enfants/liste-enfants.component';
+import { AjoutEmployeComponent } from './gestion/utilisateur/ajout-utilisateur/ajout-employe/ajout-employe.component';
+import { AjoutParentComponent } from './gestion/utilisateur/ajout-utilisateur/ajout-parent/ajout-parent.component';
+import { ModifierEnfantComponent } from './gestion/enfants/modifier-enfant/modifier-enfant.component';
+import { DialogBodyComponent } from './dialog/dialog-body/dialog-body.component';
+import { PopupAssociateEnfantComponent } from './gestion/utilisateur/list-utilisateur/popup-associate-enfant/popup-associate-enfant.component';
+import { EmployeViewComponent } from './dashboard-view/employe-view/employe-view.component';
+import { ParentViewComponent } from './dashboard-view/parent-view/parent-view.component';
+import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
+
+
 
 
 
@@ -41,7 +53,20 @@ const appRoutes: Routes = [
       { path : 'utilisateur', component: AjoutUtilisateurComponent},
       { path : 'listeUtilisateur', component: ListUtilisateurComponent},
       { path : 'listeUtilisateur/:id', component: ModifierUtilisateurComponent},
-      { path : 'enfant', component: AjoutEnfantComponent}
+      { path : 'enfant', component: AjoutEnfantComponent},
+      { path : 'listeEnfants/:id', component: ModifierEnfantComponent},
+      { path : 'listeEnfants', component: ListeEnfantsComponent}
+    ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardViewComponent,
+    children : [
+
     ]
   }
 ];
@@ -59,7 +84,16 @@ const appRoutes: Routes = [
     ModifierUtilisateurComponent,
     FormModEmpComponent,
     FormModParentComponent,
-    ListeChoixParentComponent
+    ListeEnfantsComponent,
+    AjoutEmployeComponent,
+    AjoutParentComponent,
+    ModifierEnfantComponent,
+    DialogBodyComponent,
+    PopupAssociateEnfantComponent,
+    EmployeViewComponent,
+    ParentViewComponent,
+    DashboardViewComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -69,6 +103,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     MatTableModule,
+    MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatToolbarModule,
@@ -84,6 +119,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatStepperModule,
     MatSelectModule,
+    MatTableModule ,
+    MatSnackBarModule,
+    MatDialogModule,
     RouterModule.forRoot(appRoutes)
   ],
 
@@ -91,10 +129,14 @@ const appRoutes: Routes = [
               UtilisateurService,
               ParentService,
               EmployeService,
+              EnfantService,
               ProfilService,
               InformationService,
               AuthGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogBodyComponent,
+                    PopupAssociateEnfantComponent ]
+
 })
 export class AppModule { }

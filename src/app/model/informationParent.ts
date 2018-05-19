@@ -10,7 +10,6 @@ export class InformationParent {
         public telMobile: string,
         public telPro: string,
         public telFixe: string,
-        public fonction: string,
         public id?: number
     ) {}
 

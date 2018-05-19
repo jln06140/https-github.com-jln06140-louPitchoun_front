@@ -48,13 +48,8 @@
         <input type="text" id="telMobile" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.telMobile" name="telMobile">
       </div>
     </div>
-    <div class="form-group">
-      <label for="profil">Profil</label>
-      <select class="form-control" id="profil" required [(ngModel)]="employeToUpdate.profil" name="profil">
-        <option value="ADMIN">Admin</option>
-        <option value="EMPLOYE">Employe</option>
-      </select>
-    </div>
+
+
     <div class="col-4 ">
       <div class="form-group">
         <label for="motDePasse">Mot de passe</label>
@@ -70,6 +65,20 @@
           les mots de passe doivent correspondre
         </div>
       </div>
+      <div class="form-group">
+        <label for="profil">Profil</label>
+        <select class="form-control" id="profil" required [(ngModel)]="employeToUpdate.profil" name="profil">
+          <option value="ADMIN">Admin</option>
+          <option value="EMPLOYE">Employe</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="section">Section</label>
+        <select id="section" class="form-control" [(ngModel)]="employeToUpdate.section"  name="section" required>
+          <option *ngFor="let section of sectionList" [selected]="employeToUpdate.section" [value]="section | uppercase">{{section}}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
   <div class="row justify-content-around">
@@ -79,5 +88,6 @@
     </div>
   </div>
 </form>
+<p>{{employeToUpdate | json}}</p>
 
 <!-- <ng-template #loading>Loading User Data...</ng-template> -->

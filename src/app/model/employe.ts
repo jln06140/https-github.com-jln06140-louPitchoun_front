@@ -7,6 +7,7 @@ export class Employe {
 
         public username: string,
         public motDePasse: string,
+        public section: string,
         public infoEmploye: InformationEmploye,
         public profil: string,
         public id?: number,

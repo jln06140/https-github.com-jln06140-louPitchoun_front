@@ -26,7 +26,9 @@ export class ModifierUtilisateurComponent implements OnInit {
     this.utilisateurService.getUtilisateur(this.id).subscribe(data => {
       this.utilisateurSelected = data;
       console.log(this.utilisateurSelected.profil === ('ADMIN' || 'EMPLOYE'));
-      this.isEmploye = this.utilisateurSelected.profil=== ('ADMIN') || this.utilisateurSelected.profil === ('EMPLOYE');
+      this.isEmploye =
+        this.utilisateurSelected.profil === 'ADMIN' ||
+        this.utilisateurSelected.profil === 'EMPLOYE';
     });
   }
 
@@ -41,5 +43,4 @@ export class ModifierUtilisateurComponent implements OnInit {
   getProfilLebelle() {
     return this.utilisateurSelected.profil;
   }
-
 }

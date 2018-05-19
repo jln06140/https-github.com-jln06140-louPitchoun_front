@@ -19,19 +19,19 @@ export class ParentService {
     return this.http.get(this.url) as Observable<Utilisateur[]>;
   }
 
-  public addParent(utilisateur: Utilisateur): Observable<Utilisateur>{
-    return this.http.post<Utilisateur>((this.url), utilisateur, httpOptions);
+  public addParent(parent: Parent): Observable<Parent>{
+    return this.http.post<Parent>((this.url), parent, httpOptions);
   }
 
-  public getParent(id: number): Observable<Utilisateur> {
+  public getParent(id: number): Observable<Parent> {
     const url = `${this.url}/${id}`;
-    return this.http.get<Utilisateur>(url);
+    return this.http.get<Parent>(url);
   }
 
   public updateParent(id: number, parent: Parent): Observable<any> {
     const url = `${this.url}/${id}`;
     console.log(url);
-    console.log(JSON.stringify(parent));
+    console.log('parent envoye' + JSON.stringify(parent));
     return this.http.put(url, parent, httpOptions);
   }
 
