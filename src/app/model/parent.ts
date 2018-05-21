@@ -9,7 +9,7 @@ export class Parent {
         public username: string,
         public motDePasse: string,
         public infoParent: any,
-        public profil?: Profil,
+        public profil?: any,
         public enfants?: Enfant[],
         public id?: number
      ) {}

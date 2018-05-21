@@ -38,6 +38,9 @@ import { PopupAssociateEnfantComponent } from './gestion/utilisateur/list-utilis
 import { EmployeViewComponent } from './dashboard-view/employe-view/employe-view.component';
 import { ParentViewComponent } from './dashboard-view/parent-view/parent-view.component';
 import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
+import { SectionViewComponent } from './section-view/section-view.component';
+import { JourneeServiceService } from './services/journee-service.service';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -66,9 +69,11 @@ const appRoutes: Routes = [
     path: 'dashboard',
     component: DashboardViewComponent,
     children : [
-
+     
     ]
-  }
+  },
+  { path : 'section', component: SectionViewComponent}
+
 ];
 
 @NgModule({
@@ -93,6 +98,7 @@ const appRoutes: Routes = [
     EmployeViewComponent,
     ParentViewComponent,
     DashboardViewComponent,
+    SectionViewComponent,
   
   ],
   imports: [
@@ -131,8 +137,10 @@ const appRoutes: Routes = [
               EmployeService,
               EnfantService,
               ProfilService,
+              JourneeServiceService,
               InformationService,
-              AuthGuard
+              AuthGuard,
+              DatePipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [DialogBodyComponent,

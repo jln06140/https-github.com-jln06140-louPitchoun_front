@@ -7,8 +7,7 @@ import { Utilisateur } from '../model/Utilisateur';
   styleUrls: ['./dashboard-view.component.css']
 })
 export class DashboardViewComponent implements OnInit {
-   
- 
+  
   utilisateur: Utilisateur;
   typeUtilisateur: any;
   nomSection: string;

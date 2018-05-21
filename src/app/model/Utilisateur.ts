@@ -7,7 +7,7 @@ export class Utilisateur {
         public username: string,
         public motDePasse: string,
         public infoUserDto: any,
-        public profil: string,
+        public profil: any,
         public section?: any,
         public enfants?: Enfant[],
         public id?: number

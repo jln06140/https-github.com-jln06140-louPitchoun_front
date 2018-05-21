@@ -1,0 +1,45 @@
+<mat-table #table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="danger">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-icon *ngIf="element.enfantInfo.allergie">warning</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="nom">
+    <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.enfantInfo.nom}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="prenom">
+    <mat-header-cell *matHeaderCellDef> prenom </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.enfantInfo.prenom}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="heure arrivee">
+    <mat-header-cell *matHeaderCellDef> heure arrivee </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button class="btn" *ngIf="!journeeEnCours(element)" (click)="debuterJournee(element.id)">Arrivee</button>
+      <input type="text" readonly class="form-control-plaintext" *ngIf="journeeEnCours(element)"
+       id="heureArrivee" value={{getJourneeEnCours(element).heureArrivee}}>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="heure depart">
+    <mat-header-cell *matHeaderCellDef> heure depart </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button class="btn" *ngIf="journeeEnCours(element)">Depart</button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef> action </mat-header-cell>
+    <mat-cell *matCellDef="let element"> </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<p>{{ dataSource.data | json}}</p>
