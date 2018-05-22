@@ -5,6 +5,6 @@ export class JourneeEnfant{
 		public  heureArrivee: Date,
 		public  heureDepart: Date,
 		public remarque: string,
-		public journeeEnCours: boolean;
+		public journeeEnCours: boolean
 	){}
 }

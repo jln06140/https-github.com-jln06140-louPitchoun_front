@@ -16,8 +16,15 @@ export class JourneeServiceService {
   constructor(private http: HttpClient) { }
 
   public debuterJournee(id: number): Observable<any> {
-    const urlStart = this.url + '/start';
-    const url = `${urlStart}/${id}`;
+    const urlDeb = this.url + '/debuter';
+    const url = `${urlDeb}/${id}`;
+    console.log(url);
+    return this.http.get<any>(url) ;
+  }
+
+  public cloturerJournee(id: number): Observable<any> {
+    const urlClot = this.url + '/cloturer';
+    const url = `${urlClot}/${id}`;
     console.log(url);
     return this.http.get<any>(url) ;
   }

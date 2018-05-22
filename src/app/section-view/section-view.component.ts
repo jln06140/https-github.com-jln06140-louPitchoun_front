@@ -6,6 +6,7 @@ import { Enfant } from '../model/enfant';
 import { MatTableDataSource } from '@angular/material';
 import { JourneeServiceService } from '../services/journee-service.service';
 import { DatePipe } from '@angular/common';
+import { JourneeEnfant } from '../model/journeeEnfant';
 
 @Component({
   selector: 'app-section-view',
@@ -18,12 +19,12 @@ export class SectionViewComponent implements OnInit {
   erreur: string;
   now: any;
 
-  displayedColumns = [ 'danger', 'nom', 'prenom', 'heure arrivee', 'heure depart', 'action'];
+  displayedColumns = ['danger', 'nom', 'prenom', 'heure arrivee', 'heure depart', 'action'];
   dataSource = new MatTableDataSource();
 
   constructor(private enfantService: EnfantService,
-              private journeeService: JourneeServiceService,
-              private datePipe: DatePipe) { }
+    private journeeService: JourneeServiceService,
+    private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.loadEnfantsSection();
@@ -40,31 +41,63 @@ export class SectionViewComponent implements OnInit {
     );
   }
 
+  cloturerJournee(idEnfant: number) {
+    this.journeeService.cloturerJournee(idEnfant).subscribe(
+      (data) => {
+        console.log("cloture" + data);
+        this.loadEnfantsSection();
+      }
+    );
+  }
+
   // cloturerJournee(idEnfant: number){
   //   this.journeeService.cloturerJournee(idEnfant).subscribe(
 
   //   );
   // }
 
-  loadEnfantsSection(){
+  loadEnfantsSection() {
     this.enfantService.getAllEnfants().subscribe(
       data => this.dataSource.data = data
     );
   }
 
-  journeeEnCours(element : Enfant): boolean{
+  //renseigne si il ya journee en cours
+  journeeEnCours(element: Enfant): boolean {
     let isPresent = false;
     const today = Date.now();
     if (element.journees.length > 0) {
       for (const journee of element.journees) {
-        console.log((journee.date.toDateString ));
-        //console.log(this.datePipe.transform(today, 'yyyy-MM-dd'));
-        isPresent = true;
-         }
-     }
-     console.log(isPresent);
-     return isPresent;
+        if (journee.journeeEnCours) {
+          isPresent = true;
+        }
+      }
     }
+    console.log(isPresent);
+    return isPresent;
+  }
+
+  getJourneeDuJour(element: Enfant): JourneeEnfant {
+    if (element.journees.length > 0) {
+      for (const journee of element.journees) {
+        if (journee.date === this.now) {
+          return journee;
+        }
+      }
+    }
+    return null;
+  }
+
+  isJourneeDuJourTerminee(element: Enfant): boolean {
+    if (element.journees.length > 0) {
+      for (const journee of element.journees) {
+        if (journee.date === this.now && !journee.journeeEnCours) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   indiceJourneeEnCours(element: Enfant): number {
     let indice = -1;
@@ -73,15 +106,15 @@ export class SectionViewComponent implements OnInit {
         indice = i;
       }
     }
-    if (indice === -1){
+    if (indice === -1) {
       this.erreur = 'Aucune journee en cours';
     }
     return indice;
   }
 
-  getJourneeEnCours( element: Enfant) {
+  getJourneeEnCours(element: Enfant) {
     const indice = this.indiceJourneeEnCours(element);
-    if(indice >= 0) {
+    if (indice >= 0) {
       console.log(indice);
       return element.journees[indice];
     }
@@ -90,7 +123,7 @@ export class SectionViewComponent implements OnInit {
     }
   }
 
-  journeeFinie()
+  //journeeFinie()
 }
 
   // getJournee(element: Enfant){
@@ -101,7 +134,5 @@ export class SectionViewComponent implements OnInit {
 
 
 
-
-}
 
 

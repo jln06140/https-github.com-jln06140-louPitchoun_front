@@ -20,22 +20,26 @@
   <ng-container matColumnDef="heure arrivee">
     <mat-header-cell *matHeaderCellDef> heure arrivee </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button class="btn" *ngIf="!journeeEnCours(element)" (click)="debuterJournee(element.id)">Arrivee</button>
-      <input type="text" readonly class="form-control-plaintext" *ngIf="journeeEnCours(element)"
-       id="heureArrivee" value={{getJourneeEnCours(element).heureArrivee}}>
+      <button class="btn" *ngIf="!getJourneeDuJour(element)" (click)="debuterJournee(element.id)">Arrivee</button>
+      <input type="text" readonly class="form-control-plaintext" *ngIf=" getJourneeDuJour(element).heureArrivee"
+       id="heureArrivee" value={{getJourneeDuJour(element).heureArrivee}}>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="heure depart">
     <mat-header-cell *matHeaderCellDef> heure depart </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button class="btn" *ngIf="journeeEnCours(element)">Depart</button>
+      <button class="btn" *ngIf="getJourneeDuJour(element) && getJourneeDuJour(element).journeeEnCours" (click)="cloturerJournee(element.id)">Depart</button>
+      <input type="text" readonly class="form-control-plaintext" *ngIf="getJourneeDuJour(element) && !getJourneeDuJour(element).journeeEnCours"
+       id="heureArrivee" value={{getJourneeDuJour(element).heureDepart}}>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef> action </mat-header-cell>
-    <mat-cell *matCellDef="let element"> </mat-cell>
+    <mat-cell *matCellDef="let element"> 
+      <button class="btn" >Debuter activité</button>
+    </mat-cell>
   </ng-container>
 
 
