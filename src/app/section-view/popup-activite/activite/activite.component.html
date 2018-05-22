@@ -1,0 +1,19 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <fieldset>
+    <legend>Activité</legend>
+    <div class="form-group">
+      <label for="activite">Type d'activité</label>
+      <select class="form-control" id="activite" [ngModel]="activite.nomActivite" name="nomActivite">
+        <option value="1">Peinture</option>
+        <option value="2">Coloriage</option>
+        <option value="3">Histoire</option>
+        <option value="4">Jeu exterieur</option>
+      </select>
+    </div>
+    <label for="remarque">Remarque</label>
+    <input class="form-control remarque" id="remarque" [ngModel]="activite.remarque" name="remarque">
+    <button class="btn" type="submit">Debuter</button>
+  </fieldset>
+  <!-- <input type="text" ngModel name="firstName" #firstName="ngModel" (change)="doSomething(firstName)"> -->
+</form>
+<p>{{enfant | json }}</p>

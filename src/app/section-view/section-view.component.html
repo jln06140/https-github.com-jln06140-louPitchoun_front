@@ -3,7 +3,7 @@
   <ng-container matColumnDef="danger">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <mat-icon *ngIf="element.enfantInfo.allergie">warning</mat-icon>
+      <mat-icon *ngIf="element.enfantInfo.allergie" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">warning</mat-icon>
     </mat-cell>
   </ng-container>
 
@@ -21,8 +21,8 @@
     <mat-header-cell *matHeaderCellDef> heure arrivee </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <button class="btn" *ngIf="!getJourneeDuJour(element)" (click)="debuterJournee(element.id)">Arrivee</button>
-      <input type="text" readonly class="form-control-plaintext" *ngIf=" getJourneeDuJour(element).heureArrivee"
-       id="heureArrivee" value={{getJourneeDuJour(element).heureArrivee}}>
+      <input type="text" readonly class="form-control-plaintext" *ngIf="getJourneeDuJour(element)?.heureArrivee" id="heureArrivee"
+        value="{{getJourneeDuJour(element).heureArrivee}}">
     </mat-cell>
   </ng-container>
 
@@ -31,14 +31,14 @@
     <mat-cell *matCellDef="let element">
       <button class="btn" *ngIf="getJourneeDuJour(element) && getJourneeDuJour(element).journeeEnCours" (click)="cloturerJournee(element.id)">Depart</button>
       <input type="text" readonly class="form-control-plaintext" *ngIf="getJourneeDuJour(element) && !getJourneeDuJour(element).journeeEnCours"
-       id="heureArrivee" value={{getJourneeDuJour(element).heureDepart}}>
+        id="heureArrivee" value={{getJourneeDuJour(element).heureDepart}}>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef> action </mat-header-cell>
-    <mat-cell *matCellDef="let element"> 
-      <button class="btn" >Debuter activité</button>
+    <mat-cell *matCellDef="let element">
+      <button class="btn" (click)="openDialog(element)">Debuter activité</button>
     </mat-cell>
   </ng-container>
 

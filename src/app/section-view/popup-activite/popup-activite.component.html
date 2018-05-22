@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>demarrer activite</h2>
+
+<mat-dialog-content>
+  <div class="activite">
+    <ul class="">
+      <li (click) = "debuterActivite()">Demarrer une activité</li>
+      <li>Commencer une sieste</li>
+      <li>Donner un repas</li>
+    </ul>
+  </div>
+  <app-activite *ngIf="activite" [enfant]= "enfantSelected"></app-activite>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button">Close</button>
+</mat-dialog-actions>

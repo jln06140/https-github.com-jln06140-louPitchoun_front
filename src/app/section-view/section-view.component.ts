@@ -3,10 +3,11 @@ import { EnfantService } from '../services/enfant.service';
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs/Observable';
 import { Enfant } from '../model/enfant';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { JourneeServiceService } from '../services/journee-service.service';
 import { DatePipe } from '@angular/common';
 import { JourneeEnfant } from '../model/journeeEnfant';
+import { PopupActiviteComponent } from './popup-activite/popup-activite.component';
 
 @Component({
   selector: 'app-section-view',
@@ -24,7 +25,9 @@ export class SectionViewComponent implements OnInit {
 
   constructor(private enfantService: EnfantService,
     private journeeService: JourneeServiceService,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.loadEnfantsSection();
@@ -121,6 +124,22 @@ export class SectionViewComponent implements OnInit {
     if (indice === -1) {
       this.erreur = 'Aucune journee en cours';
     }
+  }
+
+  openDialog(element: any): void {
+    const dialogConfig = new MatDialogConfig();
+    const dialogRef = this.dialog.open(PopupActiviteComponent, { width: '600px', data : element});
+    dialogRef.afterClosed().subscribe(result => {
+      this.openSnackBar('Enfants associés', 'succes');
+      //this.dialogResult = result;
+    });
+
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   //journeeFinie()

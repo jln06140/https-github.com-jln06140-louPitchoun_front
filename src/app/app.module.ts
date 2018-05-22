@@ -41,6 +41,9 @@ import { DashboardViewComponent } from './dashboard-view/dashboard-view.componen
 import { SectionViewComponent } from './section-view/section-view.component';
 import { JourneeServiceService } from './services/journee-service.service';
 import { DatePipe } from '@angular/common';
+import { DialogActiviteComponent } from './dialog/dialog-activite/dialog-activite.component';
+import { PopupActiviteComponent } from './section-view/popup-activite/popup-activite.component';
+import { ActiviteComponent } from './section-view/popup-activite/activite/activite.component';
 
 
 
@@ -99,6 +102,9 @@ const appRoutes: Routes = [
     ParentViewComponent,
     DashboardViewComponent,
     SectionViewComponent,
+    DialogActiviteComponent,
+    PopupActiviteComponent,
+    ActiviteComponent,
   
   ],
   imports: [
@@ -144,7 +150,8 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
   entryComponents: [DialogBodyComponent,
-                    PopupAssociateEnfantComponent ]
+                    PopupAssociateEnfantComponent,
+                    PopupActiviteComponent ]
 
 })
 export class AppModule { }
