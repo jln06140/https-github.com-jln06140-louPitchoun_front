@@ -8,11 +8,11 @@
       <li>Donner un repas</li>
     </ul>
   </div>
-  <app-activite *ngIf="activite" [enfant]= "enfantSelected"></app-activite>
+  <app-activite *ngIf="activite" [journee]= "journee"></app-activite>
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button class="mat-raised-button" (click)="close()">Close</button>
-  <button class="mat-raised-button">Close</button>
+  <!-- <button class="mat-raised-button">Close</button> -->
 </mat-dialog-actions>

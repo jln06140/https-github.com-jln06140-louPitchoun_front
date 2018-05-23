@@ -1,10 +1,11 @@
 export class JourneeEnfant{
 
     constructor(
-        public date: Date,
-		public  heureArrivee: Date,
-		public  heureDepart: Date,
+		public date: Date,
 		public remarque: string,
-		public journeeEnCours: boolean
+		public typeActivite: any;
+		public  heureArrivee?: Date,
+		public  heureDepart?: Date,
+		public journeeEnCours?: boolean
 	){}
 }

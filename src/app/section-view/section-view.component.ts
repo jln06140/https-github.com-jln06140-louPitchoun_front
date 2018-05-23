@@ -128,8 +128,18 @@ export class SectionViewComponent implements OnInit {
 
   openDialog(element: any): void {
     const dialogConfig = new MatDialogConfig();
-    const dialogRef = this.dialog.open(PopupActiviteComponent, { width: '600px', data : element});
+    const dialogRef = this.dialog.open(PopupActiviteComponent,
+      {
+        width: '600px',
+        data: {
+          /*put your data here*/
+          enfant: element,
+          journee: this.getJourneeDuJour(element)
+        }
+      });
+
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       this.openSnackBar('Enfants associés', 'succes');
       //this.dialogResult = result;
     });

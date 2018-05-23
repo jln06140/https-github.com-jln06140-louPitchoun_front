@@ -11,11 +11,11 @@ import { JourneeEnfant } from '../../../model/journeeEnfant';
 export class ActiviteComponent implements OnInit {
 
   @Input()
-  enfant: Enfant;
+  journee: any;
   journeeEncours : JourneeEnfant;
   activite : any = {
     remarque: '',
-    nomActivite: 1
+    typeActivite: 1
 
   };
 
@@ -27,6 +27,13 @@ export class ActiviteComponent implements OnInit {
   }
 
   submit(f) {
+    this.journee.activites.push(this.activite);
+    this.journeeService.updateJourneeEncours(this.journee.id, this.journee).subscribe(
+      //ok -> revenir au dialog box et notifier activite ajoutée
+      //erreur -> rester dans le composant
+      (data) =>{console.log(data);}
+    );
+    console.log(this.journee);
     console.log(f.value);
   }
 

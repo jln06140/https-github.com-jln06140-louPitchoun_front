@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { JourneeEnfant } from '../model/journeeEnfant';
 
 
 
@@ -27,6 +28,11 @@ export class JourneeServiceService {
     const url = `${urlClot}/${id}`;
     console.log(url);
     return this.http.get<any>(url) ;
+  }
+
+  public updateJourneeEncours(id: number ,journeeEnfant: JourneeEnfant){
+    const url = `${this.url}/${id}`;
+    return this.http.put(url, journeeEnfant, httpOptions);
   }
 
 }
