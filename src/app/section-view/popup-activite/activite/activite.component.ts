@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Enfant } from '../../../model/enfant';
 import { JourneeServiceService } from '../../../services/journee-service.service';
 import { JourneeEnfant } from '../../../model/journeeEnfant';
+import { TypeActiviteService } from '../../../services/type-activite.service';
+import { ActiviteService } from '../../../services/activite.service';
 
 @Component({
   selector: 'app-activite',
@@ -12,29 +14,39 @@ export class ActiviteComponent implements OnInit {
 
   @Input()
   journee: any;
-  journeeEncours : JourneeEnfant;
-  activite : any = {
+  @Output()  
+  afficheComponent = new EventEmitter<boolean>();
+
+  journeeEncours: JourneeEnfant;
+  activite: any = {
     remarque: '',
     typeActivite: 1
 
   };
 
 
-  constructor(private journeeService : JourneeServiceService) { }
+  constructor(private activiteService: ActiviteService,
+    private typeActiviteService: TypeActiviteService) { }
 
   ngOnInit() {
     //retourner la journee de l'enfant en cours
   }
 
   submit(f) {
-    this.journee.activites.push(this.activite);
-    this.journeeService.updateJourneeEncours(this.journee.id, this.journee).subscribe(
-      //ok -> revenir au dialog box et notifier activite ajoutée
-      //erreur -> rester dans le composant
-      (data) =>{console.log(data);}
+    this.typeActiviteService.getTypeActivite(this.activite.typeActivite).subscribe(
+      (data) => {
+        this.activite.typeActivite = data,
+          console.log(this.activite.typeActivite);
+          this.activiteService.ajoutActiviteDansJournee(this.journee.id, this.activite).subscribe(
+            //ok -> revenir au dialog box et notifier activite ajoutée
+            //erreur -> rester dans le composant
+            (data) => { 
+              console.log(data); 
+              this.afficheComponent.emit(false);
+            }
+          );
+      }
     );
-    console.log(this.journee);
-    console.log(f.value);
   }
 
 }

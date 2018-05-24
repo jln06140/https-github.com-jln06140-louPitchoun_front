@@ -39,5 +39,12 @@ export class EnfantService {
     return this.http.delete<Enfant>(url, httpOptions);
   }
 
+  public loadEnfants(variable : any[]){
+    this.getAllEnfants().subscribe(
+      data => {variable = data;
+      console.log(data);}
+    )
+  }
+
   //public getEnfantsBySection(String nomSection)
 }

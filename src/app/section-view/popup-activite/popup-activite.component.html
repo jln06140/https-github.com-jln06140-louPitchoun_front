@@ -1,15 +1,15 @@
-<h2 mat-dialog-title>demarrer activite</h2>
+<h2 mat-dialog-title >demarrer activite</h2>
 
 <mat-dialog-content>
   <div class="activite">
     <ul class="">
       <li (click) = "debuterActivite()">Demarrer une activité</li>
-      <li>Commencer une sieste</li>
+      <li *ngIf="!sieste" (click) = "debuterSieste()">Commencer une sieste</li>
+      <li *ngIf="sieste" (click) = "debuterSieste()">Renseigner la sieste en cours</li>
       <li>Donner un repas</li>
     </ul>
   </div>
-  <app-activite *ngIf="activite" [journee]= "journee"></app-activite>
-
+  <app-activite *ngIf="activite" [journee]= "journee" (afficheComponent)="onAffiched($event)"></app-activite>
 </mat-dialog-content>
 
 <mat-dialog-actions>

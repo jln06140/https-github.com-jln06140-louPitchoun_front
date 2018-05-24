@@ -44,6 +44,11 @@ import { DatePipe } from '@angular/common';
 import { DialogActiviteComponent } from './dialog/dialog-activite/dialog-activite.component';
 import { PopupActiviteComponent } from './section-view/popup-activite/popup-activite.component';
 import { ActiviteComponent } from './section-view/popup-activite/activite/activite.component';
+import { TypeActiviteService } from './services/type-activite.service';
+import { ActiviteService } from './services/activite.service';
+import { SnackBarService } from './services/snack-bar.service';
+import { SiesteComponent } from './section-view/popup-activite/sieste/sieste.component';
+import { SiesteService } from './services/sieste.service';
 
 
 
@@ -105,6 +110,7 @@ const appRoutes: Routes = [
     DialogActiviteComponent,
     PopupActiviteComponent,
     ActiviteComponent,
+    SiesteComponent,
   
   ],
   imports: [
@@ -145,6 +151,10 @@ const appRoutes: Routes = [
               ProfilService,
               JourneeServiceService,
               InformationService,
+              TypeActiviteService,
+              SiesteService,
+              ActiviteService,
+              SnackBarService,
               AuthGuard,
               DatePipe
   ],

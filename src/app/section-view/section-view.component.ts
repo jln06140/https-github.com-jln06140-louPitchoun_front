@@ -139,18 +139,13 @@ export class SectionViewComponent implements OnInit {
       });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.openSnackBar('Enfants associés', 'succes');
-      //this.dialogResult = result;
+      this.loadEnfantsSection();
+     
     });
 
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
+ 
 
   //journeeFinie()
 }
