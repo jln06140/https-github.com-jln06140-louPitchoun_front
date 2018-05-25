@@ -1,0 +1,30 @@
+<h2> Resumé de la journée de {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }} </h2>
+
+<ul>
+    <h4>repas</h4>
+<li *ngIf="journeeEnCours.repas" class="list-group-item">
+  <div *ngFor="let repas of journeeEnCours.repas; let i = index">
+    Repas {{ i + 1 }} : pris à {{ repas.heureDebut }} - {{ repas.heureFin }}
+    <p *ngIf="repas.quantite"> a bu {{ repas.quantite }} ml</p>
+    <p *ngIf="repas.menu"> a mangé {{ repas.menu }}</p>
+    <p *ngIf="repas.remarque">Remarque : {{ repas.remarque }}</p>
+  </div>
+</li>
+<h4>sieste</h4>
+<li *ngIf="journeeEnCours.siestes" class="list-group-item">
+  <div *ngFor="let sieste of journeeEnCours.siestes; let i = index">
+    Sieste {{ i + 1 }} : de {{ sieste.heureDebut }} à {{ sieste.heureFin }}
+    <p *ngIf="sieste.remarque">Remarque : {{ sieste.remarque }}</p>
+  </div>
+</li>
+<div *ngIf="!journeeEnCours.siestes" class="afficheSieste">
+  pas de sieste aujourd'hui
+</div>
+<h4>activite</h4>
+<li *ngIf="journeeEnCours.activites" class="list-group-item">
+  <div *ngFor="let activite of journeeEnCours.activites; let i = index">
+    Activite {{ i + 1 }} : {{ activite.typeActivite.typeActivite }}
+    <p *ngIf="activite.remarque">Remarque : {{ activite.remarque }}</p>
+  </div>
+</li>
+</ul>

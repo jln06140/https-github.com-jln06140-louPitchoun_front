@@ -8,6 +8,8 @@ import { JourneeServiceService } from '../services/journee-service.service';
 import { DatePipe } from '@angular/common';
 import { JourneeEnfant } from '../model/journeeEnfant';
 import { PopupActiviteComponent } from './popup-activite/popup-activite.component';
+import { PopupResumeComponent } from './popup-resume/popup-resume.component';
+import { PopupInfoComponent } from './popup-info/popup-info.component';
 
 @Component({
   selector: 'app-section-view',
@@ -19,8 +21,10 @@ export class SectionViewComponent implements OnInit {
   //journeeEnCours: any;
   erreur: string;
   now: any;
+  dateTest = new Date();
 
-  displayedColumns = ['danger', 'nom', 'prenom', 'heure arrivee', 'heure depart', 'action'];
+
+  displayedColumns = ['danger', 'nom', 'prenom', 'heure arrivee', 'heure depart', 'action', 'Renseignements'];
   dataSource = new MatTableDataSource();
 
   constructor(private enfantService: EnfantService,
@@ -126,6 +130,16 @@ export class SectionViewComponent implements OnInit {
     }
   }
 
+  getHeureArrivee(element: Enfant) {
+    const heureArr  = this.getJourneeDuJour(element).heureArrivee.substring(0,5);
+    return heureArr;
+  }
+
+  getHeureDepart(element: Enfant) {
+    const heureDep  = this.getJourneeDuJour(element).heureDepart.substring(0,5);
+    return heureDep;
+  }
+
   openDialog(element: any): void {
     const dialogConfig = new MatDialogConfig();
     const dialogRef = this.dialog.open(PopupActiviteComponent,
@@ -142,6 +156,43 @@ export class SectionViewComponent implements OnInit {
       this.loadEnfantsSection();
      
     });
+
+  }
+
+  openDialogResume(element: any): void {
+    const dialogConfig = new MatDialogConfig();
+    const dialogRef = this.dialog.open(PopupResumeComponent,
+      {
+        width: '600px',
+        data: {
+          /*put your data here*/
+          enfant: element,
+          journee: this.getJourneeDuJour(element)
+        }
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadEnfantsSection();
+     
+    });
+  }
+
+    openDialogInfo(element: any): void {
+      const dialogConfig = new MatDialogConfig();
+      const dialogRef = this.dialog.open(PopupInfoComponent,
+        {
+          width: '600px',
+          data: {
+            /*put your data here*/
+            enfant: element,
+          }
+        });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        this.loadEnfantsSection();
+       
+      });
+  
 
   }
 

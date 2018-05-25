@@ -1,9 +1,10 @@
+<a routerLink ="/dashboard">Accueil</a>
 <mat-table #table [dataSource]="dataSource">
 
   <ng-container matColumnDef="danger">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <mat-icon *ngIf="element.enfantInfo.allergie" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">warning</mat-icon>
+      <mat-icon *ngIf="element.enfantInfo.allergie" data-container="body" data-toggle="popover" data-placement="left" data-content="">warning</mat-icon>
     </mat-cell>
   </ng-container>
 
@@ -21,8 +22,7 @@
     <mat-header-cell *matHeaderCellDef> heure arrivee </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <button class="btn" *ngIf="!getJourneeDuJour(element)" (click)="debuterJournee(element.id)">Arrivee</button>
-      <input type="text" readonly class="form-control-plaintext" *ngIf="getJourneeDuJour(element)?.heureArrivee" id="heureArrivee"
-        value="{{getJourneeDuJour(element).heureArrivee}}">
+      <p readonly class="form-control-plaintext" *ngIf="getJourneeDuJour(element)?.heureArrivee" id="heureArrivee">{{ getHeureArrivee(element) }}</p>
     </mat-cell>
   </ng-container>
 
@@ -30,19 +30,25 @@
     <mat-header-cell *matHeaderCellDef> heure depart </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <button class="btn" *ngIf="getJourneeDuJour(element) && getJourneeDuJour(element).journeeEnCours" (click)="cloturerJournee(element.id)">Depart</button>
-      <input type="text" readonly class="form-control-plaintext" *ngIf="getJourneeDuJour(element) && !getJourneeDuJour(element).journeeEnCours"
-        id="heureArrivee" value={{getJourneeDuJour(element).heureDepart}}>
+      <p readonly class="form-control-plaintext" *ngIf="getJourneeDuJour(element) && !getJourneeDuJour(element).journeeEnCours"
+        id="heureArrivee">{{ getHeureDepart(element)}} </p>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef> action </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button class="btn" *ngIf = "getJourneeDuJour(element) && getJourneeDuJour(element).journeeEnCours" (click)="openDialog(element)">Debuter activité</button>
-      <button class="btn" *ngIf = "getJourneeDuJour(element) && !getJourneeDuJour(element).journeeEnCours" (click)="openDialog(element)">Resumé de la journée</button>
+      <button class="btn" *ngIf="getJourneeDuJour(element) && getJourneeDuJour(element).journeeEnCours" (click)="openDialog(element)">Debuter activité</button>
+      <button class="btn" *ngIf="getJourneeDuJour(element) && !getJourneeDuJour(element).journeeEnCours" (click)="openDialogResume(element)">Resumé</button>
     </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="Renseignements">
+      <mat-header-cell *matHeaderCellDef> Renseignements </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button class="btn" (click)="openDialogInfo(element)" >Info</button>
+      </mat-cell>
+    </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

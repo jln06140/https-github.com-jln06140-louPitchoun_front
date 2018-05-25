@@ -4,12 +4,14 @@
   <div class="activite">
     <ul class="">
       <li (click) = "debuterActivite()">Demarrer une activité</li>
-      <li *ngIf="!sieste" (click) = "debuterSieste()">Commencer une sieste</li>
-      <li *ngIf="sieste" (click) = "debuterSieste()">Renseigner la sieste en cours</li>
-      <li>Donner un repas</li>
+      <li (click) = "ajouterSieste()">Renseigner une sieste</li>
+      
+      <li (click) = "ajouterRepas()">Donner un repas</li>
     </ul>
   </div>
-  <app-activite *ngIf="activite" [journee]= "journee" (afficheComponent)="onAffiched($event)"></app-activite>
+  <app-activite *ngIf="activite" [journee]= "journee" (afficheComponent)="onAffichedActivite($event)"></app-activite>
+  <app-sieste *ngIf="sieste" [journee]= "journee" (afficheComponent)="onAffichedSieste($event)"></app-sieste>
+  <app-repas *ngIf="repas" [journee]= "journee" (afficheComponent)="onAffichedRepas($event)"></app-repas>
 </mat-dialog-content>
 
 <mat-dialog-actions>

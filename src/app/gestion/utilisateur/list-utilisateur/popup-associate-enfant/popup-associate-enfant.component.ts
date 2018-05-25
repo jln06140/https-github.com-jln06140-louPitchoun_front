@@ -4,6 +4,7 @@ import { Enfant } from '../../../../model/enfant';
 import { EnfantService } from '../../../../services/enfant.service';
 import { Parent } from '../../../../model/parent';
 import { ParentService } from '../../../../services/parent.service';
+import { SnackBarService } from '../../../../services/snack-bar.service';
 
 @Component({
   selector: 'app-popup-associate-enfant',
@@ -28,6 +29,7 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
   constructor(
     public enfantService: EnfantService,
     public parentService: ParentService,
+    private snackBarService: SnackBarService,
     public dialogRef: MatDialogRef<PopupAssociateEnfantComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.parent = data;
@@ -47,6 +49,7 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
   ajouter(element: Enfant) {
     console.log(element);
     this.enfantsAjoutes.push(element);
+    this.parentService.
     console.log(this.enfantsAjoutes);
   }
 
@@ -61,6 +64,15 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
       isPresent =  true;
     }
     return isPresent;
+  }
+
+  associer(){
+    this.parentService.ajoutEnfantsParent(this.parent.id, this.enfantsAjoutes).subscribe(
+      (data) =>{
+        this.snackBarService.openSnackBar("Enfant ajouté", "Succes");
+        this.close();
+    }
+    )
   }
 
   loadEnfants() {
@@ -79,10 +91,10 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
 
 
   close() {
-    this.parent.enfants = this.enfantsAjoutes;
-    this.parentService.updateParent(this.parent.id, this.parent).subscribe(
-      () => console.log("coucou")
-    );
+    // this.parent.enfants = this.enfantsAjoutes;
+    // this.parentService.updateParent(this.parent.id, this.parent).subscribe(
+    //   () => console.log("coucou")
+    // );
     this.dialogRef.close(this.enfantsAjoutes);
   }
 

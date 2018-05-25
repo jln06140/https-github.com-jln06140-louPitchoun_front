@@ -24,14 +24,6 @@
       <mat-cell *matCellDef="let element"> {{ element.section}} </mat-cell>
     </ng-container>
 
-    <!-- <ng-container matColumnDef="associer">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <button *ngIf="isParent(element.profil)"class="btn" routerLink="{{element.id}}">Associer Enfant</button>
-          <button *ngIf="!isParent(element.profil)"class="btn" routerLink="{{element.id}}">Associer Section</button>
-        </mat-cell>
-      </ng-container> -->
-
     <ng-container matColumnDef="associer">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
@@ -51,5 +43,5 @@
 <p>{{enfantsAjoutes | json}}</p>
 <mat-dialog-actions>
   <button class="mat-raised-button" (click)="close()">Close</button>
-  <button class="mat-raised-button" (click)="associer()">Close</button>
+  <button class="mat-raised-button" (click)="associer()">Valider</button>
 </mat-dialog-actions>

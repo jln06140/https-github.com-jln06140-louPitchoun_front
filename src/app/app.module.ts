@@ -49,6 +49,10 @@ import { ActiviteService } from './services/activite.service';
 import { SnackBarService } from './services/snack-bar.service';
 import { SiesteComponent } from './section-view/popup-activite/sieste/sieste.component';
 import { SiesteService } from './services/sieste.service';
+import { RepasComponent } from './section-view/popup-activite/repas/repas.component';
+import { RepasService } from './services/repas.service';
+import { PopupResumeComponent } from './section-view/popup-resume/popup-resume.component';
+import { PopupInfoComponent } from './section-view/popup-info/popup-info.component';
 
 
 
@@ -111,6 +115,9 @@ const appRoutes: Routes = [
     PopupActiviteComponent,
     ActiviteComponent,
     SiesteComponent,
+    RepasComponent,
+    PopupResumeComponent,
+    PopupInfoComponent,
   
   ],
   imports: [
@@ -154,6 +161,7 @@ const appRoutes: Routes = [
               TypeActiviteService,
               SiesteService,
               ActiviteService,
+              RepasService,
               SnackBarService,
               AuthGuard,
               DatePipe
@@ -161,6 +169,8 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent],
   entryComponents: [DialogBodyComponent,
                     PopupAssociateEnfantComponent,
+                    PopupResumeComponent,
+                    PopupInfoComponent,
                     PopupActiviteComponent ]
 
 })

@@ -14,7 +14,7 @@ export class ActiviteComponent implements OnInit {
 
   @Input()
   journee: any;
-  @Output()  
+  @Output()
   afficheComponent = new EventEmitter<boolean>();
 
   journeeEncours: JourneeEnfant;
@@ -36,12 +36,9 @@ export class ActiviteComponent implements OnInit {
     this.typeActiviteService.getTypeActivite(this.activite.typeActivite).subscribe(
       (data) => {
         this.activite.typeActivite = data,
-          console.log(this.activite.typeActivite);
           this.activiteService.ajoutActiviteDansJournee(this.journee.id, this.activite).subscribe(
             //ok -> revenir au dialog box et notifier activite ajoutée
-            //erreur -> rester dans le composant
-            (data) => { 
-              console.log(data); 
+            (data) => {
               this.afficheComponent.emit(false);
             }
           );

@@ -14,52 +14,69 @@ export class PopupActiviteComponent implements OnInit {
 
   activite = false;
   sieste = false;
+  repas = false;
+  componentSieste = false;
   enfantSelected: Enfant;
   journee: JourneeEnfant;
-  shortName;
+  
 
   constructor(
     private siesteService: SiesteService,
-    private snackBarService : SnackBarService,
+    private snackBarService: SnackBarService,
     public dialogRef: MatDialogRef<PopupActiviteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(data);
     this.enfantSelected = data.enfant;
     this.journee = data.journee;
-    console.log(this.journee);
   }
 
   ngOnInit() {
   }
-  
 
-  debuterActivite(){
+
+  debuterActivite() {
     this.activite ? this.activite = false : this.activite = true;
-    console.log(this.activite);
+    if (this.activite === true) this.repas = false; this.sieste = false
+
   }
 
-  debuterSieste(){
-    this.siesteService.debuterSieste(this.enfantSelected.id).subscribe(
-      (data) => {
-        console.log(data);
-        this.sieste ? this.sieste = false : this.sieste = true;
-        console.log(this.sieste);
-        this.snackBarService.openSnackBar("Sieste demarrée", "Succes");
-      }
-    );
-    
-   
+  ajouterSieste() {
+    this.sieste ? this.sieste = false : this.sieste = true;
+    if (this.sieste === true) this.repas = false; this.activite = false;
+  }
+
+  ajouterRepas() {
+    this.repas ? this.repas = false : this.repas = true;
+    if (this.repas === true) this.sieste = false; this.activite = false;
+  }
+
+
+  afficheComponent() {
+
   }
 
   close() {
     this.dialogRef.close(this.journee);
   }
 
-  onAffiched(affiche: boolean){
-    !affiche ? this.activite = false : this.activite = true;
-    if (!affiche){
-      this.snackBarService.openSnackBar("Activite ajoutée","succes");
+  onAffichedActivite(afficheActivite: boolean) {
+    !afficheActivite ? this.activite = false : this.activite = true;
+    if (!afficheActivite) {
+      this.snackBarService.openSnackBar("Activite ajoutée", "succes");
+    }
+  }
+
+  onAffichedSieste(afficheSieste: boolean) {
+    !afficheSieste ? this.sieste = false : this.sieste = true;
+    if (!afficheSieste) {
+      this.snackBarService.openSnackBar("Sieste ajoutée", "succes");
+    }
+  }
+
+  onAffichedRepas(afficheRepas: boolean) {
+    !afficheRepas ? this.repas = false : this.repas = true;
+    if (!afficheRepas) {
+      this.snackBarService.openSnackBar("Repas ajoutée", "succes");
     }
   }
 }

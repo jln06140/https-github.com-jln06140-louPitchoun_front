@@ -13,10 +13,10 @@ export class SiesteService {
 
   constructor(private http: HttpClient) { }
 
-  public debuterSieste (idEnfant: number): Observable<any>{
-    const urlDebSieste = this.url + "/demarrerSieste";
-    const url = `${urlDebSieste}/${idEnfant}`;
-    return this.http.get<any>(url);
+  public ajouterSieste (idJournee: number, sieste: any): Observable<any>{
+    const urlDebSieste = this.url + "/ajoutsieste";
+    const url = `${urlDebSieste}/${idJournee}`;
+    return this.http.post<any>(url,sieste,httpOptions);
   }
   
 }

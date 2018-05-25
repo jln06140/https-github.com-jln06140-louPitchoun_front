@@ -1,0 +1,27 @@
+<mat-dialog-content>
+  <div class="activite">
+    <ul class="choixInfo">
+      <li (click)="informationEnfant()">Ses informations</li>
+      <li (click)="informationParents()">Ses parents</li>
+    </ul>
+  </div>
+  <div *ngIf="viewInfo" class="informations">
+    <ul>
+      <li>Nom : {{ enfantSelected.enfantInfo.nom }}</li>
+      <li>Prenom : {{ enfantSelected.enfantInfo.prenom }}</li>
+      <li>Date de naissance : {{ enfantSelected.enfantInfo.dateDeNaissance | date:'dd-MM-yyyy' }}</li>
+      <li>Section : {{ enfantSelected.section }}</li>
+      <li *ngIf="enfantSelected.enfantInfo.allergie">Allergique</li>
+      <li *ngIf="enfantSelected.enfantInfo.maladie">Soucis de santé</li>
+      <li *ngIf="enfantSelected.enfantInfo.biberon">Prend le biberon</li>
+    </ul>
+  </div>
+  <div *ngIf="viewParent" class="parents">
+parent
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <!-- <button class="mat-raised-button">Close</button> -->
+</mat-dialog-actions>

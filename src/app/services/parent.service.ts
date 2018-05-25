@@ -3,6 +3,7 @@ import { Utilisateur } from '../model/Utilisateur';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Parent } from '../model/parent';
+import { Enfant } from '../model/enfant';
 
 
 const httpOptions = {
@@ -39,4 +40,13 @@ export class ParentService {
     const url = `${this.url}/${id}`;
     return this.http.delete<Utilisateur>(url, httpOptions);
   }
+
+  public ajoutEnfantsParent(parentId: number, enfant: Enfant[]): Observable<any> {
+    const urlAjout = this.url + "/ajoutenfant"
+    const url = `${urlAjout}/${parentId}`;
+    console.log(url);
+    console.log('parent envoye' + JSON.stringify(parent));
+    return this.http.put(url, enfant, httpOptions);
+  }
+
 }
