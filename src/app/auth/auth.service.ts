@@ -7,6 +7,9 @@ import { UtilisateurService } from '../services/utilisateur.service';
 @Injectable()
 export class AuthService {
 
+  isEmploye :boolean;
+  isParent :boolean;
+  isAdmin :boolean;
   private loggedIn = new BehaviorSubject<boolean>(false);
   private Utilisateurs: Utilisateur[];
 
@@ -22,6 +25,8 @@ export class AuthService {
     this.utilisateurService.getUtilisateurByUsernameAndPassword(utilisateur.userName,utilisateur.password).subscribe(
       (data) =>{
         localStorage.setItem('utilisateur', JSON.stringify(data));
+        this.setProfil(data.profil.libelle);
+        console.log('profilemp' + this.isEmploye +', profParent ' + this.isParent);
         this.router.navigate(['/dashboard']);
       },
       (error) =>{
@@ -33,12 +38,19 @@ export class AuthService {
     // sinon comparer email et mot de passe correspondent
     // if (utilisateur.login !== '' && utilisateur.motDePasse !== '') {
       this.loggedIn.next(true);
-      
+
     // }
   }
 
   logout() {
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
+  }
+
+  setProfil(profil: string){
+    console.log(profil);
+    profil === 'PARENT' ? this.isParent = true : this.isParent = false;
+    profil === 'EMPLOYE' ? this.isEmploye = true : this.isEmploye = false;
+    profil === 'ADMIN' ? this.isAdmin = true : this.isAdmin = false;
   }
 }

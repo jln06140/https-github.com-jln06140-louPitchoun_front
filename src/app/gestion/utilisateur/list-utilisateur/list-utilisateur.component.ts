@@ -91,8 +91,7 @@ export class ListUtilisateurComponent implements OnInit, AfterViewInit {
       data: element
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.openSnackBar('Enfants associés', 'succes');
-      //this.dialogResult = result;
+      this.loadAgents();
     });
   }
 

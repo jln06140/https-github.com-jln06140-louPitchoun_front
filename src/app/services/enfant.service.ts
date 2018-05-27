@@ -18,6 +18,12 @@ export class EnfantService {
     return this.http.get(this.url) as Observable<Enfant[]>;
   }
 
+  public getEnfantsParent(id: number): Observable<Enfant[]>{
+    const url = this.url + '/enfantsDuParent';
+    const urlUp = `${url}/${id}`;
+    return this.http.get(urlUp)  as Observable<Enfant[]>;
+  }
+
   public addEnfant(enfant: Enfant): Observable<Enfant> {
     return this.http.post<Enfant>((this.url), enfant, httpOptions);
   }

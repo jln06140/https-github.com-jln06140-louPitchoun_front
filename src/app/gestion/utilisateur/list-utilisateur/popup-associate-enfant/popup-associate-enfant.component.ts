@@ -17,6 +17,7 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
   parent: Parent;
   enfantsAjoutes = new Array<Enfant>();
   enfants: Enfant[];
+  enfantsDuParent: Enfant[];
   displayedColumns = ['nom', 'prenom', 'section', 'associer'];
   dataSource = new MatTableDataSource();
 
@@ -37,6 +38,8 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
     }
 
   ngOnInit() {
+    this.enfantsDuParent = this.parent.enfants;
+    console.log(this.enfants);
     this.enfantService.getAllEnfants().subscribe(
       data => this.enfants = this.dataSource.data = data
     );
@@ -47,32 +50,30 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
   }
 
   ajouter(element: Enfant) {
-    console.log(element);
-    this.enfantsAjoutes.push(element);
-    this.parentService.
-    console.log(this.enfantsAjoutes);
+    this.enfantsDuParent.push(element);
+    console.log(this.enfantsDuParent);
   }
 
   enlever(element: Enfant) {
-    this.enfantsAjoutes = this.enfantsAjoutes.filter(item => item !== element);
-    console.log(this.enfantsAjoutes);
+    this.enfantsDuParent = this.enfantsDuParent.filter(item => item.id !== element.id);
+    console.log(this.enfantsDuParent);
   }
 
-  elementDansArray(element: any): boolean{
+  elementDansArray(element: any): boolean {
     let isPresent = false;
-    if (this.enfantsAjoutes.find( x => x.id === element.id)){
+    if (this.enfantsDuParent.find( x => x.id === element.id)) {
       isPresent =  true;
     }
     return isPresent;
   }
 
-  associer(){
-    this.parentService.ajoutEnfantsParent(this.parent.id, this.enfantsAjoutes).subscribe(
-      (data) =>{
-        this.snackBarService.openSnackBar("Enfant ajouté", "Succes");
+  associer() {
+    this.parentService.ajoutEnfantsParent(this.parent.id, this.enfantsDuParent).subscribe(
+      (data) => {
+        this.snackBarService.openSnackBar('Enfant ajouté', 'Succes');
         this.close();
     }
-    )
+    );
   }
 
   loadEnfants() {
@@ -95,8 +96,8 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
     // this.parentService.updateParent(this.parent.id, this.parent).subscribe(
     //   () => console.log("coucou")
     // );
-    this.dialogRef.close(this.enfantsAjoutes);
+    this.dialogRef.close(this.enfantsDuParent);
   }
 
-  
+
 }

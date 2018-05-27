@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Utilisateur } from '../model/Utilisateur';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Parent } from '../model/parent';
+import { Injectable } from "@angular/core";
+import { Utilisateur } from "../model/Utilisateur";
+import { Observable } from "rxjs/Observable";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Parent } from "../model/parent";
 import { Enfant } from '../model/enfant';
-
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,14 +13,14 @@ const httpOptions = {
 export class ParentService {
   private url = 'http://localhost:8080/api/parent';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getAllParents(): Observable<Utilisateur[]> {
     return this.http.get(this.url) as Observable<Utilisateur[]>;
   }
 
-  public addParent(parent: Parent): Observable<Parent>{
-    return this.http.post<Parent>((this.url), parent, httpOptions);
+  public addParent(parent: Parent): Observable<Parent> {
+    return this.http.post<Parent>(this.url, parent, httpOptions);
   }
 
   public getParent(id: number): Observable<Parent> {
@@ -41,12 +40,13 @@ export class ParentService {
     return this.http.delete<Utilisateur>(url, httpOptions);
   }
 
-  public ajoutEnfantsParent(parentId: number, enfant: Enfant[]): Observable<any> {
-    const urlAjout = this.url + "/ajoutenfant"
+  public ajoutEnfantsParent(
+    parentId: number,
+    enfant: Enfant[]
+  ): Observable<any> {
+    const urlAjout = this.url + '/ajoutenfant';
     const url = `${urlAjout}/${parentId}`;
     console.log(url);
-    console.log('parent envoye' + JSON.stringify(parent));
-    return this.http.put(url, enfant, httpOptions);
+    return this.http.post(url, enfant, httpOptions);
   }
-
 }

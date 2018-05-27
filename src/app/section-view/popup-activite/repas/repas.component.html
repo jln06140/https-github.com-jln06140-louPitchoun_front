@@ -9,17 +9,17 @@
       <input type="checkbox" id="biberon" name="biberon" [(ngModel)] = "biberon">
     <label for="biberon">Biberon ?</label>
     </div>
-    <div class="form-group" *ngIf="biberon">
-      <label for="remarque">quantite</label>
-      <input type="text" class="form-control quantite" id="quantite" [(ngModel)]="repas.quantite" name="quantite">
+    <div class="input-group mb-3" *ngIf="biberon">
+      <input type="text" class="form-control quantite" id="quantite" placeholder="Quantité" [(ngModel)]="repas.quantite" name="quantite">
+      <div class="input-group-append">
+          <span class="input-group-text">ml</span>
+        </div>
     </div>
     <div class="form-group" *ngIf="!biberon">
-      <label for="menu">Menu</label>
-      <input type="text" class="form-control menu" id="menu" [(ngModel)]="repas.menu" name="menu">
+      <input type="text" class="form-control menu" id="menu" [(ngModel)]="repas.menu" placeholder="Menu" name="menu">
     </div>
     <div class="form-group">
-      <label for="remarque">Remarque</label>
-      <input type="text" class="form-control remarque" id="remarque" [(ngModel)]="repas.remarque" name="remarque">
+      <input type="text" class="form-control remarque" id="remarque" [(ngModel)]="repas.remarque" placeholder="Remarque" name="remarque">
     </div>
     <button class="btn" type="submit" [disabled]="f.invalid">ajouter</button>
   </fieldset>

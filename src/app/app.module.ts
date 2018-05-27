@@ -60,7 +60,7 @@ import { PopupInfoComponent } from './section-view/popup-info/popup-info.compone
 
 const appRoutes: Routes = [
   // { path: '', component: HomeEmployeComponent}, //canActivate: [AuthGuard] },
-  // { path: 'login', component: LoginComponent },
+ //  { path: 'login', component: LoginComponent },
   {
     path: 'gestion',
     component: GestionComponent,
