@@ -53,6 +53,8 @@ import { RepasComponent } from './section-view/popup-activite/repas/repas.compon
 import { RepasService } from './services/repas.service';
 import { PopupResumeComponent } from './section-view/popup-resume/popup-resume.component';
 import { PopupInfoComponent } from './section-view/popup-info/popup-info.component';
+import { EnfantJourneeComponent } from './dashboard-view/parent-view/enfant-journee/enfant-journee.component';
+import { IndexComponent } from './index/index.component';
 
 
 
@@ -84,6 +86,7 @@ const appRoutes: Routes = [
      
     ]
   },
+  { path : 'journeeEnfant/:id', component : EnfantJourneeComponent},
   { path : 'section', component: SectionViewComponent}
 
 ];
@@ -118,6 +121,8 @@ const appRoutes: Routes = [
     RepasComponent,
     PopupResumeComponent,
     PopupInfoComponent,
+    EnfantJourneeComponent,
+    IndexComponent,
   
   ],
   imports: [

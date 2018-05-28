@@ -3,13 +3,16 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
 import { Utilisateur } from '../model/Utilisateur';
 import { UtilisateurService } from '../services/utilisateur.service';
+import { ParentService } from '../services/parent.service';
 
 @Injectable()
 export class AuthService {
 
-  isEmploye :boolean;
-  isParent :boolean;
-  isAdmin :boolean;
+  isEmploye: boolean;
+  isParent: boolean;
+  isAdmin: boolean;
+  utilisateurLogged: Utilisateur;
+
   private loggedIn = new BehaviorSubject<boolean>(false);
   private Utilisateurs: Utilisateur[];
 
@@ -18,18 +21,23 @@ export class AuthService {
   }
 
   constructor(private router: Router,
-              private utilisateurService: UtilisateurService
+    private utilisateurService: UtilisateurService,
+    private parentService: ParentService
   ) { }
 
   login(utilisateur: any) {
-    this.utilisateurService.getUtilisateurByUsernameAndPassword(utilisateur.userName,utilisateur.password).subscribe(
-      (data) =>{
+    this.utilisateurService.getUtilisateurByUsernameAndPassword(utilisateur.userName, utilisateur.password).subscribe(
+      (data) => {
+        this.utilisateurLogged = data;
         localStorage.setItem('utilisateur', JSON.stringify(data));
-        this.setProfil(data.profil.libelle);
-        console.log('profilemp' + this.isEmploye +', profParent ' + this.isParent);
+        console.log(data.profil);
+        this.setProfil(data.profil);
+        console.log('profilemp' + this.isEmploye + ', profParent ' + this.isParent);
         this.router.navigate(['/dashboard']);
-      },
-      (error) =>{
+      }
+
+      ,
+      (error) => {
         console.log(error.message);
       }
     );
@@ -37,7 +45,7 @@ export class AuthService {
     // comparer que email existe sinon erreur
     // sinon comparer email et mot de passe correspondent
     // if (utilisateur.login !== '' && utilisateur.motDePasse !== '') {
-      this.loggedIn.next(true);
+    this.loggedIn.next(true);
 
     // }
   }
@@ -47,7 +55,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  setProfil(profil: string){
+  setProfil(profil: string) {
     console.log(profil);
     profil === 'PARENT' ? this.isParent = true : this.isParent = false;
     profil === 'EMPLOYE' ? this.isEmploye = true : this.isEmploye = false;

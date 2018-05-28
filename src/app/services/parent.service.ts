@@ -11,6 +11,9 @@ const httpOptions = {
 
 @Injectable()
 export class ParentService {
+
+  parentLogged: Parent;
+  
   private url = 'http://localhost:8080/api/parent';
 
   constructor(private http: HttpClient) {}

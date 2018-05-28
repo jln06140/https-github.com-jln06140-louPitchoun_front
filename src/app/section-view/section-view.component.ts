@@ -10,6 +10,7 @@ import { JourneeEnfant } from '../model/journeeEnfant';
 import { PopupActiviteComponent } from './popup-activite/popup-activite.component';
 import { PopupResumeComponent } from './popup-resume/popup-resume.component';
 import { PopupInfoComponent } from './popup-info/popup-info.component';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-section-view',
@@ -22,6 +23,7 @@ export class SectionViewComponent implements OnInit {
   erreur: string;
   now: any;
   dateTest = new Date();
+  enfants: Enfant[];
 
 
   displayedColumns = ['danger', 'nom', 'prenom', 'heure arrivee', 'heure depart', 'action', 'Renseignements'];
@@ -30,6 +32,7 @@ export class SectionViewComponent implements OnInit {
   constructor(private enfantService: EnfantService,
     private journeeService: JourneeServiceService,
     private datePipe: DatePipe,
+    private authService: AuthService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
 
@@ -65,7 +68,11 @@ export class SectionViewComponent implements OnInit {
 
   loadEnfantsSection() {
     this.enfantService.getAllEnfants().subscribe(
-      data => this.dataSource.data = data
+      data => {
+      this.enfants = data;
+        this.enfants = this.enfants.filter(enfant => enfant.section === this.authService.utilisateurLogged.section);
+        this.dataSource.data = this.enfants;
+      }
     );
   }
 
@@ -131,12 +138,12 @@ export class SectionViewComponent implements OnInit {
   }
 
   getHeureArrivee(element: Enfant) {
-    const heureArr  = this.getJourneeDuJour(element).heureArrivee.substring(0,5);
+    const heureArr = this.getJourneeDuJour(element).heureArrivee.substring(0, 5);
     return heureArr;
   }
 
   getHeureDepart(element: Enfant) {
-    const heureDep  = this.getJourneeDuJour(element).heureDepart.substring(0,5);
+    const heureDep = this.getJourneeDuJour(element).heureDepart.substring(0, 5);
     return heureDep;
   }
 
@@ -154,7 +161,7 @@ export class SectionViewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.loadEnfantsSection();
-     
+
     });
 
   }
@@ -173,30 +180,30 @@ export class SectionViewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.loadEnfantsSection();
-     
+
     });
   }
 
-    openDialogInfo(element: any): void {
-      const dialogConfig = new MatDialogConfig();
-      const dialogRef = this.dialog.open(PopupInfoComponent,
-        {
-          width: '600px',
-          data: {
-            /*put your data here*/
-            enfant: element,
-          }
-        });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        this.loadEnfantsSection();
-       
+  openDialogInfo(element: any): void {
+    const dialogConfig = new MatDialogConfig();
+    const dialogRef = this.dialog.open(PopupInfoComponent,
+      {
+        width: '600px',
+        data: {
+          /*put your data here*/
+          enfant: element,
+        }
       });
-  
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadEnfantsSection();
+
+    });
+
 
   }
 
- 
+
 
   //journeeFinie()
 }

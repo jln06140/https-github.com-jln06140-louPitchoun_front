@@ -35,12 +35,17 @@ export class JourneeServiceService {
     return this.http.put(url, journeeEnfant, httpOptions);
   }
 
-  public getJourneeDuJourEnfant(enfantId: number){
+  public getJourneeDuJourEnCoursEnfant(enfantId: number){
     const urlTemp = this.url + "/journeesEnCoursEnfant" 
     const url = `${urlTemp}/${enfantId}`;
     return this.http.get<any>(url) ;
   }
 
+  public getJourneeDuJour(enfantId: number){
+    const urlTemp = this.url + "/journeeDuJourEnfant" 
+    const url = `${urlTemp}/${enfantId}`;
+    return this.http.get<any>(url) ;
+  }
   // getJourneeDuJour(element: Enfant): JourneeEnfant {
   //   if (element.journees.length > 0) {
   //     for (const journee of element.journees) {

@@ -19,6 +19,8 @@ export class ParentViewComponent implements OnInit {
     this.enfantService.getEnfantsParent(this.parent.id).subscribe(
       (data) => {
         this.enfants = data;
+        console.log(this.enfants);
+        console.log(this.parent);
         // trie la liste d'enfants selon la section de l'employe
         //this.enfants = this.enfants.filter( enfant => enfant.section === 'PETIT' );
       }
