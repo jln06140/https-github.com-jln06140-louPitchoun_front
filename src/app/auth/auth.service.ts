@@ -14,10 +14,15 @@ export class AuthService {
   utilisateurLogged: Utilisateur;
 
   private loggedIn = new BehaviorSubject<boolean>(false);
+  private profil = new BehaviorSubject<any>(null);
   private Utilisateurs: Utilisateur[];
 
   get isLoggedin() {
     return this.loggedIn.asObservable();
+  }
+
+  get quelProfil() {
+    return this.profil.asObservable();
   }
 
   constructor(private router: Router,
@@ -30,8 +35,9 @@ export class AuthService {
       (data) => {
         this.utilisateurLogged = data;
         localStorage.setItem('utilisateur', JSON.stringify(data));
-        console.log(data.profil);
+        this.loggedIn.next(true);
         this.setProfil(data.profil);
+        this.profil.next(data.profil);
         console.log('profilemp' + this.isEmploye + ', profParent ' + this.isParent);
         this.router.navigate(['/dashboard']);
       }
@@ -45,7 +51,7 @@ export class AuthService {
     // comparer que email existe sinon erreur
     // sinon comparer email et mot de passe correspondent
     // if (utilisateur.login !== '' && utilisateur.motDePasse !== '') {
-    this.loggedIn.next(true);
+    
 
     // }
   }

@@ -11,11 +11,19 @@ import * as $ from 'jquery';
 export class HeaderComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
+  quelProfil$: Observable<any>;
+  
+  profil: any;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedin;
+    this.quelProfil$ = this.authService.quelProfil;
+    console.log("profil observable " + JSON.stringify(this.quelProfil$);
+    const utilisateur = JSON.parse(localStorage.getItem('utilisateur'));
+    this.profil = utilisateur.profil;
+    console.log(this.profil);
   }
   
   onLogout() {

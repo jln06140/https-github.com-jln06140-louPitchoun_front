@@ -61,8 +61,8 @@ import { IndexComponent } from './index/index.component';
 
 
 const appRoutes: Routes = [
-  // { path: '', component: HomeEmployeComponent}, //canActivate: [AuthGuard] },
- //  { path: 'login', component: LoginComponent },
+  { path: '', component: DashboardViewComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
   {
     path: 'gestion',
     component: GestionComponent,
