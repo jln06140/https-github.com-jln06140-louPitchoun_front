@@ -10,40 +10,51 @@ import * as $ from 'jquery';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn$: Observable<boolean>;
-  quelProfil$: Observable<any>;
+  isLoggedIn$: Observable<boolean>; 
   
   profil: any;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.authService.isLoggedin;
-    this.quelProfil$ = this.authService.quelProfil;
-    console.log("profil observable " + JSON.stringify(this.quelProfil$);
+    this.menuJquery();
     const utilisateur = JSON.parse(localStorage.getItem('utilisateur'));
-    this.profil = utilisateur.profil;
-    console.log(this.profil);
+    this.profil = sessionStorage.getItem('profil');
+    this.isLoggedIn$ = this.authService.isLoggedin;
   }
   
   onLogout() {
     this.authService.logout();
+  }
 
-    const margin = $('header').css('margin-left');
-    $('.menu-mob').unbind().on('click', function (e) {
+  menuJquery() {
+    $('.nav-opener').unbind().on('click', function (e) {
       e.preventDefault();
-      $(this).parents('header').css('left', margin);
-      $(this).parents('header').toggleClass('nav-active');
-      if ($(this).parents('header').hasClass('nav-active')){
-        $(this).parents('header').find('nav').css({ "opacity": "0", "display": "block" }).stop().animate({ "opacity": "1", "left": '0' });
+      $(this).parent('nav').toggleClass('nav-active');
+      if ($(this).parent('nav').hasClass('nav-active')){
+      $(this).parent('nav').find('.menu').css({ 'height': '100%' }).stop().animate({ 'left': '0' });
+      } else {
+      $(this).parent('nav').find('.menu').stop().animate({ 'left': '-100%' }, function () {
+        $(this).parent('nav').find('.menu').css({ 'height': '0' });
+      });
       }
-      else {
-        $(this).parents('header').find('nav').stop().animate({ "left": '100%', "opacity": "0" }, function () {
-          $(this).parents('header').find('nav').css({ "display": "none" });
-        });
+    });
+    $('.sousCatg').on('click', function(e){
+      $(this).find('ul').toggleClass('opened');
+    });
+    $('.panel-title').on('click', function(){
+      $(this).parent().toggleClass('open');
+    });
+    $('body').on('click', function(e){
+      if ($(e.target).is('.sousCatg')) {
+        e.preventDefault();
+        return;
+      }
+      if($('.menu').find('ul.opened').length > 0){
+        $('.menu').find('ul.opened').removeClass('opened')
       }
     });
   }
 
-  
+ 
 }

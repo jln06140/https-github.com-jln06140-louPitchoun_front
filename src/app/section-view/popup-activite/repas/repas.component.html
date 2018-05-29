@@ -1,6 +1,5 @@
 <form #f="ngForm" (ngSubmit)="submit(f)">
-  <fieldset>
-    <legend>Repas</legend>
+  
     <div class="form-group">
       <label for="debut">Heure de debut</label>
       <input type="time" class="form-control heureDebut" id="debut" [(ngModel)]="repas.heureDebut" name="heureDebut" required>
@@ -22,6 +21,6 @@
       <input type="text" class="form-control remarque" id="remarque" [(ngModel)]="repas.remarque" placeholder="Remarque" name="remarque">
     </div>
     <button class="btn" type="submit" [disabled]="f.invalid">ajouter</button>
-  </fieldset>
+
   <!-- <input type="text" ngModel name="firstName" #firstName="ngModel" (change)="doSomething(firstName)"> -->
 </form>

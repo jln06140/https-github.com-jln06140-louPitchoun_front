@@ -1,18 +1,16 @@
 <form #f="ngForm" (ngSubmit)="submit(f)">
-  <fieldset>
-    <legend>Activité</legend>
-    <div class="form-group">
-      <label for="activite">Type d'activité</label>
-      <select class="form-control" id="activite" [(ngModel)]="activite.typeActivite" name="typeActivite" required>
-        <option value="1">Peinture</option>
-        <option value="2">Coloriage</option>
-        <option value="3">Histoire</option>
-        <option value="4">Jeu exterieur</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <input class="form-control remarque" id="remarque" [(ngModel)]="activite.remarque" placeholder="Remarque" name="remarque">
-    </div>
-    <button class="btn" [disabled]="f.invalid" type="submit">Debuter</button>
-  </fieldset>
+  
+  <div class="form-group">
+    <label for="activite">Type d'activité</label>
+    <select class="form-control" id="activite" [(ngModel)]="activite.typeActivite" name="typeActivite" required>
+      <option value="1">Peinture</option>
+      <option value="2">Coloriage</option>
+      <option value="3">Histoire</option>
+      <option value="4">Jeu exterieur</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input class="form-control remarque" id="remarque" [(ngModel)]="activite.remarque" placeholder="Remarque" name="remarque">
+  </div>
+  <button class="btn" [disabled]="f.invalid" type="submit">Debuter</button>
 </form>

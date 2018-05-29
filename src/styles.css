@@ -1,3 +1,317 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
-@import "~bootstrap/dist/css/bootstrap.css"
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+	font-size:14px;
+	margin:0;
+	padding:0;
+	color:#575652
+}
+
+a {
+	color:#575652
+}
+a:hover {
+	color:#af99ff
+}
+ul {
+	list-style:none
+}
+img{
+	max-width:100%
+}
+h1 {
+	color:#af99ff; 
+	text-transform:uppercase;
+	font-size:20px;
+	margin-top:0;
+	margin-bottom:20px;
+}
+h2 {
+	font-size:14px;
+	margin:10px 0;
+	text-align:justify;
+	color:#575652	
+}
+h3 {
+	margin:0;
+	font-size:14px;
+	color:#575652;
+	font-weight:bold;
+	display:inline
+}
+p {
+	margin:10px 0;
+	text-align:justify;
+	color:#575652
+}
+mat-icon.mat-icon {
+    width: 20px;
+    height: 22px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+/*header*/
+header {
+	box-shadow: 0px 8px 10px #eee; 
+	width:100%;
+	padding:10px 0; 
+	margin-bottom:20px;
+}
+header nav, .logo {
+	margin-top:20px;
+	display:inline-block;
+}
+.logo img {
+	max-width:80px
+}
+.menu {
+	line-height:45px;
+}
+.menu > li {
+	display:inline-block;
+	padding:0 20px; 
+	color: #575652;
+}
+li.sousCatg {
+	position:relative;
+	cursor:pointer;
+	}
+li.sousCatg ul {
+	display:none;
+	position:absolute;
+	top:45px;
+	width:250px;
+	padding:0;
+	margin:0;
+	background-color:white;
+	z-index:100;
+	border:1px solid #eee
+}
+li.sousCatg ul li {
+	width:100%;
+	display:block;
+	line-height:45px;
+	border-bottom:1px dashed #af99ff;
+	padding:0 15px
+}
+li.sousCatg ul li:last-child {
+	border-bottom:0 none
+}
+li.sousCatg ul.opened {
+	display:block
+}
+
+/* footer */
+footer {
+	box-shadow: 0px -8px 10px #eee; 
+	width:100%;
+	padding:10px 0; 
+	margin-top:20px
+}
+footer li {
+	display:inline-block;
+	padding:0 10px
+}
+footer address {
+	display:inline
+}
+.sep:before {
+	content:"|";
+	color:#af99ff;
+	padding:0 5px;
+}
+.phone {
+	padding:0 10px
+}
+.phone .mat-icon {
+	margin-right:10px
+}
+
+/* main */
+.contenu {
+	clear:both;
+}
+.card {
+	margin: 0 10px;
+    padding: 10px;
+	background-color:#ffef7d;
+	border-color: #af99ff
+}
+.card .fa-user {
+	font-size: 55px;
+    margin-top: 26px;
+}
+/* remarques */
+.remarques h3 {
+	display: block;
+    margin: 20px 0 10px;
+    font-size: 16px;
+}
+blockquote {
+font-style: italic;
+padding: 10px;
+text-align: center;}
+
+/* Form */
+form {	
+	overflow: hidden;
+}
+form .btn{	
+	margin: 0 auto;
+    display: block;
+}
+
+/* Dialog */
+h2.mat-dialog-title {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+.mat-dialog-actions {
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+}
+.activite h3 {
+	background-color: #eee;
+    margin-bottom: 5px;
+    display: block;
+    padding: 5px;
+	line-height: 30px;
+	width:100%
+}
+.activite h3 .mat-icon {
+	float:right;
+	line-height: 32px;
+	color:#af99ff
+}
+.activite form {
+	padding:10px
+}
+.activiteTitle {
+	border-bottom: 1px dashed #af99ff;
+	font-weight:bold;
+}
+.boxTitle {
+	border-bottom: 1px solid #ffef7d;
+}
+
+/* MOB */
+@media (max-width: 767px) {
+	header nav, .logo {
+		margin-top:0;
+		display:block;
+		text-align:center;
+	}
+	header > .container > a {
+		z-index:1
+	}
+	.nav-opener {
+		position: relative;
+		float: left;
+		width: 50px;
+		height: 18px;
+		overflow: hidden;
+		text-indent: 101%;
+		white-space: nowrap;
+		z-index:5;
+		margin:-40px 0 0 0px
+}
+	.nav-opener:before, .nav-opener:after, .nav-opener span {
+		position: absolute;
+		background: #333;
+		top: 50%;
+		left: 0;
+		right: 0;
+		margin-top: -2px;
+		height: 4px;
+		-webkit-transition: all .2s linear;
+		transition: all .2s linear;
+		width: 22px;
+	}
+	.nav-opener:before, .nav-opener:after {
+		content: "";
+		top: 15%;
+	}	
+	.nav-opener:after {
+		top: 85%;
+	}
+	.nav-active .nav-opener span {
+		opacity: 0;
+		background: #af99ff;
+	}
+	.nav-active .nav-opener:after, .nav-active .nav-opener:before {
+		background: #af99ff;
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+		top: 50%;
+		left: 0;
+		right: 0;
+	}
+	.nav-active .nav-opener:after {
+		-webkit-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+	}
+	.menu {
+		position: absolute;
+		height:0;
+		left:-100%;
+	}
+	.nav-active .menu {
+		left:-15px;
+		right: -15px;
+		margin: 20px 0px 0;
+		z-index: 20;
+		height: auto;
+		width: auto;
+		background-color: #fff;    
+		text-align: left;
+		padding: 0 0 0 25px;
+	}
+	.menu li {
+		display:block;
+		padding:0
+	}
+	.menu li .mat-icon {
+		margin-right:10px
+	}
+	li.sousCatg ul {
+		position:relative;
+		top:0;
+		width:100%;
+		border:0 none
+	}
+	li.sousCatg ul li {
+		padding:0
+	}
+	li.sousCatg ul li:last-child, li.sousCatg ul li:first-child {	
+		border-bottom:1px dashed #af99ff;
+	}
+	footer {
+		text-align: center;
+		line-height: 45px;
+	}
+	footer adress {
+		display:block;
+		width:100%
+	}
+	.sep:before {
+		display:block;
+		content:" ";
+		width:25px;
+		height:1px;
+		background-color: #af99ff;
+		margin: 0 auto;
+	}
+	.phone {
+		padding: 0;
+		margin: 0px;
+		line-height: 45px;
+	}
+	.card {
+		margin:0 0 20px 0
+	}
+}

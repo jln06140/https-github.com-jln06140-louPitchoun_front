@@ -16,12 +16,14 @@ export class AjoutParentComponent implements OnInit {
   parentForm: FormGroup;
   parentCreated: Parent;
 
+  motDePasseEgaux: boolean = true;
+
   constructor(
     private parentService: ParentService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private route: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.inifForm();
@@ -49,28 +51,41 @@ export class AjoutParentComponent implements OnInit {
         motDePasse: ['', Validators.required],
         confMdp: ['', Validators.required]
       },
-      { validator: CustomValidators.childrenEqual }
+     // { validator: CustomValidators.childrenEqual }
     );
   }
 
   onSubmitForm() {
-    this.parentCreated = new Parent(
-      this.email,
-      this.parentForm.value['motDePasse'],
-      this.parentForm.value['infoParent'],
-      'PARENT',
-    );
-    this.parentService.addParent(this.parentCreated).subscribe(
-      () => {
-        this.openSnackBar('Succes', 'Utilisateur enregistré');
-        this.route.navigate(['/gestion/listeUtilisateur']);
-      },
-      (err) => { JSON.stringify(err.error.message); this.openSnackBar('error', err.error.message); }
-    );
+    this.compareMdp(this.parentForm.value['motDePasse'], this.parentForm.value['confMdp']);
+    if (this.motDePasseEgaux && this.parentForm.valid) {
+      this.parentCreated = new Parent(
+        this.email,
+        this.parentForm.value['motDePasse'],
+        this.parentForm.value['infoParent'],
+        'PARENT',
+      );
+      this.parentService.addParent(this.parentCreated).subscribe(
+        () => {
+          this.openSnackBar('Succes', 'Utilisateur enregistré');
+          this.route.navigate(['/gestion/listeUtilisateur']);
+        },
+        (err) => { JSON.stringify(err.error.message); this.openSnackBar('error', err.error.message); }
+      );
+    }
   }
 
   get email() {
     return this.parentForm.get('infoParent.email').value;
+  }
+
+  compareMdp(mdp, conf) {
+    mdp === conf ? this.motDePasseEgaux = true : this.motDePasseEgaux = false;
+  }
+
+  isChampsInvalide(champs: string) {
+    return (
+      (!this.parentForm.get(champs).valid && this.parentForm.get(champs).touched)
+    );
   }
 
   openSnackBar(message: string, action: string) {

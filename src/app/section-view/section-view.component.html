@@ -38,8 +38,8 @@
   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef> action </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button class="btn" *ngIf="getJourneeDuJour(element) && getJourneeDuJour(element).journeeEnCours" (click)="openDialog(element)">Debuter activité</button>
-      <button class="btn" *ngIf="getJourneeDuJour(element) && !getJourneeDuJour(element).journeeEnCours" (click)="openDialogResume(element)">Resumé</button>
+      <button class="btn" *ngIf="getJourneeDuJour(element) && getJourneeDuJour(element).journeeEnCours" (click)="openDialog(element)"><mat-icon>edit</mat-icon></button>
+      <button class="btn" *ngIf="getJourneeDuJour(element)" (click)="openDialogResume(element)"><mat-icon>check</mat-icon></button>
     </mat-cell>
   </ng-container>
 

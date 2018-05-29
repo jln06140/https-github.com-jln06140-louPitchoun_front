@@ -1,23 +1,67 @@
+<h2 mat-dialog-title>Information sur {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }}</h2>
+
 <mat-dialog-content>
   <div class="activite">
-    <ul class="choixInfo">
-      <li (click)="informationEnfant()">Ses informations</li>
-      <li (click)="informationParents()">Ses parents</li>
-    </ul>
-  </div>
-  <div *ngIf="viewInfo" class="informations">
-    <ul>
-      <li>Nom : {{ enfantSelected.enfantInfo.nom }}</li>
-      <li>Prenom : {{ enfantSelected.enfantInfo.prenom }}</li>
-      <li>Date de naissance : {{ enfantSelected.enfantInfo.dateDeNaissance | date:'dd-MM-yyyy' }}</li>
-      <li>Section : {{ enfantSelected.section }}</li>
-      <li *ngIf="enfantSelected.enfantInfo.allergie">Allergique</li>
-      <li *ngIf="enfantSelected.enfantInfo.maladie">Soucis de santé</li>
-      <li *ngIf="enfantSelected.enfantInfo.biberon">Prend le biberon</li>
-    </ul>
-  </div>
-  <div *ngIf="viewParent" class="parents">
-parent
+
+    <div>
+      <h3 (click)="informationEnfant()">Ses information
+        <mat-icon>expand_more</mat-icon>
+      </h3>
+      <div *ngIf="viewInfo" class="informations">
+        <ul>
+          <li>Nom : {{ enfantSelected.enfantInfo.nom }}</li>
+          <li>Prenom : {{ enfantSelected.enfantInfo.prenom }}</li>
+          <li>Date de naissance : {{ enfantSelected.enfantInfo.dateDeNaissance | date:'dd-MM-yyyy' }}</li>
+          <li>Section : {{ enfantSelected.section }}</li>
+          <li *ngIf="enfantSelected.enfantInfo.allergie">Allergique</li>
+          <li *ngIf="enfantSelected.enfantInfo.maladie">Soucis de santé</li>
+          <li *ngIf="enfantSelected.enfantInfo.biberon">Prend le biberon</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h3 (click)="informationParents()">Ses parents
+        <mat-icon>expand_more</mat-icon>
+      </h3>
+      <div *ngIf="viewParent" class="parents">
+        <div class="row">
+          <div class="col-12 col-sm-6" *ngFor="let parent of enfantSelected.geniteurs; let i = index">
+            <p class="text-center boxTitle">
+              Père</p>
+            <dl>
+              <dt>Nom : </dt>
+              <dd>{{ parent.infoParent.nom }}</dd>
+              <dt>Prénom</dt>
+              <dd>{{ parent.infoParent.prenom }}</dd>
+              <dt>Adresse :</dt>
+              <dd>{{ parent.infoParent.adresse }}</dd>
+              <dt>Ville :</dt>
+              <dd>{{ parent.infoParent.ville }}</dd>
+              <dt>Téléphone mobile :</dt>
+              <dd>{{ parent.infoParent.telMobile }}</dd>
+              <dt>Téléphone Fixe :</dt>
+              <dd>{{ parent.infoParent.telFixe }}</dd>
+              <dt>Téléphone Professionnel :</dt>
+              <dd>{{ parent.infoParent.telPro }}</dd>
+            </dl>
+          </div>
+          <!-- <div class="col-12 col-sm-6">
+            <p class="text-center boxTitle">
+              Mère</p>
+            <dl>
+              <dt>Nom :</dt>
+              <dd>xxxxx</dd>
+              <dt>Prénom</dt>
+              <dd>xxxxx</dd>
+              <dt>Adresse :</dt>
+              <dd>xxxx</dd>
+              <dt>Téléphone :</dt>
+              <dd>xxxxxx</dd>
+            </dl>
+          </div> -->
+        </div>
+      </div>
+    </div>
   </div>
 </mat-dialog-content>
 
@@ -25,3 +69,19 @@ parent
   <button class="mat-raised-button" (click)="close()">Close</button>
   <!-- <button class="mat-raised-button">Close</button> -->
 </mat-dialog-actions>
+
+<!-- <div *ngIf="viewParent" class="parents"> 
+  parent 
+      <div *ngFor="let parent of enfantSelected.geniteurs; let i = index"> 
+      <h3>Parent {{ i+1 }}</h3> 
+      <ul> 
+        <li>Nom : {{ parent.infoParent.nom }}</li> 
+        <li>Prenom : {{ parent.infoParent.prenom }}</li> 
+        <li>adresse : {{ parent.infoParent.adresse }}</li> 
+        <li>ville : {{ parent.infoParent.ville }}</li> 
+        <li>email : {{ parent.infoParent.email }}</li> 
+        <li>Telephone fixe : {{ parent.infoParent.telFixe }}</li> 
+        <li>Telephone mobile : {{ parent.infoParent.telMobile }}</li> 
+        <li>Telephone professionnel : {{ parent.infoParent.telPro }}</li> 
+      </ul> 
+    </div>  -->

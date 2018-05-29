@@ -1,23 +1,27 @@
 <form [formGroup]="employeForm" (ngSubmit)="onSubmitForm()">
   <div class="row justify-content-around">
-    
+
 
     <div class="col-md-4" formGroupName="infoEmploye">
       <div class="form-group">
         <label for="adresse">Matricule</label>
         <input type="text" id="matricule" class="form-control" formControlName="matricule" required>
+        <div class="form-control-feedback" *ngIf="isChampsInvalide('infoEmploye.matricule')">Matricule obligatoire</div>
       </div>
       <div class="form-group">
         <label for="nom">Nom</label>
         <input type="text" id="nom" class="form-control" formControlName="nom" required>
+        <div class="form-control-feedback" *ngIf="isChampsInvalide('infoEmploye.nom')">Renseigner un nom</div>
       </div>
       <div class="form-group">
         <label for="prenom">Prenom</label>
         <input type="text" id="prenom" class="form-control" formControlName="prenom" required>
+        <div class="form-control-feedback" *ngIf="isChampsInvalide('infoEmploye.prenom')">Renseigner un prenom</div>
       </div>
       <div class="form-group">
         <label for="email">Adresse e-mail</label>
         <input type="text" id="email" class="form-control" formControlName="email">
+        <div class="form-control-feedback" *ngIf="isChampsInvalide('infoEmploye.email')">Renseigner un email</div>
       </div>
       <div class="form-group">
         <label for="telMobile">Telephone mobile</label>
@@ -25,26 +29,27 @@
       </div>
     </div>
     <div class="col-md-4 ">
-        <div class="form-group">
-          <label for="motDePasse">Mot de passe</label>
-          <input type="text" id="motDePasse" class="form-control" formControlName="motDePasse" required>
-        </div>
-        <div class="form-group">
-          <label for="confMdp">Confirmation mot de passe</label>
-          <input type="text" id="confMdp" class="form-control" formControlName="confMdp" required>
-        </div>
-        <div class="form-group">
-          <label for="section">Section</label>
-          <select id="section" class="form-control" formControlName="section" required>
-            <option *ngFor="let section of sectionList" [selected]="sectionDefault" [value]="section | uppercase">{{section}}
-            </option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label for="motDePasse">Mot de passe</label>
+        <input type="text" id="motDePasse" class="form-control" formControlName="motDePasse" required>
       </div>
+      <div class="form-group">
+        <label for="confMdp">Confirmation mot de passe</label>
+        <input type="text" id="confMdp" class="form-control" formControlName="confMdp" required>
+        <div class="form-control-feedback" *ngIf="!motDePasseEgaux">Les mots de passes doivent correspondre</div>
       </div>
-    <div class="row justify-content-md-center">
+
+      <div class="form-group">
+        <label for="section">Section</label>
+        <select id="section" class="form-control" formControlName="section" required>
+          <option value="" selected disabled hidden>Choisir une section</option>
+          <option *ngFor="let section of sectionList" [value]="section | uppercase">{{section}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
     <button type="submit" [disabled]="employeForm.invalid" class="btn btn-primary">Ajouter</button>
-  </div>  
+  </div>
 </form>
-<p>{{employeForm.value | json}}</p>
-<p>{{employeForm.status | json}}</p>

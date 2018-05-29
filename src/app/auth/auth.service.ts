@@ -14,7 +14,8 @@ export class AuthService {
   utilisateurLogged: Utilisateur;
 
   private loggedIn = new BehaviorSubject<boolean>(false);
-  private profil = new BehaviorSubject<any>(null);
+  public profil = new BehaviorSubject<any>(null);
+
   private Utilisateurs: Utilisateur[];
 
   get isLoggedin() {
@@ -28,16 +29,19 @@ export class AuthService {
   constructor(private router: Router,
     private utilisateurService: UtilisateurService,
     private parentService: ParentService
-  ) { }
+  ) {
+    this.profil = new BehaviorSubject(null);
+   }
 
   login(utilisateur: any) {
     this.utilisateurService.getUtilisateurByUsernameAndPassword(utilisateur.userName, utilisateur.password).subscribe(
       (data) => {
         this.utilisateurLogged = data;
         localStorage.setItem('utilisateur', JSON.stringify(data));
+        sessionStorage.setItem('profil',data.profil);
+        sessionStorage.setItem('isLogged',JSON.stringify(true));
         this.loggedIn.next(true);
         this.setProfil(data.profil);
-        this.profil.next(data.profil);
         console.log('profilemp' + this.isEmploye + ', profParent ' + this.isParent);
         this.router.navigate(['/dashboard']);
       }
@@ -58,6 +62,13 @@ export class AuthService {
 
   logout() {
     this.loggedIn.next(false);
+    console.log('logout');
+    sessionStorage.clear();
+    this.navigateToLogin();
+
+  }
+
+  navigateToLogin(){
     this.router.navigate(['/login']);
   }
 

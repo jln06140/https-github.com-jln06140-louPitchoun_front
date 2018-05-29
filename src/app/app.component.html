@@ -1,8 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<app-header></app-header>
-
+<app-header *ngIf="isLoggedIn$ | async"></app-header>
 <div class="col-md-8 offset-md-2 contenu">
 <router-outlet></router-outlet>
 </div>
+
+<footer>
+        <div class="container">
+            <div>
+                <span>Copyright 2018 <span class="sep"></span> Tous droits réservés <span class="sep"></span> <a href="" title="">Contact</a> </span>																		
+            </div>
+            <div>
+                <address>Crèche nom <span class="address"><span class="sep"></span> Crèche adresse - cp ville</span></address>
+                <div class="phone float-none float-sm-right">
+                    <a href="tel:0000000000"><mat-icon>phone</mat-icon>00.00.00.00.00</a>
+                </div>						
+            </div>
+        </div>
+    </footer>
 

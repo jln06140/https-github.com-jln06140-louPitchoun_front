@@ -1,16 +1,74 @@
-<header class="row"  *ngIf="isLoggedIn$ | async">
+<header *ngIf="isLoggedIn$ | async">
+  <div class="container">
+    <a href="index.html" title="" class="logo">
+      <img src="./assets/logo.png" alt="" class="float-none float-sm-left">
+    </a>
+    <nav class="float-none float-sm-right">
+      <a class="nav-opener d-block d-sm-none" href="#">
+        <span>Menu</span>
+      </a>
+      <ul class="menu" *ngIf= "profil === 'EMPLOYE'">
+        <li>
+          <a routerLink='dashboard' title="Dashboard">
+            <mat-icon>home</mat-icon>
+            <span class="visible-xs-inline-block"> Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink='section'>La Section</a>
+        </li>
+        <!-- <li><a href="" title="">Se Ddeconnecter</a></li>
+						
+						<li><a href="" title=""><mat-icon>book</mat-icon> Liaison</a></li>  -->
+        <li>
+          <a routerLink='login' *ngIf="isLoggedIn$ | async" (click)="onLogout()">
+            <mat-icon>lock</mat-icon> Logout</a>
+        </li>
+      </ul>
+
+      <ul class="menu" *ngIf= "profil === 'PARENT'">
+        <li>
+          <a routerLink='dashboard' title="Dashboard">
+            <mat-icon>home</mat-icon>
+            <span class="visible-xs-inline-block"> Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink='section'>Mes enfants</a>
+        </li>
+        <li>
+          <a routerLink='login' *ngIf="isLoggedIn$ | async" (click)="onLogout()">
+            <mat-icon>lock</mat-icon> Logout</a>
+        </li>
+      </ul>
+
+      <ul class="menu" *ngIf= "profil === 'ADMIN'">
+        <li class="sousCatg">Creation<mat-icon>home</mat-icon>
+          <ul>
+            <li><a routerLink='gestion/utilisateur'>Utilisateur</a></li>
+            <li><a routerLink='gestion/enfant'>Enfant</a></li>
+          </ul>
+        </li>
+        <li>
+          <a routerLink='login' *ngIf="isLoggedIn$ | async" (click)="onLogout()">
+            <mat-icon>lock</mat-icon> Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<!-- <header >
   <div class="col-2 text-center logo">
-    <img src="./assets/logo.png"> 
+    <img src="./assets/logo.png">
   </div>
   <h1 class="col-6 col-sm-8 text-center">LouPitchoun</h1>
   <menu class="col-4 col-sm-2">
-      <span routerLink="login" class="fa fa-user"></span>
-      <span class="menu-mob">
-        <span></span>
-      </span>
-    </menu>
+        <span></span> -->
 
-  <!-- <nav class="d-none d-md-block col-12 text-center">
+<!-- <nav class="d-none d-md-block col-12 text-center">
     <ul>
       <li>Menu Option 01</li>
       <li>Menu Option 02</li>
@@ -19,26 +77,38 @@
     </ul>
 
   </nav> -->
-  <nav class="d-none d-md-block col-12 text-center" *ngIf= "profil === 'ADMIN'">
-          <li routerLink = 'gestion/utilisateur' >creer utilisateur</li>
-          <li routerLink = 'gestion/listeUtilisateur'>liste utilisateur</li>
-          <li routerLink = 'gestion/enfant'>creer enfant</li>
-          <li routerLink = 'gestion/listeEnfants'>liste enfants</li>
-          <li routerLink = 'login' *ngIf="!isLoggedIn$ | async">S'identifier</li>
-          <li routerLink = 'login' *ngIf="isLoggedIn$ | async" (click) = "onLogout()">Se deconnecter</li>
+  <!-- <nav class="d-none d-md-block col-12 text-center">
   </nav>
-  <nav class="d-none d-md-block col-12 text-center" *ngIf= "profil === 'EMPLOYE'">
-      <li routerLink = 'dashboard' >DashBoard</li>
-      <li routerLink = 'section'>Ma Section</li>
-      <li routerLink = 'login' *ngIf="isLoggedIn$ | async" (click) = "onLogout()">Se deconnecter</li>
-</nav>
+  <nav class="d-none d-md-block col-12 text-center" *ngIf="profil === 'EMPLOYE'">
+    <li routerLink='dashboard'>DashBoard</li>
+    <li routerLink='section'>Ma Section</li>
+    <li routerLink='login' *ngIf="isLoggedIn" (click)="onLogout()">Se deconnecter</li>
+  </nav>
 
-<nav class="d-none d-md-block col-12 text-center" *ngIf= "profil === 'PARENT'">
-    <li routerLink = 'dashboard' >DashBoard</li>
-    <li routerLink = 'section'>Mes Enfants</li>
-    <li routerLink = 'login' *ngIf="isLoggedIn$ | async" (click) = "onLogout()">Se deconnecter</li>
-</nav>
-</header>
+  <nav class="d-none d-md-block col-12 text-center" *ngIf="profil === 'PARENT'"> -->
 
 <!-- *ngIf="isLoggedIn$ | async as isLoggedIn" -->
 <!-- *ngIf="isLoggedIn" -->
+
+
+<!-- <nav class="d-none d-md-block col-12 text-center"> 
+<li routerLink='gestion/utilisateur'>creer utilisateur</li> 
+<li routerLink='gestion/listeUtilisateur'>liste utilisateur</li> 
+<li routerLink='gestion/enfant'>creer enfant</li> 
+<li routerLink='gestion/listeEnfants'>liste enfants</li> 
+<li routerLink='login' *ngIf="!isLoggedIn$ | async">S'identifier</li> 
+<li routerLink='login' *ngIf="isLoggedIn$ | async" (click)="onLogout()">Se deconnecter</li> 
+</nav> 
+<nav class="d-none d-md-block col-12 text-center" *ngIf="profil === 'EMPLOYE'"> 
+<li routerLink='dashboard'>DashBoard</li> 
+<li routerLink='section'>Ma Section</li> 
+<li routerLink='login' *ngIf="isLoggedIn" (click)="onLogout()">Se deconnecter</li> 
+</nav> 
+
+
+</nav> 
+<nav class="d-none d-md-block col-12 text-center" *ngIf="profil === 'PARENT'"> 
+<li routerLink='dashboard'>DashBoard</li> 
+<li routerLink='section'>Mes Enfants</li> 
+<li routerLink='login' *ngIf="isLoggedIn" (click)="onLogout()">Se deconnecter</li> 
+</nav>  -->

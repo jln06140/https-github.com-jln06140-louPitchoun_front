@@ -1,3 +1,59 @@
+<h2 mat-dialog-title>Resumé de la journée de {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }}</h2>
+
+<mat-dialog-content>
+  <div class="activite">
+    <div *ngIf="journeeEnCours.repas" class="row">
+      <h3>Repas<mat-icon>expand_more</mat-icon></h3>
+      <div *ngFor="let repas of journeeEnCours.repas; let i = index" class="col-12 col-sm-4">
+        <p class="text-center boxTitle"><mat-icon>restaurant</mat-icon>Repas {{ i + 1 }}</p> 
+        <dl>
+          <dt>Heure :</dt>
+          <dd>{{ repas.heureDebut }} - {{ repas.heureFin }}</dd>
+          <dt *ngIf="repas.quantite">Quantité :</dt>
+          <dd *ngIf="repas.quantite">{{ repas.quantite }} ml</dd>
+          <dt *ngIf="repas.menu">Menu :</dt>
+          <dd *ngIf="repas.menu">{{ repas.menu }}</dd>
+          <dt *ngIf="repas.remarque">Remarque :</dt>
+          <dd *ngIf="repas.remarque">{{ repas.remarque }}</dd>
+        </dl> 
+      </div>
+    </div>
+    <div *ngIf="journeeEnCours.siestes" class="row">
+      <h3>Sommeil<mat-icon>expand_more</mat-icon></h3>
+      <div *ngFor="let sieste of journeeEnCours.siestes; let i = index" class="col-12 col-sm-4">
+          <p class="text-center boxTitle"><mat-icon>hotel</mat-icon>Sieste {{ i + 1 }}</p> 
+          <dl>
+            <dt>Heure :</dt>
+            <dd>{{ sieste.heureDebut }} à {{ sieste.heureFin }}</dd>          
+            <dt *ngIf="sieste.remarque">Remarque</dt> 
+            <dd *ngIf="sieste.remarque">{{ sieste.remarque }}</dd>
+          </dl>
+      </div>
+    </div>
+    <div *ngIf="!journeeEnCours.siestes" class="afficheSieste">
+      <p class="text-center">pas de sieste aujourd'hui</p>
+    </div>
+    <div *ngIf="journeeEnCours.activites" class="row">
+      <h3>Activités<mat-icon>expand_more</mat-icon></h3>
+      <div *ngFor="let activite of journeeEnCours.activites; let i = index" class="col-12 col-sm-4">
+          <p class="text-center boxTitle"><mat-icon>color_lens</mat-icon>Activite {{ i + 1 }}</p> 
+          <dl>
+            <dt>Type :</dt>
+            <dd>{{ activite.typeActivite.typeActivite }}</dd>          
+            <dt *ngIf="activite.remarque">Remarque</dt> 
+            <dd *ngIf="activite.remarque">{{ activite.remarque }}</dd>
+          </dl>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button float-right" (click)="close()">Close</button>
+  <!-- <button class="mat-raised-button">Close</button> -->
+</mat-dialog-actions>
+
+<!--
 <h2> Resumé de la journée de {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }} </h2>
 
 <ul>
@@ -27,4 +83,4 @@
     <p *ngIf="activite.remarque">Remarque : {{ activite.remarque }}</p>
   </div>
 </li>
-</ul>
+</ul>-->

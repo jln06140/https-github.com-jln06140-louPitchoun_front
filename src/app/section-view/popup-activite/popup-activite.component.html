@@ -1,17 +1,28 @@
-<h2 mat-dialog-title >demarrer activite</h2>
+<h2 mat-dialog-title>demarrer activite</h2>
 
 <mat-dialog-content>
   <div class="activite">
-    <ul class="">
-      <li (click) = "debuterActivite()">Demarrer une activité</li>
-      <li (click) = "ajouterSieste()">Renseigner une sieste</li>
-      
-      <li (click) = "ajouterRepas()">Donner un repas</li>
-    </ul>
+
+    <div>
+      <h3 (click)="debuterActivite()">Demarrer une activité
+        <mat-icon>expand_more</mat-icon>
+      </h3>
+      <app-activite *ngIf="activite" [journee]="journee" (afficheComponent)="onAffichedActivite($event)"></app-activite>
+    </div>
+
+    <div>
+      <h3 (click)="ajouterSieste()">Renseigner une sieste
+        <mat-icon>expand_more</mat-icon>
+      </h3>
+      <app-sieste *ngIf="sieste" [journee]="journee" (afficheComponent)="onAffichedSieste($event)"></app-sieste>
+    </div>
+    <div>
+      <h3 (click)="ajouterRepas()">Donner un repas
+        <mat-icon>expand_more</mat-icon>
+      </h3>
+      <app-repas *ngIf="repas" [journee]="journee" (afficheComponent)="onAffichedRepas($event)"></app-repas>
+    </div>
   </div>
-  <app-activite *ngIf="activite" [journee]= "journee" (afficheComponent)="onAffichedActivite($event)"></app-activite>
-  <app-sieste *ngIf="sieste" [journee]= "journee" (afficheComponent)="onAffichedSieste($event)"></app-sieste>
-  <app-repas *ngIf="repas" [journee]= "journee" (afficheComponent)="onAffichedRepas($event)"></app-repas>
 </mat-dialog-content>
 
 <mat-dialog-actions>

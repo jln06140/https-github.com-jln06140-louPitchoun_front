@@ -25,7 +25,7 @@ export class FormModEmpComponent implements OnInit {
   ListeProfil: string[];
   sectionList: string[];
 
- employetModForm: NgForm;
+  employetModForm: NgForm;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,7 +34,7 @@ export class FormModEmpComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private profilService: ProfilService
-  ) {}
+  ) { }
 
   ngOnInit() {
     // this.ListeProfil = this.profilService.listeProfils;
@@ -65,9 +65,10 @@ export class FormModEmpComponent implements OnInit {
       this.employeService
         .updateEmploye(this.employeToUpdate.id, this.employeToUpdate)
         .subscribe(
-          () => {this.router.navigate(['gestion/listeUtilisateur']); this.openSnackBar('Employe modifié avec succes', 'Succes');}
+          () => { this.router.navigate(['gestion/listeUtilisateur']); this.openSnackBar('Employe modifié avec succes', 'Succes'); },
+          (err) => this.openSnackBar( "Erreur",err.error.message)
         );
-      }
+    }
   }
 
   openSnackBar(message: string, action: string) {

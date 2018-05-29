@@ -12,6 +12,7 @@ import { UtilisateurService } from "../../../../services/utilisateur.service";
 import { Parent } from "../../../../model/parent";
 import { ParentService } from "../../../../services/parent.service";
 import { ActivatedRoute, Route, Router, ParamMap } from "@angular/router";
+import { SnackBarService } from "../../../../services/snack-bar.service";
 
 @Component({
   selector: "app-form-mod-parent",
@@ -31,9 +32,10 @@ export class FormModParentComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private parentService: ParentService,
+    private snackBar: SnackBarService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.lecture = true;
@@ -65,7 +67,12 @@ export class FormModParentComponent implements OnInit {
       console.log(JSON.stringify(form.value));
       this.parentService
         .updateParent(this.parentToUpdate.id, this.parentToUpdate)
-        .subscribe(data => this.router.navigate(["../"]));
-    }
+        .subscribe(
+          data => {
+            this.router.navigateByUrl("gestion/listeUtilisateur");
+            this.snackBar.openSnackBar("Modifié avec succes", "succes");
+          },
+          err => this.snackBar.openSnackBar("Erreur",err.error.message )
+        )}
   }
 }
