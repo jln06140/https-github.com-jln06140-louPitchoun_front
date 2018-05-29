@@ -12,21 +12,23 @@ import { CustomValidators } from '../../../../tools/custom-validators';
   styleUrls: ['./ajout-employe.component.css']
 })
 export class AjoutEmployeComponent implements OnInit {
+
   employeForm: FormGroup;
   employeCreated: Employe;
+
   sectionList: string[];
-  sectionDefault: string;
+
+  motDePasseEgaux: boolean = true;
 
   constructor(
     private employeService: EmployeService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private route: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.sectionList = ['Petit', 'Moyen', 'Grand'];
-    this.sectionDefault = this.sectionList[1];
     this.inifForm();
   }
 
@@ -55,29 +57,44 @@ export class AjoutEmployeComponent implements OnInit {
   }
 
   onSubmitForm() {
-    this.employeCreated = new Employe(
-      this.matricule,
-      this.employeForm.value['motDePasse'],
-      this.employeForm.value['section'],
-      this.employeForm.value['infoEmploye'],
-      'EMPLOYE',
-    );
-    this.employeService.addEmploye(this.employeCreated).subscribe(
-      () => {
-        this.openSnackBar('Succes', 'Utilisateur enregistré');
-        this.route.navigate(['/gestion/listeUtilisateur']);
-      },
-      (err) => { JSON.stringify(err.error.message); this.openSnackBar('error', err.error.message); }
-    );
+    this.compareMdp(this.employeForm.value['motDePasse'], this.employeForm.value['confMdp']);
+    if (this.motDePasseEgaux && this.employeForm.valid) {
+      this.employeCreated = new Employe(
+        this.matricule,
+        this.employeForm.value['motDePasse'],
+        this.employeForm.value['section'],
+        this.employeForm.value['infoEmploye'],
+        'EMPLOYE',
+      );
+      this.employeService.addEmploye(this.employeCreated).subscribe(
+        () => {
+          this.openSnackBar('Succes', 'Utilisateur enregistré');
+          this.route.navigate(['/gestion/listeUtilisateur']);
+        },
+        //message erreur si matricule deja enregistré
+        (err) => { console.log(JSON.stringify(err.error.erreur)); this.openSnackBar('error', err.error.erreur); }
+      );
+    }
   }
 
   get matricule() {
     return this.employeForm.get('infoEmploye.matricule').value;
   }
 
+  compareMdp(mdp, conf) {
+    mdp === conf ? this.motDePasseEgaux = true : this.motDePasseEgaux = false;
+    console.log(this.motDePasseEgaux);
+  }
+
+  isChampsInvalide(champs: string) {
+    return(
+      (!this.employeForm.get(champs).valid && this.employeForm.get(champs).touched)
+    );
+  }
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000,
+      duration: 4000,
     });
   }
 }

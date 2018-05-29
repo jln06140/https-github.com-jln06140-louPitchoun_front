@@ -4,6 +4,7 @@ import { EnfantService } from '../../../services/enfant.service';
 import { Enfant } from '../../../model/enfant';
 import { ProfilService } from '../../../services/profil.service';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ajout-enfant',
@@ -19,6 +20,7 @@ export class AjoutEnfantComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private enfantService: EnfantService,
+              private route: Router,
               private profilService: ProfilService,
               private snackBar: MatSnackBar
   ) { }
@@ -52,6 +54,7 @@ export class AjoutEnfantComponent implements OnInit {
     console.log(this.enfant);
     this.enfantService.addEnfant(this.enfant).subscribe(
       () => {
+        this.route.navigateByUrl('gestion/listeEnfants');
         this.openSnackBar('Enfant ajouté','Succes');
       }
     );

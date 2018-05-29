@@ -17,7 +17,19 @@
     </ul>
   </div>
   <div *ngIf="viewParent" class="parents">
-parent
+    <div *ngFor="let parent of enfantSelected.geniteurs; let i = index">
+    <h3>Parent {{ i+1 }}</h3>
+    <ul>
+      <li>Nom : {{ parent.infoParent.nom }}</li>
+      <li>Prenom : {{ parent.infoParent.prenom }}</li>
+      <li>adresse : {{ parent.infoParent.adresse }}</li>
+      <li>ville : {{ parent.infoParent.ville }}</li>
+      <li>email : {{ parent.infoParent.email }}</li>
+      <li>Telephone fixe : {{ parent.infoParent.telFixe }}</li>
+      <li>Telephone mobile : {{ parent.infoParent.telMobile }}</li>
+      <li>Telephone professionnel : {{ parent.infoParent.telPro }}</li>
+    </ul>
+  </div>
   </div>
 </mat-dialog-content>
 
