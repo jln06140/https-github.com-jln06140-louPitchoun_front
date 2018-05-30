@@ -7,7 +7,6 @@ import { ParentService } from '../services/parent.service';
 
 @Injectable()
 export class AuthService {
-
   isEmploye: boolean;
   isParent: boolean;
   isAdmin: boolean;
@@ -26,36 +25,46 @@ export class AuthService {
     return this.profil.asObservable();
   }
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private utilisateurService: UtilisateurService,
     private parentService: ParentService
   ) {
     this.profil = new BehaviorSubject(null);
-   }
+  }
 
   login(utilisateur: any) {
-    this.utilisateurService.getUtilisateurByUsernameAndPassword(utilisateur.userName, utilisateur.password).subscribe(
-      (data) => {
-        this.utilisateurLogged = data;
-        localStorage.setItem('utilisateur', JSON.stringify(data));
-        sessionStorage.setItem('profil',data.profil);
-        sessionStorage.setItem('isLogged',JSON.stringify(true));
-        this.loggedIn.next(true);
-        this.setProfil(data.profil);
-        console.log('profilemp' + this.isEmploye + ', profParent ' + this.isParent);
-        this.router.navigate(['/dashboard']);
-      }
+    this.utilisateurService
+      .getUtilisateurByUsernameAndPassword(
+        utilisateur.userName,
+        utilisateur.password
+      )
+      .subscribe(
+        data => {
+          this.utilisateurLogged = data;
+          localStorage.setItem('utilisateur', JSON.stringify(data));
+          sessionStorage.setItem('profil', data.profil);
+          sessionStorage.setItem('isLogged', JSON.stringify(true));
+          this.loggedIn.next(true);
+          this.setProfil(data.profil);
+          console.log(
+            'profilemp' + this.isEmploye + ', profParent ' + this.isParent
+          );
+          if (this.isAdmin) {
+            this.router.navigate(['/gestion/listeUtilisateur']);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
+        },
 
-      ,
-      (error) => {
-        console.log(error.message);
-      }
-    );
+        error => {
+          console.log(error.message);
+        }
+      );
     // recuperer et verifier utilisateur
     // comparer que email existe sinon erreur
     // sinon comparer email et mot de passe correspondent
     // if (utilisateur.login !== '' && utilisateur.motDePasse !== '') {
-    
 
     // }
   }
@@ -65,17 +74,16 @@ export class AuthService {
     console.log('logout');
     sessionStorage.clear();
     this.navigateToLogin();
-
   }
 
-  navigateToLogin(){
+  navigateToLogin() {
     this.router.navigate(['/login']);
   }
 
   setProfil(profil: string) {
     console.log(profil);
-    profil === 'PARENT' ? this.isParent = true : this.isParent = false;
-    profil === 'EMPLOYE' ? this.isEmploye = true : this.isEmploye = false;
-    profil === 'ADMIN' ? this.isAdmin = true : this.isAdmin = false;
+    profil === 'PARENT' ? (this.isParent = true) : (this.isParent = false);
+    profil === 'EMPLOYE' ? (this.isEmploye = true) : (this.isEmploye = false);
+    profil === 'ADMIN' ? (this.isAdmin = true) : (this.isAdmin = false);
   }
 }

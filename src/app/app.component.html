@@ -5,15 +5,15 @@
 <router-outlet></router-outlet>
 </div>
 
-<footer>
+<footer *ngIf="isLoggedIn$ | async">
         <div class="container">
             <div>
                 <span>Copyright 2018 <span class="sep"></span> Tous droits réservés <span class="sep"></span> <a href="" title="">Contact</a> </span>																		
             </div>
             <div>
-                <address>Crèche nom <span class="address"><span class="sep"></span> Crèche adresse - cp ville</span></address>
+                <address>Lou pitchoun <span class="address"><span class="sep"></span> 102 Avenue colonel Meyere - 06140 Vence</span></address>
                 <div class="phone float-none float-sm-right">
-                    <a href="tel:0000000000"><mat-icon>phone</mat-icon>00.00.00.00.00</a>
+                    <a href="tel:0493456780"><mat-icon>phone</mat-icon>04.93.45.67.89</a>
                 </div>						
             </div>
         </div>

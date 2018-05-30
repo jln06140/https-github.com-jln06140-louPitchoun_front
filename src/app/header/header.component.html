@@ -49,6 +49,10 @@
             <li><a routerLink='gestion/enfant'>Enfant</a></li>
           </ul>
         </li>
+        <li routerLink='gestion/utilisateur'>creer utilisateur</li> 
+<li routerLink='gestion/listeUtilisateur'>liste utilisateur</li> 
+<li routerLink='gestion/enfant'>creer enfant</li> 
+<li routerLink='gestion/listeEnfants'>liste enfants</li> 
         <li>
           <a routerLink='login' *ngIf="isLoggedIn$ | async" (click)="onLogout()">
             <mat-icon>lock</mat-icon> Logout</a>
