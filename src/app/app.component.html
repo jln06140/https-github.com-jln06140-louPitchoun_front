@@ -2,20 +2,27 @@
 
 <app-header *ngIf="isLoggedIn$ | async"></app-header>
 <div class="col-md-8 offset-md-2 contenu">
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
 
 <footer *ngIf="isLoggedIn$ | async">
-        <div class="container">
-            <div>
-                <span>Copyright 2018 <span class="sep"></span> Tous droits réservés <span class="sep"></span> <a href="" title="">Contact</a> </span>																		
-            </div>
-            <div>
-                <address>Lou pitchoun <span class="address"><span class="sep"></span> 102 Avenue colonel Meyere - 06140 Vence</span></address>
-                <div class="phone float-none float-sm-right">
-                    <a href="tel:0493456780"><mat-icon>phone</mat-icon>04.93.45.67.89</a>
-                </div>						
+    <div class="container">
+        <div>
+            <span>Copyright 2018
+                <span class="sep"></span> Tous droits réservés
+                <span class="sep"></span>
+                <a href="" title="">Contact</a>
+            </span>
+        </div>
+        <div>
+            <address>Lou pitchoun
+                <span class="address">
+                    <span class="sep"></span> 102 Avenue colonel Meyere - 06140 Vence</span>
+            </address>
+            <div class="phone float-none float-md-right">
+                <a href="tel:0493456780">
+                    <mat-icon>phone</mat-icon>04.93.45.67.89</a>
             </div>
         </div>
-    </footer>
-
+    </div>
+</footer>

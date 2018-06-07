@@ -4,7 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // tslint:disable-next-line:max-line-length
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatTableModule, MatMenuModule, MatIconModule, MatToolbarModule, MatCardModule, MatSelectModule, MatSnackBarModule, MatDialogModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule,
+   MatSortModule, MatProgressSpinnerModule, MatTableModule, MatMenuModule, MatIconModule, 
+   MatToolbarModule, MatCardModule, MatSelectModule, MatSnackBarModule, MatDialogModule} from '@angular/material';
 import {MatStepperModule} from '@angular/material/stepper';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
@@ -65,7 +67,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'gestion',
-    component: GestionComponent,
+    component: GestionComponent, canActivate: [AuthGuard],
     children : [
       { path : 'utilisateur', component: AjoutUtilisateurComponent},
       { path : 'listeUtilisateur', component: ListUtilisateurComponent},
@@ -75,10 +77,10 @@ const appRoutes: Routes = [
       { path : 'listeEnfants', component: ListeEnfantsComponent}
     ]
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent
+  // },
   {
     path: 'dashboard',
     component: DashboardViewComponent,
@@ -87,8 +89,8 @@ const appRoutes: Routes = [
      
     ]
   },
-  { path : 'journeeEnfant/:id', component : EnfantJourneeComponent},
-  { path : 'section', component: SectionViewComponent}
+  { path : 'journeeEnfant/:id', component : EnfantJourneeComponent, canActivate: [AuthGuard]},
+  { path : 'section', component: SectionViewComponent, canActivate: [AuthGuard]}
 
 ];
 

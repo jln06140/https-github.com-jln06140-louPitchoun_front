@@ -1,35 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import { ProfilService } from './services/profil.service';
-import { AuthService } from './auth/auth.service';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit } from "@angular/core";
+import * as $ from "jquery";
+import { ProfilService } from "./services/profil.service";
+import { AuthService } from "./auth/auth.service";
+import { Observable } from "rxjs/Observable";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
-export class AppComponent implements OnInit{
-
+export class AppComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
-  isLogged : any;
+  isLogged: any;
 
-  title = 'app';
+  title = "app";
 
-  constructor(private authService : AuthService){
-   
-  }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedin;
-    this.isLoggedIn$.subscribe(
-      (data) => this.isLogged = data
-    )
-    //console.log('valeur logged '+ typeof(this.isLoggedIn));
+    this.isLoggedIn$.subscribe(data => {
+      this.isLogged = data;
+    });
   }
-
- 
-
-
 }

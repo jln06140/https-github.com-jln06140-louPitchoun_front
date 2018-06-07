@@ -5,7 +5,7 @@
       <input type="time" class="form-control remarque" id="debut" [(ngModel)]="sieste.heureDebut" name="heureDebut" required>
     </div>
     <div class="form-group">
-      <label for="fin">Heure de debut</label>
+      <label for="fin">Heure de fin</label>
       <input type="time" class="form-control remarque" id="fin" [(ngModel)]="sieste.heureFin" name="heureFin" required>
     </div>
     <div class="form-group">
@@ -15,4 +15,3 @@
     <button class="btn" type="submit" [disabled]="f.invalid">ajouter</button>
   <!-- <input type="text" ngModel name="firstName" #firstName="ngModel" (change)="doSomething(firstName)"> -->
 </form>
-<p>{{ sieste | json}}</p>

@@ -18,8 +18,8 @@ export class ParentService {
 
   constructor(private http: HttpClient) {}
 
-  public getAllParents(): Observable<Utilisateur[]> {
-    return this.http.get(this.url) as Observable<Utilisateur[]>;
+  public getAllParents(): Observable<Parent[]> {
+    return this.http.get(this.url) as Observable<Parent[]>;
   }
 
   public addParent(parent: Parent): Observable<Parent> {
@@ -38,9 +38,9 @@ export class ParentService {
     return this.http.put(url, parent, httpOptions);
   }
 
-  public deleteParent(id: number): Observable<Utilisateur> {
+  public deleteParent(id: number): Observable<Parent> {
     const url = `${this.url}/${id}`;
-    return this.http.delete<Utilisateur>(url, httpOptions);
+    return this.http.delete<Parent>(url, httpOptions);
   }
 
   public ajoutEnfantsParent(

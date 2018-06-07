@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Resumé de la journée de {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }}</h2>
+<h2 mat-dialog-title class="text-center">Resumé de la journée de {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }}</h2>
 
 <mat-dialog-content>
   <div class="activite">
@@ -30,9 +30,9 @@
           </dl>
       </div>
     </div>
-    <div *ngIf="!journeeEnCours.siestes" class="afficheSieste">
+    <!-- <div *ngIf="!journeeEnCours.siestes" class="afficheSieste">
       <p class="text-center">pas de sieste aujourd'hui</p>
-    </div>
+    </div> -->
     <div *ngIf="journeeEnCours.activites" class="row">
       <h3>Activités<mat-icon>expand_more</mat-icon></h3>
       <div *ngFor="let activite of journeeEnCours.activites; let i = index" class="col-12 col-sm-4">

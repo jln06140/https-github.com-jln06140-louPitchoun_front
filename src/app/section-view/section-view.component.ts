@@ -19,7 +19,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class SectionViewComponent implements OnInit {
 
-  //journeeEnCours: any;
+  // journeeEnCours: any;
   erreur: string;
   now: any;
   dateTest = new Date();
@@ -54,7 +54,7 @@ export class SectionViewComponent implements OnInit {
   cloturerJournee(idEnfant: number) {
     this.journeeService.cloturerJournee(idEnfant).subscribe(
       (data) => {
-        console.log("cloture" + data);
+        console.log('cloture' + data);
         this.loadEnfantsSection();
       }
     );
@@ -76,7 +76,7 @@ export class SectionViewComponent implements OnInit {
     );
   }
 
-  //renseigne si il ya journee en cours
+  // renseigne si il ya journee en cours
   journeeEnCours(element: Enfant): boolean {
     let isPresent = false;
     const today = Date.now();
@@ -205,7 +205,7 @@ export class SectionViewComponent implements OnInit {
 
 
 
-  //journeeFinie()
+  // journeeFinie()
 }
 
   // getJournee(element: Enfant){

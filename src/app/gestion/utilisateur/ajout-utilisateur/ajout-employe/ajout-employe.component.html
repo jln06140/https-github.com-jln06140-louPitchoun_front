@@ -31,11 +31,11 @@
     <div class="col-md-4 ">
       <div class="form-group">
         <label for="motDePasse">Mot de passe</label>
-        <input type="text" id="motDePasse" class="form-control" formControlName="motDePasse" required>
+        <input type="password" id="motDePasse" class="form-control" formControlName="motDePasse" required>
       </div>
       <div class="form-group">
         <label for="confMdp">Confirmation mot de passe</label>
-        <input type="text" id="confMdp" class="form-control" formControlName="confMdp" required>
+        <input type="password" id="confMdp" class="form-control" formControlName="confMdp" required>
         <div class="form-control-feedback" *ngIf="!motDePasseEgaux">Les mots de passes doivent correspondre</div>
       </div>
 

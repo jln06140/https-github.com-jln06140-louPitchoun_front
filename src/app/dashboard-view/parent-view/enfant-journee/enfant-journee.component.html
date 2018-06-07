@@ -1,49 +1,58 @@
-<a routerLink = '/dashboard'>dashboard
-</a>
 <div *ngIf="estParent">
-  <div *ngIf="journeeEnCours; else erreur">
-   <h2> Resumé de la journée de {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }} </h2> 
+  <div *ngIf="journeeEnCours; else erreur" class="activite">
+    <h2 class="text-center"> Resumé de la journée du {{journeeEnCours.date | date:'dd-MM-yyyy'}} de {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }} </h2>
 
-    <div *ngIf="journeeEnCours.repas != 0">
-      <ul>
-        <li class="list-group-item">
-          <div *ngFor="let repas of journeeEnCours.repas; let i = index">
-            Repas {{ i + 1 }} : pris à {{ repas.heureDebut }} - {{ repas.heureFin }}
-            <p *ngIf="repas.quantite"> a bu {{ repas.quantite }} ml</p>
-            <p *ngIf="repas.menu"> a mangé {{ repas.menu }}</p>
-            <p *ngIf="repas.remarque">Remarque : {{ repas.remarque }}</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="journeeEnCours.repas == 0">Pas de repas</div>
-
-    <div *ngIf="journeeEnCours.siestes != 0">
-      <ul>
-        <li class="list-group-item">
-          <div *ngFor="let sieste of journeeEnCours.siestes; let i = index">
-            Sieste {{ i + 1 }} : de {{ sieste.heureDebut }} à {{ sieste.heureFin }}
-            <p *ngIf="sieste.remarque">Remarque : {{ sieste.remarque }}</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="journeeEnCours.siestes == 0" class="afficheSieste">
-      Pas de sieste
+    <div *ngIf="journeeEnCours.repas" class="row">
+      <h3>Repas
+        <mat-icon>expand_more</mat-icon>
+      </h3>
+      <div *ngFor="let repas of journeeEnCours.repas; let i = index" class="col-12 col-sm-4">
+        <p class="text-center boxTitle">
+          <mat-icon>restaurant</mat-icon>Repas {{ i + 1 }}</p>
+        <dl class="row">
+          <dt class="xs-12 col-sm-4">Heure :</dt>
+          <dd class="xs-12 col-sm-8">{{ repas.heureDebut }}</dd>
+          <dt *ngIf="repas.quantite"  class="xs-12 col-sm-4">Quantité :</dt>
+          <dd *ngIf="repas.quantite" class="xs-12 col-sm-8">{{ repas.quantite }} ml</dd>
+          <dt *ngIf="repas.menu" class="xs-12 col-sm-4">Menu :</dt>
+          <dd *ngIf="repas.menu" class="xs-12 col-sm-8">{{ repas.menu }}</dd>
+          <dt *ngIf="repas.remarque" class="xs-12 col-sm-4">Remarque :</dt>
+          <dd *ngIf="repas.remarque" class="xs-12 col-sm-8">{{ repas.remarque }}</dd>
+        </dl>
+      </div>
     </div>
 
-    <div *ngIf="journeeEnCours.activites != 0">
-      <ul>
-        <li *ngIf="journeeEnCours.activites" class="list-group-item">
-          <div *ngFor="let activite of journeeEnCours.activites; let i = index">
-            Activite {{ i + 1 }} : {{ activite.typeActivite.typeActivite }}
-            <p *ngIf="activite.remarque">Remarque : {{ activite.remarque }}</p>
-          </div>
-        </li>
-      </ul>
+
+    <div *ngIf="journeeEnCours.siestes" class="row">
+      <h3>Sommeil
+        <mat-icon>expand_more</mat-icon>
+      </h3>
+      <div *ngFor="let sieste of journeeEnCours.siestes; let i = index" class="col-12 col-sm-4">
+        <p class="text-center boxTitle">
+          <mat-icon>hotel</mat-icon>Sieste {{ i + 1 }}</p>
+        <dl>
+          <dt>Heure :</dt>
+          <dd>{{ sieste.heureDebut }} à {{ sieste.heureFin }}</dd>
+          <dt *ngIf="sieste.remarque">Remarque</dt>
+          <dd *ngIf="sieste.remarque">{{ sieste.remarque }}</dd>
+        </dl>
+      </div>
     </div>
-    <div *ngIf="journeeEnCours.activites == 0" class="afficheSieste">
-      Pas d'activité
+
+    <div *ngIf="journeeEnCours.activites" class="row">
+      <h3>Activités
+        <mat-icon>expand_more</mat-icon>
+      </h3>
+      <div *ngFor="let activite of journeeEnCours.activites; let i = index" class="col-12 col-sm-4">
+        <p class="text-center boxTitle">
+          <mat-icon>color_lens</mat-icon>Activite {{ i + 1 }}</p>
+        <dl>
+          <dt>Type :</dt>
+          <dd>{{ activite.typeActivite.typeActivite }}</dd>
+          <dt *ngIf="activite.remarque">Remarque</dt>
+          <dd *ngIf="activite.remarque">{{ activite.remarque }}</dd>
+        </dl>
+      </div>
     </div>
   </div>
   <ng-template #erreur>

@@ -1,7 +1,5 @@
 <div *ngIf="enfantSeclected">
   <form [formGroup]="EnfantForm" (ngSubmit)="onSubmitForm()">
-    <!-- <div class="form-row justify-content-around"> -->
-
     <div class="row" formGroupName="enfantInfo">
       <div class="col-12 col-sm-6">
         <div class="form-group">
@@ -13,19 +11,16 @@
           <label for="prenom">Prenom</label>
           <input type="text" id="prenom" class="form-control" formControlName="prenom" required>
         </div>
-        
           <div class="form-group" *ngIf="editDate">
             <label for="prenom">Date De naissance</label>
             <input type="text" [readOnly]=true id="dateDeNaissance" [value] = "dateFormat | date: 'dd/MM/yyyy'" class="form-control-plaintext" >
             <a (click)="onEditDate()">Modifier</a>
           </div>
-          
           <div class="form-group" *ngIf="!editDate">
             <label for="email">Date De naissance</label>
             <input type="date" id="dateDeNaissance" class="form-control" formControlName="dateDeNaissance" required>
             <a (click)="onEditDate()">Retour</a>
           </div>
-        
       </div>
 
       <div class="col-12 col-sm-6 text-center">
@@ -58,13 +53,8 @@
         </select>
       </div>
     </div>
-
-
-    <!-- </div> -->
     <button type="submit" [disabled]="EnfantForm.invalid" class="btn btn-primary">Soumettre</button>
   </form>
-
 </div>
-<p>{{enfantSeclected | json}}</p>
-<!-- <p>{{EnfantForm.value | json}}</p> -->
+
 

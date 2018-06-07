@@ -1,10 +1,19 @@
-<div *ngIf="enfants">
-  <div class="card " style="width: 18rem;" *ngFor="let enfant of enfants">
+<div *ngIf="enfants?.length > 0">
+  <div class="card text-center" style="width: 18rem;" *ngFor="let enfant of enfants">
     <div class="card-body">
       <h5 class="card-title">{{ enfant.enfantInfo.nom}} {{ enfant.enfantInfo.prenom}}</h5>
       <p class="card-text">Enfant appartenant a la section " {{ enfant.section }}"</p>
       <a routerLink="/journeeEnfant/{{enfant.id}}" class="card-link">Acceder a sa journée</a>
     </div>
   </div>
-  <p class="remarque">dedde</p>
+
+  <div class="remarques">
+    <h3 class="text-center">Remarques</h3>
+    <blockquote>
+      <mat-icon>format_quote</mat-icon>
+      Some quick example text to build on the card title and make up the bulk of the card's ...
+      <mat-icon>format_quote</mat-icon>
+    </blockquote>
+  </div>
 </div>
+<div *ngIf="enfants?.length === 0" class="alert alert-danger">Pas d'enfant associés, Contactez la creche</div>
