@@ -11,7 +11,7 @@
           <mat-icon>restaurant</mat-icon>Repas {{ i + 1 }}</p>
         <dl class="row">
           <dt class="xs-12 col-sm-4">Heure :</dt>
-          <dd class="xs-12 col-sm-8">{{ repas.heureDebut }}</dd>
+          <dd class="xs-12 col-sm-8">{{ repas.heureDebut | slice:0:5 }}</dd>
           <dt *ngIf="repas.quantite"  class="xs-12 col-sm-4">Quantité :</dt>
           <dd *ngIf="repas.quantite" class="xs-12 col-sm-8">{{ repas.quantite }} ml</dd>
           <dt *ngIf="repas.menu" class="xs-12 col-sm-4">Menu :</dt>
@@ -30,11 +30,11 @@
       <div *ngFor="let sieste of journeeEnCours.siestes; let i = index" class="col-12 col-sm-4">
         <p class="text-center boxTitle">
           <mat-icon>hotel</mat-icon>Sieste {{ i + 1 }}</p>
-        <dl>
-          <dt>Heure :</dt>
-          <dd>{{ sieste.heureDebut }} à {{ sieste.heureFin }}</dd>
-          <dt *ngIf="sieste.remarque">Remarque</dt>
-          <dd *ngIf="sieste.remarque">{{ sieste.remarque }}</dd>
+        <dl class="row">
+          <dt class="xs-12 col-sm-4">Heure :</dt>
+          <dd class="xs-12 col-sm-8">{{ sieste.heureDebut | slice:0:5 }} à {{ sieste.heureFin | slice:0:5 }}</dd>
+          <dt class="xs-12 col-sm-4" *ngIf="sieste.remarque">Remarque</dt>
+          <dd class="xs-12 col-sm-8" *ngIf="sieste.remarque">{{ sieste.remarque }}</dd>
         </dl>
       </div>
     </div>
@@ -46,11 +46,11 @@
       <div *ngFor="let activite of journeeEnCours.activites; let i = index" class="col-12 col-sm-4">
         <p class="text-center boxTitle">
           <mat-icon>color_lens</mat-icon>Activite {{ i + 1 }}</p>
-        <dl>
-          <dt>Type :</dt>
-          <dd>{{ activite.typeActivite.typeActivite }}</dd>
-          <dt *ngIf="activite.remarque">Remarque</dt>
-          <dd *ngIf="activite.remarque">{{ activite.remarque }}</dd>
+        <dl class="row">
+          <dt class="xs-12 col-sm-4">Type :</dt>
+          <dd class="xs-12 col-sm-8" >{{ activite.typeActivite.typeActivite }}</dd>
+          <dt class="xs-12 col-sm-4" *ngIf="activite.remarque">Remarque</dt>
+          <dd class="xs-12 col-sm-8" *ngIf="activite.remarque">{{ activite.remarque }}</dd>
         </dl>
       </div>
     </div>

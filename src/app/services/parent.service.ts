@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Utilisateur } from "../model/Utilisateur";
-import { Observable } from "rxjs/Observable";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Parent } from "../model/parent";
+import { Injectable } from '@angular/core';
+import { Utilisateur } from '../model/Utilisateur';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Parent } from '../model/parent';
 import { Enfant } from '../model/enfant';
 
 const httpOptions = {
@@ -13,7 +13,6 @@ const httpOptions = {
 export class ParentService {
 
   parentLogged: Parent;
-  
   private url = 'http://localhost:8080/api/parent';
 
   constructor(private http: HttpClient) {}

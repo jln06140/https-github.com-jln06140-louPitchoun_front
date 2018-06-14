@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Information sur {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }}</h2>
+<h2 class="text-center" mat-dialog-title>Information sur {{ enfantSelected.enfantInfo.nom }} {{ enfantSelected.enfantInfo.prenom }}</h2>
 
 <mat-dialog-content>
   <div class="activite">
@@ -38,27 +38,13 @@
               <dt>Ville :</dt>
               <dd>{{ parent.infoParent.ville }}</dd>
               <dt>Téléphone mobile :</dt>
-              <dd>{{ parent.infoParent.telMobile }}</dd>
+              <a [href]="'tel:' + parent.infoParent.telMobile"><dd>{{ parent.infoParent.telMobile }}</dd></a>
               <dt>Téléphone Fixe :</dt>
-              <dd>{{ parent.infoParent.telFixe }}</dd>
+              <a [href]="'tel:' + parent.infoParent.telFixe"><dd>{{ parent.infoParent.telFixe }}</dd></a>
               <dt>Téléphone Professionnel :</dt>
-              <dd>{{ parent.infoParent.telPro }}</dd>
+              <a [href]="'tel:' + parent.infoParent.telPro"><dd>{{ parent.infoParent.telPro }}</dd></a>
             </dl>
           </div>
-          <!-- <div class="col-12 col-sm-6">
-            <p class="text-center boxTitle">
-              Mère</p>
-            <dl>
-              <dt>Nom :</dt>
-              <dd>xxxxx</dd>
-              <dt>Prénom</dt>
-              <dd>xxxxx</dd>
-              <dt>Adresse :</dt>
-              <dd>xxxx</dd>
-              <dt>Téléphone :</dt>
-              <dd>xxxxxx</dd>
-            </dl>
-          </div> -->
         </div>
       </div>
     </div>
@@ -66,22 +52,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button" (click)="close()">Fermer</button>
   <!-- <button class="mat-raised-button">Close</button> -->
 </mat-dialog-actions>
 
-<!-- <div *ngIf="viewParent" class="parents"> 
-  parent 
-      <div *ngFor="let parent of enfantSelected.geniteurs; let i = index"> 
-      <h3>Parent {{ i+1 }}</h3> 
-      <ul> 
-        <li>Nom : {{ parent.infoParent.nom }}</li> 
-        <li>Prenom : {{ parent.infoParent.prenom }}</li> 
-        <li>adresse : {{ parent.infoParent.adresse }}</li> 
-        <li>ville : {{ parent.infoParent.ville }}</li> 
-        <li>email : {{ parent.infoParent.email }}</li> 
-        <li>Telephone fixe : {{ parent.infoParent.telFixe }}</li> 
-        <li>Telephone mobile : {{ parent.infoParent.telMobile }}</li> 
-        <li>Telephone professionnel : {{ parent.infoParent.telPro }}</li> 
-      </ul> 
-    </div>  -->

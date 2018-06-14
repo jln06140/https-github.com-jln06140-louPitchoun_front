@@ -1,8 +1,11 @@
 <!-- <div *ngIf="EmployeToUpdate; let EmployeToUpdate; else loading"> -->
-<form class="" #employetModForm="ngForm" (ngSubmit)="onSubmitForm(employetModForm)" *ngIf="employeToUpdate">
-  <div class="row justify-content-around">
+<form class="form" #employetModForm="ngForm" (ngSubmit)="onSubmitForm(employetModForm)" *ngIf="employeToUpdate">
+  <h3>Informations utilisateur
+    <mat-icon>expand_more</mat-icon>
+  </h3>
 
-    <div class="col-4" ngModelGroup="infoEmploye">
+  <div class="form-row" ngModelGroup="infoEmploye">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="matricule">Matricule</label>
         <input type="text" id="matricule" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.matricule" name="matricule"
@@ -11,6 +14,8 @@
                 Le nom est requis
               </div> -->
       </div>
+    </div>
+    <div class="col-md-6">
       <div class="form-group">
         <label for="nom">Nom</label>
         <input type="text" id="nom" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.nom" name="nom" #nom="ngModel"
@@ -20,6 +25,8 @@
         </div>
 
       </div>
+    </div>
+    <div class="col-md-6">
       <div class="form-group">
         <label for="prenom">Prenom</label>
         <input type="text" id="prenom" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.prenom" name="prenom" required
@@ -28,6 +35,8 @@
           Le prenom est requis
         </div>
       </div>
+    </div>
+    <div class="col-md-6">
       <div class="form-group">
         <label for="email">Adresse e-mail</label>
         <input type="text" id="email" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.email" name="email" #email="ngModel"
@@ -42,19 +51,51 @@
           Format non valide
         </div>
       </div>
-
+    </div>
+    <div class="col-md-6">
       <div class="form-group">
         <label for="telMobile">Telephone mobile</label>
         <input type="text" id="telMobile" class="form-control" [(ngModel)]="employeToUpdate.infoEmploye.telMobile" name="telMobile">
       </div>
     </div>
+  </div>
 
+  <h3>Section
+    <mat-icon>expand_more</mat-icon>
+  </h3>
+  <div class="form-row justify-content-around">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profil">Profil</label>
+        <select class="form-control" id="profil" required [(ngModel)]="employeToUpdate.profil" name="profil">
+          <option value="ADMIN">Admin</option>
+          <option value="EMPLOYE">Employe</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="section">Section</label>
+        <select id="section" class="form-control" [(ngModel)]="employeToUpdate.section" name="section" required>
+          <option *ngFor="let section of sectionList" [selected]="employeToUpdate.section" [value]="section | uppercase">{{section}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
 
-    <div class="col-4 ">
+  <h3>Mot de passe utilisateur
+    <mat-icon>expand_more</mat-icon>
+  </h3>
+  <div class="form-row justify-content-around">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="motDePasse">Mot de passe</label>
         <input type="password" id="motDePasse" class="form-control" [(ngModel)]="motDePasse" name="motDePasse" #mdp="ngModel">
       </div>
+    </div>
+
+    <div class="col-md-6">
       <div class="form-group">
         <label for="confMdp">Confirmation mot de passe</label>
         <input type="password" id="confMdp" class="form-control" [(ngModel)]="confirmation" name="confMdp" #confMdp="ngModel">
@@ -65,25 +106,14 @@
           les mots de passe doivent correspondre
         </div>
       </div>
-      <div class="form-group">
-        <label for="profil">Profil</label>
-        <select class="form-control" id="profil" required [(ngModel)]="employeToUpdate.profil" name="profil">
-          <option value="ADMIN">Admin</option>
-          <option value="EMPLOYE">Employe</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="section">Section</label>
-        <select id="section" class="form-control" [(ngModel)]="employeToUpdate.section"  name="section" required>
-          <option *ngFor="let section of sectionList" [selected]="employeToUpdate.section" [value]="section | uppercase">{{section}}
-          </option>
-        </select>
-      </div>
     </div>
   </div>
-  <div class="row justify-content-around">
-    <div class="col-4">
+
+  <div class="row justify-content-center">
+    <div >
       <a class="btn btn-outline-primary" routerLink="../">Retour</a>
+    </div>
+    <div class="offset-md-1">
       <button type="submit" class="btn btn-outline-primary">Valider</button>
     </div>
   </div>

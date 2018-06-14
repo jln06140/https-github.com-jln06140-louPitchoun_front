@@ -1,23 +1,23 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl,
   NgForm
-} from "@angular/forms";
-import { CustomValidators } from "../../../../tools/custom-validators";
-import { Utilisateur } from "../../../../model/Utilisateur";
-import { UtilisateurService } from "../../../../services/utilisateur.service";
-import { Parent } from "../../../../model/parent";
-import { ParentService } from "../../../../services/parent.service";
-import { ActivatedRoute, Route, Router, ParamMap } from "@angular/router";
-import { SnackBarService } from "../../../../services/snack-bar.service";
+} from '@angular/forms';
+import { CustomValidators } from '../../../../tools/custom-validators';
+import { Utilisateur } from '../../../../model/Utilisateur';
+import { UtilisateurService } from '../../../../services/utilisateur.service';
+import { Parent } from '../../../../model/parent';
+import { ParentService } from '../../../../services/parent.service';
+import { ActivatedRoute, Route, Router, ParamMap } from '@angular/router';
+import { SnackBarService } from '../../../../services/snack-bar.service';
 
 @Component({
-  selector: "app-form-mod-parent",
-  templateUrl: "./form-mod-parent.component.html",
-  styleUrls: ["./form-mod-parent.component.css"]
+  selector: 'app-form-mod-parent',
+  templateUrl: './form-mod-parent.component.html',
+  styleUrls: ['./form-mod-parent.component.css']
 })
 export class FormModParentComponent implements OnInit {
   @Input() parent: Utilisateur;
@@ -69,10 +69,11 @@ export class FormModParentComponent implements OnInit {
         .updateParent(this.parentToUpdate.id, this.parentToUpdate)
         .subscribe(
           data => {
-            this.router.navigateByUrl("gestion/listeUtilisateur");
-            this.snackBar.openSnackBar("Modifié avec succes", "succes");
+            this.router.navigateByUrl('gestion/listeUtilisateur');
+            this.snackBar.openSnackBar('Modifié avec succes', 'succes');
           },
-          err => this.snackBar.openSnackBar("Erreur",err.error.message )
-        )}
+          err => this.snackBar.openSnackBar('Erreur', err.error.message )
+        );
+      }
   }
 }

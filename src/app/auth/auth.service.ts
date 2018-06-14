@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Utilisateur } from '../model/Utilisateur';
 import { UtilisateurService } from '../services/utilisateur.service';
 import { ParentService } from '../services/parent.service';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Injectable()
 export class AuthService {
@@ -11,6 +12,8 @@ export class AuthService {
   isParent: boolean;
   isAdmin: boolean;
   utilisateurLogged: Utilisateur;
+  errorMsg: string;
+  isError = false;
 
   private loggedIn = new BehaviorSubject<boolean>(false);
   public profil = new BehaviorSubject<any>(null);
@@ -28,7 +31,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private utilisateurService: UtilisateurService,
-    private parentService: ParentService
+    private parentService: ParentService,
+    private snckBar : SnackBarService
   ) {
     this.profil = new BehaviorSubject(null);
   }
@@ -58,8 +62,9 @@ export class AuthService {
           }
         },
 
-        error => {
-          console.log(error.message);
+        err => {
+          this.errorMsg = err.error.message;
+          this.snckBar.openSnackBar(this.errorMsg, 'Echec');
         }
       );
     // recuperer et verifier utilisateur

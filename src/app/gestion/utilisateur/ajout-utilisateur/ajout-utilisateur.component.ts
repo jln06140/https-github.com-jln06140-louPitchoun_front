@@ -20,6 +20,7 @@ import { CustomValidators, ConfirmValidParentMatcher, errorMessages } from '../.
 export class AjoutUtilisateurComponent implements OnInit {
   UtilisateurForm: FormGroup;
   parent: boolean;
+  employe: boolean;
   isLinear = true;
   
   firstFormGroup: FormGroup;
@@ -51,7 +52,7 @@ export class AjoutUtilisateurComponent implements OnInit {
 
   inifForm2() {
     this.secondFormGroup = this.formBuilder.group({
-      matricule: '',//['', Validators.required],
+      matricule: '',
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       adresse: '',
@@ -63,23 +64,21 @@ export class AjoutUtilisateurComponent implements OnInit {
       fonction: '',
     });
   }
-  
- 
 
-  //"\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"
 
   initForm3() {
     this.thirdFormGroup = this.formBuilder.group({
       motDePasse: ['', Validators.required],
       confMdp: ['', Validators.required]
     }, { validator: CustomValidators.childrenEqual});
-  
   }
 
   chargeFormulaire(profil: string) {
     if (profil === 'parent') {
       this.parent = true;
-    } else {
+      this.employe = false;
+    } else if (profil === 'employe') {
+      this.employe = true;
       this.parent = false;
     }
   }
@@ -93,7 +92,7 @@ export class AjoutUtilisateurComponent implements OnInit {
     const form2value = this.secondFormGroup.value;
     console.log(form2value);
     this.email = form2value['email'];
-    //this.matricule = form2value['matricule'];
+    // this.matricule = form2value['matricule'];
       this.informationSelected = new InformationParent(
         form2value['matricule'],
         form2value['nom'],
@@ -112,7 +111,6 @@ export class AjoutUtilisateurComponent implements OnInit {
 
   onSubmitForm3() {
     const form3value = this.thirdFormGroup.value;
-    console.log('form3value.')
     const login = (parent) ? this.email : this.matriculeSel;
     this.utilisateurCreated = new Utilisateur(
       login,
@@ -122,18 +120,18 @@ export class AjoutUtilisateurComponent implements OnInit {
   );
   }
 
-  get matricule(){
+  get matricule() {
     return this.secondFormGroup.get('matricule');
   }
 
-  get telMobile(){
+  get telMobile() {
     return this.secondFormGroup.get('telMobile');
   }
 
- 
+
   onSubmitForm() {
    this.utilisateurService.addUtilisateur(this.utilisateurCreated).subscribe(
-     ()=>console.log('utilisateur ajouté')
+     () => console.log('utilisateur ajouté')
    );
     // console.log(JSON.stringify(newUtilisateur));
   }

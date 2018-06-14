@@ -8,7 +8,7 @@
         <p class="text-center boxTitle"><mat-icon>restaurant</mat-icon>Repas {{ i + 1 }}</p> 
         <dl>
           <dt>Heure :</dt>
-          <dd>{{ repas.heureDebut }} - {{ repas.heureFin }}</dd>
+          <dd>{{ repas.heureDebut | slice:0:5 }} </dd>
           <dt *ngIf="repas.quantite">Quantité :</dt>
           <dd *ngIf="repas.quantite">{{ repas.quantite }} ml</dd>
           <dt *ngIf="repas.menu">Menu :</dt>
@@ -24,7 +24,7 @@
           <p class="text-center boxTitle"><mat-icon>hotel</mat-icon>Sieste {{ i + 1 }}</p> 
           <dl>
             <dt>Heure :</dt>
-            <dd>{{ sieste.heureDebut }} à {{ sieste.heureFin }}</dd>          
+            <dd>{{ sieste.heureDebut | slice:0:5 }} à {{ sieste.heureFin | slice:0:5 }}</dd>          
             <dt *ngIf="sieste.remarque">Remarque</dt> 
             <dd *ngIf="sieste.remarque">{{ sieste.remarque }}</dd>
           </dl>

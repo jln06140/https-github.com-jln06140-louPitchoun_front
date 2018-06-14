@@ -10,32 +10,39 @@ import { Enfant } from '../../model/enfant';
 export class PopupInfoComponent implements OnInit {
 
   enfantSelected: Enfant;
-  viewParent : boolean = false;
-  viewInfo : boolean = true
+  viewParent = false;
+  viewInfo = false;
 
   constructor(
     public dialogRef: MatDialogRef<PopupInfoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.enfantSelected = data.enfant;
-  
   }
 
   ngOnInit() {
   }
 
-  informationParents(){
-    if (!this.viewParent){
-      this.viewParent = true;
-      this.viewInfo = false;
-    }
+  informationParents() {
+    this.viewParent ? this.viewParent = false : this.viewParent = true;
+    // if (!this.viewParent) {
+    //   this.viewParent = true;
+    //   this.viewInfo = false;
+    // } else {
+    //   this.viewParent = false;
+    //   this.viewInfo = true;
+    // }
   }
 
-  informationEnfant(){
-    if (!this.viewInfo){
-      this.viewParent = false;
-      this.viewInfo = true;
-    }
+  informationEnfant() {
+    this.viewInfo ? this.viewInfo = false : this.viewInfo = true;
+    // if (!this.viewInfo) {
+    //   this.viewParent = false;
+    //   this.viewInfo = true;
+    // } else {
+    //   this.viewParent = true;
+    //   this.viewInfo = false;
+    // }
   }
 
   close() {

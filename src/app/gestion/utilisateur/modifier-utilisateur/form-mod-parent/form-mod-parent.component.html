@@ -1,7 +1,10 @@
 <div *ngIf="parentToUpdate; let parentToUpdate; else loading">
-  <form class="" #parentModForm="ngForm" (ngSubmit)="onSubmitForm(parentModForm)" *ngIf="parentToUpdate">
-    <div class="form-row justify-content-around">
-      <div class="col-md-4" ngModelGroup="infoParent">
+  <form class="form" #parentModForm="ngForm" (ngSubmit)="onSubmitForm(parentModForm)" *ngIf="parentToUpdate">
+    <h3>Informations utilisateur
+      <mat-icon>expand_more</mat-icon>
+    </h3>
+    <div class="form-row justify-content-around" ngModelGroup="infoParent">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="nom">Nom</label>
           <input type="text" id="nom" class="form-control" [(ngModel)]="parentToUpdate.infoParent.nom" name="nom" #nom="ngModel" required>
@@ -9,6 +12,8 @@
             Le nom est requis
           </div>
         </div>
+      </div>
+      <div class="col-md-6">
         <div class="form-group">
           <label for="prenom">Prenom</label>
           <input type="text" id="prenom" class="form-control" [(ngModel)]="parentToUpdate.infoParent.prenom" name="prenom" required
@@ -17,6 +22,8 @@
             Le prenom est requis
           </div>
         </div>
+      </div>
+      <div class="col-md-6">
         <div class="form-group">
           <label for="email">Adresse e-mail</label>
           <input type="text" id="email" class="form-control" [(ngModel)]="parentToUpdate.infoParent.email" name="email" #email="ngModel"
@@ -31,6 +38,8 @@
             Format non valide
           </div>
         </div>
+      </div>
+      <div class="col-md-6">
         <div class="form-group">
           <label for="adresse">Adresse</label>
           <input type="text" id="adresse" class="form-control" [(ngModel)]="parentToUpdate.infoParent.adresse" name="adresse" #adresse="ngModel"
@@ -39,16 +48,47 @@
             Adresse requise
           </div>
         </div>
+      </div>
+      <div class="col-md-6">
         <div class="form-group">
           <label for="ville">Ville</label>
           <input type="text" id="ville" class="form-control" [(ngModel)]="parentToUpdate.infoParent.ville" name="ville" required>
         </div>
       </div>
-      <div class="col-md-4 ">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="telMobile">Telephone mobile</label>
+          <input type="text" id="telMobile" class="form-control" [(ngModel)]="parentToUpdate.infoParent.telMobile" name="telMobile">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="telFixe">Telephone fixe</label>
+          <input type="text" id="telFixe" class="form-control" [(ngModel)]="parentToUpdate.infoParent.telFixe" name="telFixe">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="telPro">Telephone travail</label>
+          <input type="text" id="telPro" class="form-control" [(ngModel)]="parentToUpdate.infoParent.telPro" name="telPro">
+        </div>
+      </div>
+    </div>
+
+    <h3>Mot de passe utilisateur
+      <mat-icon>expand_more</mat-icon>
+    </h3>
+
+    <div class="form-row justify-content-around">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="motDePasse">Mot de passe</label>
           <input type="password" id="motDePasse" class="form-control" [(ngModel)]="motDePasse" name="motDePasse" #mdp="ngModel">
         </div>
+      </div>
+
+      <div class="col-md-6">
         <div class="form-group">
           <label for="confMdp">Confirmation mot de passe</label>
           <input type="password" id="confMdp" class="form-control" [(ngModel)]="confirmation" name="confMdp" #confMdp="ngModel">
@@ -61,25 +101,14 @@
         </div>
       </div>
     </div>
-    <div class="form-row justify-content-around">
-      <div class="form-group col-md-2 ">
-        <label for="telMobile">Telephone mobile</label>
-        <input type="text" id="telMobile" class="form-control" [(ngModel)]="parentToUpdate.infoParent.telMobile" name="telMobile">
-      </div>
-      <div class="form-group  col-md-2">
-        <label for="telFixe">Telephone fixe</label>
-        <input type="text" id="telFixe" class="form-control" [(ngModel)]="parentToUpdate.infoParent.telFixe" name="telFixe">
-      </div>
-      <div class="form-group  col-md-2">
-        <label for="telPro">Telephone travail</label>
-        <input type="text" id="telPro" class="form-control" [(ngModel)]="parentToUpdate.infoParent.telPro" name="telPro">
-      </div>
-    </div>
 
 
-    <div class="form-row justify-content-center">
-      <div class="col-md-auto">
+
+    <div class="row justify-content-center">
+      <div>
         <a class="btn btn-outline-primary" routerLink="../">Retour</a>
+      </div>
+      <div class="offset-md-1">
         <button type="submit" class="btn btn-outline-primary">Valider</button>
       </div>
     </div>

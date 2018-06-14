@@ -4,8 +4,13 @@ mat-card {
     text-align: center;
   }
   .signin-content {
-    padding: 60px 1rem;
+    padding: 40px 1rem;
   }
   .full-width-input {
     width: 100%;
   }
+
+.titre{
+  font-size: 28px;
+  margin-top: 30px;
+}

@@ -59,7 +59,12 @@ export class ListUtilisateurComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.utilisateurService
       .getAllUtilisateurs()
-      .subscribe(data => (this.utilisateurs = this.dataSource.data = data));
+      .subscribe(
+        data => {
+          this.utilisateurs = data;
+          this.dataSource = new MatTableDataSource(data);
+        }
+        );
   }
 
   ngAfterViewInit() {

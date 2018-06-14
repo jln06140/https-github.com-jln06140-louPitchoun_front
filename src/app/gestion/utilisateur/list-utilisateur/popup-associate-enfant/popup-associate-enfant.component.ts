@@ -41,7 +41,10 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
     this.enfantsDuParent = this.parent.enfants;
     console.log(this.enfants);
     this.enfantService.getAllEnfants().subscribe(
-      data => this.enfants = this.dataSource.data = data
+      data => {
+        this.enfants =  data;
+        this.dataSource = new MatTableDataSource(data);
+      }
     );
   }
 
@@ -70,7 +73,7 @@ export class PopupAssociateEnfantComponent implements OnInit ,AfterViewInit{
   associer() {
     this.parentService.ajoutEnfantsParent(this.parent.id, this.enfantsDuParent).subscribe(
       (data) => {
-        this.snackBarService.openSnackBar('Enfant ajouté', 'Succes');
+        this.snackBarService.openSnackBar('Enfant associé', 'Succes');
         this.close();
     }
     );

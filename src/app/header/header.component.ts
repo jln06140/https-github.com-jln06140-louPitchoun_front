@@ -8,7 +8,7 @@ import * as $ from 'jquery';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   value = false;
   profil: any;
@@ -81,7 +81,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
             });
       $('nav.nav-active').removeClass('nav-active');
     });
-    $('body').on('click', function(e) { 
+    $('body').on('click', function(e) {
       if ($(e.target).is('.sousCatg')) {
         e.preventDefault();
         return;
